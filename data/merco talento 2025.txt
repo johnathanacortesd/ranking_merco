@@ -1,0 +1,1625 @@
+<div id="ranking-talento" class="ranking-tab-item ranking-tab-active">
+                    <table class="table table-ranking-1 table-orange-1 f-light">
+                        <thead>
+                            <tr>
+                                <th>Posición</th>
+                                <th>Empresa</th>
+                                <th>Puntuación</th>
+                                <th>Anterior</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">1</span></td>
+                                                <td>BANCOLOMBIA</td>
+                                                <td class="t-center f-monospace">10000</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">2</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">2</span></td>
+                                                <td>ECOPETROL</td>
+                                                <td class="t-center f-monospace">9994</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">1</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">3</span></td>
+                                                <td>GRUPO NUTRESA</td>
+                                                <td class="t-center f-monospace">8865</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">4</span></td>
+                                                <td>ALPINA</td>
+                                                <td class="t-center f-monospace">8665</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">5</span></td>
+                                                <td>BAVARIA</td>
+                                                <td class="t-center f-monospace">8643</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">6</span></td>
+                                                <td>SURA</td>
+                                                <td class="t-center f-monospace">8339</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">7</span></td>
+                                                <td>EPM</td>
+                                                <td class="t-center f-monospace">8033</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">8</span></td>
+                                                <td>NESTLÉ</td>
+                                                <td class="t-center f-monospace">7927</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">9</span></td>
+                                                <td>DAVIVIENDA</td>
+                                                <td class="t-center f-monospace">7743</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">10</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">10</span></td>
+                                                <td>GOOGLE</td>
+                                                <td class="t-center f-monospace">7623</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">18</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">11</span></td>
+                                                <td>MERCADO LIBRE</td>
+                                                <td class="t-center f-monospace">7467</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">15</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">12</span></td>
+                                                <td>COLOMBINA</td>
+                                                <td class="t-center f-monospace">7399</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">11</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">13</span></td>
+                                                <td>UNIVERSIDAD NACIONAL DE COLOMBIA</td>
+                                                <td class="t-center f-monospace">7385</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">17</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">14</span></td>
+                                                <td>POSTOBÓN</td>
+                                                <td class="t-center f-monospace">7345</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">16</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">15</span></td>
+                                                <td>GRUPO ARGOS</td>
+                                                <td class="t-center f-monospace">7325</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">25</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">16</span></td>
+                                                <td>LATAM</td>
+                                                <td class="t-center f-monospace">7317</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">36</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">17</span></td>
+                                                <td>CREPES &amp; WAFFLES</td>
+                                                <td class="t-center f-monospace">7304</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">12</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">18</span></td>
+                                                <td>CEMENTOS ARGOS</td>
+                                                <td class="t-center f-monospace">7271</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">19</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">19</span></td>
+                                                <td>PONTIFICIA UNIVERSIDAD JAVERIANA</td>
+                                                <td class="t-center f-monospace">7270</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">13</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">20</span></td>
+                                                <td>AVIANCA</td>
+                                                <td class="t-center f-monospace">7189</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">21</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">21</span></td>
+                                                <td>ALQUERÍA</td>
+                                                <td class="t-center f-monospace">7134</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">26</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">22</span></td>
+                                                <td>SISTEMA COCA-COLA</td>
+                                                <td class="t-center f-monospace">7099</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">29</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">23</span></td>
+                                                <td>RAMO</td>
+                                                <td class="t-center f-monospace">7093</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">27</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">24</span></td>
+                                                <td>JOHNSON &amp; JOHNSON</td>
+                                                <td class="t-center f-monospace">7074</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">9</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">25</span></td>
+                                                <td>HOMECENTER-SODIMAC</td>
+                                                <td class="t-center f-monospace">7065</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">42</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">26</span></td>
+                                                <td>ORGANIZACIÓN CORONA</td>
+                                                <td class="t-center f-monospace">7027</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">20</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">27</span></td>
+                                                <td>RENAULT - SOFASA</td>
+                                                <td class="t-center f-monospace">6999</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">39</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">28</span></td>
+                                                <td>UNIVERSIDAD EAFIT</td>
+                                                <td class="t-center f-monospace">6989</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">35</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">29</span></td>
+                                                <td>PEPSICO</td>
+                                                <td class="t-center f-monospace">6937</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">22</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">30</span></td>
+                                                <td>COMPENSAR</td>
+                                                <td class="t-center f-monospace">6874</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">40</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">31</span></td>
+                                                <td>COLSUBSIDIO</td>
+                                                <td class="t-center f-monospace">6831</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">37</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">32</span></td>
+                                                <td>BANCO DE BOGOTÁ</td>
+                                                <td class="t-center f-monospace">6825</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">38</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">33</span></td>
+                                                <td>SEGUROS BOLÍVAR</td>
+                                                <td class="t-center f-monospace">6794</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">31</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">34</span></td>
+                                                <td>COLANTA</td>
+                                                <td class="t-center f-monospace">6789</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">88</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">35</span></td>
+                                                <td>GRUPO ÉXITO</td>
+                                                <td class="t-center f-monospace">6789</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">23</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">36</span></td>
+                                                <td>CELSIA</td>
+                                                <td class="t-center f-monospace">6758</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">24</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">37</span></td>
+                                                <td>COMFAMA</td>
+                                                <td class="t-center f-monospace">6750</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">32</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">38</span></td>
+                                                <td>FALABELLA</td>
+                                                <td class="t-center f-monospace">6717</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">57</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">39</span></td>
+                                                <td>METRO DE MEDELLÍN</td>
+                                                <td class="t-center f-monospace">6716</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">45</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">40</span></td>
+                                                <td>UNIVERSIDAD DE LA SABANA</td>
+                                                <td class="t-center f-monospace">6706</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">33</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">41</span></td>
+                                                <td>ISA</td>
+                                                <td class="t-center f-monospace">6689</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">14</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">42</span></td>
+                                                <td>TERPEL</td>
+                                                <td class="t-center f-monospace">6670</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">34</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">43</span></td>
+                                                <td>PROTECCIÓN</td>
+                                                <td class="t-center f-monospace">6637</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">49</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">44</span></td>
+                                                <td>PROCAFECOL (JUAN VALDEZ)</td>
+                                                <td class="t-center f-monospace">6618</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">30</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">45</span></td>
+                                                <td>INDUSTRIAS HACEB</td>
+                                                <td class="t-center f-monospace">6578</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">41</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">46</span></td>
+                                                <td>UNIVERSIDAD DEL ROSARIO</td>
+                                                <td class="t-center f-monospace">6544</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">80</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">47</span></td>
+                                                <td>NU COLOMBIA</td>
+                                                <td class="t-center f-monospace">6537</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">59</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">48</span></td>
+                                                <td>SCOTIABANK COLPATRIA</td>
+                                                <td class="t-center f-monospace">6515</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">47</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">49</span></td>
+                                                <td>BANCO DE OCCIDENTE</td>
+                                                <td class="t-center f-monospace">6500</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">156</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">50</span></td>
+                                                <td>CAFAM</td>
+                                                <td class="t-center f-monospace">6495</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">79</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">51</span></td>
+                                                <td>FEDERACIÓN NACIONAL DE CAFETEROS</td>
+                                                <td class="t-center f-monospace">6426</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">44</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">52</span></td>
+                                                <td>HOSPITAL PABLO TOBÓN URIBE</td>
+                                                <td class="t-center f-monospace">6394</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">85</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">53</span></td>
+                                                <td>CEMEX</td>
+                                                <td class="t-center f-monospace">6392</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">46</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">54</span></td>
+                                                <td>KERALTY / ORGANIZACIÓN SANITAS</td>
+                                                <td class="t-center f-monospace">6317</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">62</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">55</span></td>
+                                                <td>BBVA</td>
+                                                <td class="t-center f-monospace">6307</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">56</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">56</span></td>
+                                                <td>GRUPO FAMILIA - ESSITY</td>
+                                                <td class="t-center f-monospace">6286</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">55</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">57</span></td>
+                                                <td>TECNOQUÍMICAS</td>
+                                                <td class="t-center f-monospace">6266</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">43</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">58</span></td>
+                                                <td>CONSTRUCTORA BOLÍVAR</td>
+                                                <td class="t-center f-monospace">6248</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">50</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">59</span></td>
+                                                <td>TOYOTA</td>
+                                                <td class="t-center f-monospace">6227</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">86</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">60</span></td>
+                                                <td>GRUPO CARVAJAL</td>
+                                                <td class="t-center f-monospace">6120</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">51</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">61</span></td>
+                                                <td>FUNDACIÓN VALLE DEL LILI</td>
+                                                <td class="t-center f-monospace">6083</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">98</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">62</span></td>
+                                                <td>MOVISTAR</td>
+                                                <td class="t-center f-monospace">6080</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">60</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">63</span></td>
+                                                <td>PROMIGAS</td>
+                                                <td class="t-center f-monospace">6066</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">52</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">64</span></td>
+                                                <td>COMERCIALIZADORA ARTURO CALLE</td>
+                                                <td class="t-center f-monospace">6048</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">48</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">65</span></td>
+                                                <td>AMARILO</td>
+                                                <td class="t-center f-monospace">5965</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">54</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">66</span></td>
+                                                <td>IBM</td>
+                                                <td class="t-center f-monospace">5930</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">58</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">67</span></td>
+                                                <td>CLARO</td>
+                                                <td class="t-center f-monospace">5858</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">68</span></td>
+                                                <td>GRUPO VANTI</td>
+                                                <td class="t-center f-monospace">5822</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">72</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">69</span></td>
+                                                <td>GRUPO MANUELITA</td>
+                                                <td class="t-center f-monospace">5797</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">53</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">70</span></td>
+                                                <td>NATURA COSMÉTICOS</td>
+                                                <td class="t-center f-monospace">5788</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">61</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">71</span></td>
+                                                <td>HOSPITAL SAN VICENTE FUNDACIÓN</td>
+                                                <td class="t-center f-monospace">5753</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">65</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">72</span></td>
+                                                <td>LACARDIO</td>
+                                                <td class="t-center f-monospace">5747</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">63</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">73</span></td>
+                                                <td>BELCORP</td>
+                                                <td class="t-center f-monospace">5641</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">69</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">74</span></td>
+                                                <td>CERREJÓN</td>
+                                                <td class="t-center f-monospace">5637</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">64</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">75</span></td>
+                                                <td>TIGO</td>
+                                                <td class="t-center f-monospace">5600</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">68</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">76</span></td>
+                                                <td>GRUPO AVAL</td>
+                                                <td class="t-center f-monospace">5582</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">75</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">77</span></td>
+                                                <td>GRUPO BIOS</td>
+                                                <td class="t-center f-monospace">5527</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">73</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">78</span></td>
+                                                <td>SMURFIT KAPPA CARTÓN DE COLOMBIA</td>
+                                                <td class="t-center f-monospace">5279</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">169</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">79</span></td>
+                                                <td>CORFICOLOMBIANA</td>
+                                                <td class="t-center f-monospace">5269</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">71</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">80</span></td>
+                                                <td>UNIVERSIDAD DE LOS ANDES</td>
+                                                <td class="t-center f-monospace">5224</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">28</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">81</span></td>
+                                                <td>GRUPO ENERGÍA BOGOTÁ</td>
+                                                <td class="t-center f-monospace">5063</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">82</span></td>
+                                                <td>RAPPI</td>
+                                                <td class="t-center f-monospace">4887</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">77</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">83</span></td>
+                                                <td>COLGATE PALMOLIVE</td>
+                                                <td class="t-center f-monospace">4780</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">153</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">84</span></td>
+                                                <td>MICROSOFT</td>
+                                                <td class="t-center f-monospace">4773</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">78</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">85</span></td>
+                                                <td>DIAGEO</td>
+                                                <td class="t-center f-monospace">4760</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">76</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">86</span></td>
+                                                <td>AMAZON</td>
+                                                <td class="t-center f-monospace">4710</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">82</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">87</span></td>
+                                                <td>APPLE</td>
+                                                <td class="t-center f-monospace">4673</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">83</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">88</span></td>
+                                                <td>GRUPO BOLÍVAR</td>
+                                                <td class="t-center f-monospace">4009</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">93</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">89</span></td>
+                                                <td>ISAGEN</td>
+                                                <td class="t-center f-monospace">3898</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">90</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">90</span></td>
+                                                <td>D1</td>
+                                                <td class="t-center f-monospace">3896</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">99</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">91</span></td>
+                                                <td>CINE COLOMBIA</td>
+                                                <td class="t-center f-monospace">3802</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">89</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">92</span></td>
+                                                <td>ENEL COLOMBIA</td>
+                                                <td class="t-center f-monospace">3775</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">91</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">93</span></td>
+                                                <td>P&amp;G</td>
+                                                <td class="t-center f-monospace">3748</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">97</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">94</span></td>
+                                                <td>TECNOGLASS</td>
+                                                <td class="t-center f-monospace">3691</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">100</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">95</span></td>
+                                                <td>ALLIANZ COLOMBIA</td>
+                                                <td class="t-center f-monospace">3676</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">193</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">96</span></td>
+                                                <td>MARIO HERNÁNDEZ</td>
+                                                <td class="t-center f-monospace">3618</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">95</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">97</span></td>
+                                                <td>ALKOSTO / CORBETA</td>
+                                                <td class="t-center f-monospace">3556</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">87</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">98</span></td>
+                                                <td>FUNDACIÓN SANTA FE DE BOGOTÁ</td>
+                                                <td class="t-center f-monospace">3342</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">94</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">99</span></td>
+                                                <td>UNILEVER ANDINA</td>
+                                                <td class="t-center f-monospace">3264</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">84</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">100</span></td>
+                                                <td>3M</td>
+                                                <td class="t-center f-monospace">3000</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">92</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">101</span></td>
+                                                <td>DRUMMOND COMPANY</td>
+                                                <td class="t-center f-monospace">1658</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">109</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">102</span></td>
+                                                <td>UNIVERSIDAD DE ANTIOQUIA</td>
+                                                <td class="t-center f-monospace">1544</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">104</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">103</span></td>
+                                                <td>ADIDAS</td>
+                                                <td class="t-center f-monospace">1522</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">104</span></td>
+                                                <td>GLOBANT</td>
+                                                <td class="t-center f-monospace">1472</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">105</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">105</span></td>
+                                                <td>UNIVERSIDAD EXTERNADO DE COLOMBIA</td>
+                                                <td class="t-center f-monospace">1452</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">113</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">106</span></td>
+                                                <td>META</td>
+                                                <td class="t-center f-monospace">1441</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">112</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">107</span></td>
+                                                <td>BIMBO</td>
+                                                <td class="t-center f-monospace">1432</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">111</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">108</span></td>
+                                                <td>CENIT TRANSPORTE Y LOGÍSTICA DE HIDROCARBUROS</td>
+                                                <td class="t-center f-monospace">1427</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">114</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">109</span></td>
+                                                <td>CERRO MATOSO</td>
+                                                <td class="t-center f-monospace">1399</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">127</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">110</span></td>
+                                                <td>UNIVERSIDAD ICESI</td>
+                                                <td class="t-center f-monospace">1397</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-eq" src="/_img/evolucion-equal.png"></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">111</span></td>
+                                                <td>PFIZER</td>
+                                                <td class="t-center f-monospace">1390</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">66</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">112</span></td>
+                                                <td>ODINSA</td>
+                                                <td class="t-center f-monospace">1382</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">113</span></td>
+                                                <td>REFICAR</td>
+                                                <td class="t-center f-monospace">1368</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">125</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">114</span></td>
+                                                <td>SAMSUNG ELECTRONICS</td>
+                                                <td class="t-center f-monospace">1368</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">117</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">115</span></td>
+                                                <td>CARACOL TV</td>
+                                                <td class="t-center f-monospace">1361</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">133</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">116</span></td>
+                                                <td>NETFLIX</td>
+                                                <td class="t-center f-monospace">1357</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">106</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">117</span></td>
+                                                <td>UNIVERSIDAD PONTIFICIA BOLIVARIANA (UPB)</td>
+                                                <td class="t-center f-monospace">1349</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">107</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">118</span></td>
+                                                <td>MAZDA</td>
+                                                <td class="t-center f-monospace">1348</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">116</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">119</span></td>
+                                                <td>PORVENIR</td>
+                                                <td class="t-center f-monospace">1345</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">146</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">120</span></td>
+                                                <td>CONSTRUCTORA COLPATRIA</td>
+                                                <td class="t-center f-monospace">1330</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">123</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">121</span></td>
+                                                <td>ACUEDUCTO DE BOGOTÁ</td>
+                                                <td class="t-center f-monospace">1327</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">120</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">122</span></td>
+                                                <td>GASES DEL CARIBE</td>
+                                                <td class="t-center f-monospace">1311</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">123</span></td>
+                                                <td>SIEMENS</td>
+                                                <td class="t-center f-monospace">1310</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">144</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">124</span></td>
+                                                <td>ORACLE</td>
+                                                <td class="t-center f-monospace">1298</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">108</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">125</span></td>
+                                                <td>GRUPO AGROINDUSTRIAL RIOPAILA CASTILLA</td>
+                                                <td class="t-center f-monospace">1293</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">136</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">126</span></td>
+                                                <td>OLÍMPICA</td>
+                                                <td class="t-center f-monospace">1288</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">154</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">127</span></td>
+                                                <td>SAP</td>
+                                                <td class="t-center f-monospace">1287</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">124</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">128</span></td>
+                                                <td>ITAÚ</td>
+                                                <td class="t-center f-monospace">1277</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">157</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">129</span></td>
+                                                <td>QUALA</td>
+                                                <td class="t-center f-monospace">1276</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">96</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">130</span></td>
+                                                <td>GRUPO COOMEVA</td>
+                                                <td class="t-center f-monospace">1276</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">175</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">131</span></td>
+                                                <td>SKANDIA</td>
+                                                <td class="t-center f-monospace">1266</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">160</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">132</span></td>
+                                                <td>FÁBRICA DE LICORES DE ANTIOQUIA</td>
+                                                <td class="t-center f-monospace">1266</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">194</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">133</span></td>
+                                                <td>GRUPO BMW</td>
+                                                <td class="t-center f-monospace">1265</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">137</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">134</span></td>
+                                                <td>CUEROS VÉLEZ</td>
+                                                <td class="t-center f-monospace">1263</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">128</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">135</span></td>
+                                                <td>INALDE</td>
+                                                <td class="t-center f-monospace">1258</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">119</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">136</span></td>
+                                                <td>VISA</td>
+                                                <td class="t-center f-monospace">1247</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">137</span></td>
+                                                <td>L'ORÉAL</td>
+                                                <td class="t-center f-monospace">1243</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">126</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">138</span></td>
+                                                <td>MCKINSEY &amp; COMPANY</td>
+                                                <td class="t-center f-monospace">1243</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">130</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">139</span></td>
+                                                <td>BAYER</td>
+                                                <td class="t-center f-monospace">1236</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">115</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">140</span></td>
+                                                <td>UNIVERSIDAD EIA</td>
+                                                <td class="t-center f-monospace">1236</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">190</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">141</span></td>
+                                                <td>HOLCIM</td>
+                                                <td class="t-center f-monospace">1232</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">152</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">142</span></td>
+                                                <td>CRUZ VERDE</td>
+                                                <td class="t-center f-monospace">1231</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">101</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">143</span></td>
+                                                <td>SOLLA</td>
+                                                <td class="t-center f-monospace">1231</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">174</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">144</span></td>
+                                                <td>BOLSA DE VALORES DE COLOMBIA</td>
+                                                <td class="t-center f-monospace">1229</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">138</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">145</span></td>
+                                                <td>JERÓNIMO MARTINS / TIENDAS ARA</td>
+                                                <td class="t-center f-monospace">1222</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">142</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">146</span></td>
+                                                <td>ANDRÉS CARNE DE RES</td>
+                                                <td class="t-center f-monospace">1218</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">197</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">147</span></td>
+                                                <td>COLMÉDICA</td>
+                                                <td class="t-center f-monospace">1215</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">186</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">148</span></td>
+                                                <td>ARCOS DORADOS / McDonald's</td>
+                                                <td class="t-center f-monospace">1214</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">149</span></td>
+                                                <td>CASA LUKER</td>
+                                                <td class="t-center f-monospace">1214</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">134</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">150</span></td>
+                                                <td>INCAUCA</td>
+                                                <td class="t-center f-monospace">1210</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">173</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">151</span></td>
+                                                <td>PUBLICACIONES SEMANA</td>
+                                                <td class="t-center f-monospace">1206</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">149</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">152</span></td>
+                                                <td>CLÍNICA IMBANACO</td>
+                                                <td class="t-center f-monospace">1185</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">121</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">153</span></td>
+                                                <td>MASTERCARD</td>
+                                                <td class="t-center f-monospace">1184</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">154</span></td>
+                                                <td>SANOFI</td>
+                                                <td class="t-center f-monospace">1182</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">145</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">155</span></td>
+                                                <td>CONSTRUCTORA JARAMILLO MORA</td>
+                                                <td class="t-center f-monospace">1181</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">156</span></td>
+                                                <td>CASA EDITORIAL EL TIEMPO</td>
+                                                <td class="t-center f-monospace">1180</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">70</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">157</span></td>
+                                                <td>ROCHE</td>
+                                                <td class="t-center f-monospace">1179</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">141</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">158</span></td>
+                                                <td>UNIVERSIDAD CES</td>
+                                                <td class="t-center f-monospace">1176</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">150</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">159</span></td>
+                                                <td>ACCENTURE</td>
+                                                <td class="t-center f-monospace">1175</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">160</span></td>
+                                                <td>CLÍNICA DEL COUNTRY</td>
+                                                <td class="t-center f-monospace">1175</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">140</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">161</span></td>
+                                                <td>DELOITTE</td>
+                                                <td class="t-center f-monospace">1172</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">163</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">162</span></td>
+                                                <td>ORGANIZACIÓN ARDILA LÜLLE</td>
+                                                <td class="t-center f-monospace">1172</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">196</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">163</span></td>
+                                                <td>LABORATORIOS ABBOTT</td>
+                                                <td class="t-center f-monospace">1172</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">168</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">164</span></td>
+                                                <td>CONCONCRETO</td>
+                                                <td class="t-center f-monospace">1170</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">162</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">165</span></td>
+                                                <td>LABORATORIOS PROCAPS</td>
+                                                <td class="t-center f-monospace">1165</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">151</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">166</span></td>
+                                                <td>ALIANZA TEAM</td>
+                                                <td class="t-center f-monospace">1157</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">172</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">167</span></td>
+                                                <td>ESENTTIA</td>
+                                                <td class="t-center f-monospace">1153</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">170</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">168</span></td>
+                                                <td>TOTTO NALSANI</td>
+                                                <td class="t-center f-monospace">1151</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">161</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">169</span></td>
+                                                <td>HARINERA DEL VALLE</td>
+                                                <td class="t-center f-monospace">1146</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">180</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">170</span></td>
+                                                <td>CRYSTAL</td>
+                                                <td class="t-center f-monospace">1141</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">159</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">171</span></td>
+                                                <td>LEONISA</td>
+                                                <td class="t-center f-monospace">1139</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">143</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">172</span></td>
+                                                <td>FARMATODO</td>
+                                                <td class="t-center f-monospace">1133</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">155</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">173</span></td>
+                                                <td>FRISBY</td>
+                                                <td class="t-center f-monospace">1128</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">165</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">174</span></td>
+                                                <td>GEOPARK</td>
+                                                <td class="t-center f-monospace">1114</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">175</span></td>
+                                                <td>CENCOSUD</td>
+                                                <td class="t-center f-monospace">1113</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">167</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">176</span></td>
+                                                <td>PRIMAX</td>
+                                                <td class="t-center f-monospace">1112</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">177</span></td>
+                                                <td>INGENIO PROVIDENCIA</td>
+                                                <td class="t-center f-monospace">1111</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">185</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">178</span></td>
+                                                <td>MONDELĒZ INTERNATIONAL</td>
+                                                <td class="t-center f-monospace">1109</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">182</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">179</span></td>
+                                                <td>NOVARTIS</td>
+                                                <td class="t-center f-monospace">1106</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">147</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">180</span></td>
+                                                <td>INGENIO MAYAGÜEZ</td>
+                                                <td class="t-center f-monospace">1101</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">181</span></td>
+                                                <td>IMUSA</td>
+                                                <td class="t-center f-monospace">1097</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">182</span></td>
+                                                <td>CLÍNICA UNIVERSIDAD DE LA SABANA</td>
+                                                <td class="t-center f-monospace">1093</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">188</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">183</span></td>
+                                                <td>BANCO AV VILLAS</td>
+                                                <td class="t-center f-monospace">1078</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">158</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">184</span></td>
+                                                <td>MARVAL</td>
+                                                <td class="t-center f-monospace">1073</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">183</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">185</span></td>
+                                                <td>PROANTIOQUIA</td>
+                                                <td class="t-center f-monospace">1065</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">148</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">186</span></td>
+                                                <td>BANCO CAJA SOCIAL</td>
+                                                <td class="t-center f-monospace">1062</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">179</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">187</span></td>
+                                                <td>EY - ERNST &amp; YOUNG</td>
+                                                <td class="t-center f-monospace">1057</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">188</span></td>
+                                                <td>VALOREM</td>
+                                                <td class="t-center f-monospace">1050</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">176</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">189</span></td>
+                                                <td>GRUPO DIANA</td>
+                                                <td class="t-center f-monospace">1040</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-up-orange-1.png"><span class="badge-pos-2 bg-white bd-1-orange-1 f-orange-1">200</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">190</span></td>
+                                                <td>GRUPO FANALCA</td>
+                                                <td class="t-center f-monospace">1039</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">189</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">191</span></td>
+                                                <td>ENKA</td>
+                                                <td class="t-center f-monospace">1023</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">135</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">192</span></td>
+                                                <td>FUNDACIÓN CLÍNICA SHAIO</td>
+                                                <td class="t-center f-monospace">1022</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">171</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">193</span></td>
+                                                <td>GRUPO CARVAL</td>
+                                                <td class="t-center f-monospace">1021</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">194</span></td>
+                                                <td>GRUPO TAKAMI</td>
+                                                <td class="t-center f-monospace">1019</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">195</span></td>
+                                                <td>CLÍNICA CARDIO VID</td>
+                                                <td class="t-center f-monospace">1018</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">196</span></td>
+                                                <td>HOSPITAL UNIVERSITARIO SAN IGNACIO</td>
+                                                <td class="t-center f-monospace">1013</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">197</span></td>
+                                                <td>KIMBERLY-CLARK</td>
+                                                <td class="t-center f-monospace">1011</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">184</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">198</span></td>
+                                                <td>EMIRATES</td>
+                                                <td class="t-center f-monospace">1007</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">199</span></td>
+                                                <td>NIKE</td>
+                                                <td class="t-center f-monospace">1005</td>
+                                                <td class="t-center " title="Posición 2024"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">198</span></td>
+                                            </tr>
+                                        
+                                        
+                                            <tr>
+                                                <td><span class="badge-pos-1 bg-white bd-1-orange-1 f-orange-1">200</span></td>
+                                                <td>AMÉRICAN AIRLINES</td>
+                                                <td class="t-center f-monospace">1000</td>
+                                                <td class="t-center " title=""></td>
+                                            </tr>
+                                        
+
+                        </tbody>
+                    </table>
+
+                                
+                                    <p class="f-11 pad-5-10 mar-0-auto w-mx-740">
+                                        <em>
+                                            El seguimiento de la metodología establecida por Merco para la elaboración del ranking de las empresas con talento ha sido objeto de revisión independiente por parte de KPMG.
+                                            Por esta razón, KPMG no hace pública su posición en la presente clasificación. La metodología seguida para elaborar Merco Talento se encuentra disponible en este sitio web.
+                                        </em>
+                                    </p>
+                                
+
+                </div>

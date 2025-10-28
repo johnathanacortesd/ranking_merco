@@ -1,0 +1,806 @@
+<div id="ranking-sectorial" class="ranking-tab-item ranking-tab-active">
+
+
+                    <h3 class="title-ranking f-bold">AGROINDUSTRIAL</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>GRUPO MANUELITA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>GRUPO BIOS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>INCAUCA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>GRUPO AGROINDUSTRIAL RIOPAILA CASTILLA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>INGENIO PROVIDENCIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>SOLLA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>PREMEX</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">ALIMENTOS</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>ALPINA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>GRUPO NUTRESA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>ALQUERÍA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>RAMO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>NESTLÉ</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>COLOMBINA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>PEPSICO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>COLANTA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">9</span></td>
+                                                                              <td>BIMBO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">10</span></td>
+                                                                              <td>QUALA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">11</span></td>
+                                                                              <td>CASA LUKER</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">12</span></td>
+                                                                              <td>GRUPO DIANA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">13</span></td>
+                                                                              <td>HARINERA DEL VALLE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">14</span></td>
+                                                                              <td>ALIANZA TEAM</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">15</span></td>
+                                                                              <td>MONDELĒZ INTERNATIONAL</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">16</span></td>
+                                                                              <td>INGENIO MAYAGÜEZ</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">17</span></td>
+                                                                              <td>SUPER DE ALIMENTOS</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">ASEGURADORAS</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>SURA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>SEGUROS BOLÍVAR</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>ALLIANZ COLOMBIA</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">ASEO, BELLEZA Y CUIDADO PERSONAL</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>NATURA COSMÉTICOS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>COLGATE PALMOLIVE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>GRUPO FAMILIA - ESSITY</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>BELCORP</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>P&amp;G</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>UNILEVER ANDINA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>L'ORÉAL</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>KIMBERLY-CLARK</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">ASOCIACIONES, CORPORACIONES, FUNDACIONES</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>FEDERACIÓN NACIONAL DE CAFETEROS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>PROANTIOQUIA</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">AUDITORÍA Y CONSULTORÍA</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>DELOITTE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>MCKINSEY &amp; COMPANY</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>ACCENTURE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>EY - ERNST &amp; YOUNG</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">AUTOMOTRIZ</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>RENAULT - SOFASA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>TOYOTA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>MAZDA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>GRUPO BMW</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">BEBIDAS</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>BAVARIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>POSTOBÓN</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>SISTEMA COCA-COLA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>DIAGEO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>FÁBRICA DE LICORES DE ANTIOQUIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>CENTRAL CERVECERA DE COLOMBIA</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">CAJAS DE COMPENSACIÓN</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>COLSUBSIDIO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>COMPENSAR</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>CAFAM</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>COMFAMA</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">CEMENTERAS</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>CEMENTOS ARGOS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>CEMEX</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">COMERCIO ELECTRÓNICO Y DISTRIBUCIÓN</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>MERCADO LIBRE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>AMAZON</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>RAPPI</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">CONFECCIÓN Y MARROQUINERÍA</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>COMERCIALIZADORA ARTURO CALLE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>MARIO HERNÁNDEZ</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>ADIDAS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>LEONISA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>CUEROS VÉLEZ</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>CRYSTAL</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>TOTTO NALSANI</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">CONGLOMERADO EMPRESARIAL</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>GRUPO ARGOS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>GRUPO AVAL</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>GRUPO BOLÍVAR</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>GRUPO COOMEVA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>ORGANIZACIÓN ARDILA LÜLLE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>GRUPO CARVAL</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>VALOREM</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">CONSTRUCCIÓN E INFRAESTRUCTURA</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>CONSTRUCTORA BOLÍVAR</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>AMARILO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>CONSTRUCTORA COLPATRIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>HOLCIM</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>ODINSA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>ARQUITECTURA Y CONCRETO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>CONCONCRETO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>CONSTRUCTORA JARAMILLO MORA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">9</span></td>
+                                                                              <td>MARVAL</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">EDUCACIÓN-UNIVERSIDADES</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>PONTIFICIA UNIVERSIDAD JAVERIANA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>UNIVERSIDAD NACIONAL DE COLOMBIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>UNIVERSIDAD EAFIT</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>UNIVERSIDAD DE LA SABANA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>UNIVERSIDAD DE LOS ANDES</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>UNIVERSIDAD DEL ROSARIO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>UNIVERSIDAD DE ANTIOQUIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>UNIVERSIDAD PONTIFICIA BOLIVARIANA (UPB)</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">9</span></td>
+                                                                              <td>UNIVERSIDAD EXTERNADO DE COLOMBIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">10</span></td>
+                                                                              <td>UNIVERSIDAD ICESI</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">11</span></td>
+                                                                              <td>UNIVERSIDAD CES</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">12</span></td>
+                                                                              <td>UNIVERSIDAD EIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">13</span></td>
+                                                                              <td>INALDE</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">ELECTRODOMÉSTICOS Y EQUIPAMIENTO</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>INDUSTRIAS HACEB</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">ELECTRÓNICA, INFORMÁTICA Y SOFTWARE</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>MICROSOFT</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>APPLE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>IBM</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>SAMSUNG ELECTRONICS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>ORACLE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>SIEMENS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>SAP</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>GLOBANT</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">ENERGÍA, GAS Y AGUA</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>EPM</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>ISA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>CELSIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>PROMIGAS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>GRUPO ENERGÍA BOGOTÁ</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>GRUPO VANTI</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>ISAGEN</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>ENEL COLOMBIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">9</span></td>
+                                                                              <td>ACUEDUCTO DE BOGOTÁ</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">10</span></td>
+                                                                              <td>GASES DEL CARIBE</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">ENTRETENIMIENTO</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>CINE COLOMBIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>NETFLIX</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>DIRECTV</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">FARMACÉUTICO</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>JOHNSON &amp; JOHNSON</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>TECNOQUÍMICAS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>PFIZER</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>FARMATODO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>BAYER</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>CRUZ VERDE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>ROCHE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>LABORATORIOS PROCAPS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">9</span></td>
+                                                                              <td>SANOFI</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">10</span></td>
+                                                                              <td>LABORATORIOS ABBOTT</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">11</span></td>
+                                                                              <td>NOVARTIS</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">FINANCIERO</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>BANCOLOMBIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>DAVIVIENDA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>BANCO DE BOGOTÁ</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>NU COLOMBIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>BBVA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>SCOTIABANK COLPATRIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>BANCO DE OCCIDENTE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>CORFICOLOMBIANA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">9</span></td>
+                                                                              <td>BANCO CAJA SOCIAL</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">10</span></td>
+                                                                              <td>VISA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">11</span></td>
+                                                                              <td>MASTERCARD</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">12</span></td>
+                                                                              <td>BANCO AV VILLAS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">13</span></td>
+                                                                              <td>BOLSA DE VALORES DE COLOMBIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">14</span></td>
+                                                                              <td>ITAÚ</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">FONDOS DE PENSIONES Y CESANTÍAS</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>PROTECCIÓN</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>PORVENIR</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>SKANDIA</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">GRANDES SUPERFICIES, RETAIL</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>GRUPO ÉXITO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>HOMECENTER-SODIMAC</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>ALKOSTO / CORBETA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>FALABELLA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>D1</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>JERÓNIMO MARTINS / TIENDAS ARA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>OLÍMPICA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>CENCOSUD</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">INDUSTRIAL</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>ORGANIZACIÓN CORONA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>GRUPO CARVAJAL</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>TECNOGLASS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>3M</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>SMURFIT KAPPA CARTÓN DE COLOMBIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>GROUPE SEB COLOMBIA - IMUSA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>ESENTTIA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>ENKA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">9</span></td>
+                                                                              <td>GRUPO FANALCA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">10</span></td>
+                                                                              <td>BRINSA</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">MEDIOS DE COMUNICACIÓN</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>CASA EDITORIAL EL TIEMPO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>CARACOL TV</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>PUBLICACIONES SEMANA</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">MINERÍA</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>CERREJÓN</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>DRUMMOND COMPANY</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>CERRO MATOSO</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">MOVILIDAD URBANA</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>METRO DE MEDELLÍN</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">PETROLERAS Y DISTRIBUCIÓN DE HIDROCARBUROS</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>ECOPETROL</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>TERPEL</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>PRIMAX</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>CENIT TRANSPORTE Y LOGÍSTICA DE HIDROCARBUROS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>REFICAR</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>GEOPARK</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">RESTAURANTES Y CAFÉS</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>CREPES &amp; WAFFLES</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>PROCAFECOL (JUAN VALDEZ)</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>FRISBY</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>ARCOS DORADOS / McDonald's</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>ANDRÉS CARNE DE RES</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>GRUPO TAKAMI</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">SALUD</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>LACARDIO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>KERALTY / ORGANIZACIÓN SANITAS</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>HOSPITAL SAN VICENTE FUNDACIÓN</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">4</span></td>
+                                                                              <td>HOSPITAL PABLO TOBÓN URIBE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">5</span></td>
+                                                                              <td>FUNDACIÓN SANTA FE DE BOGOTÁ</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">6</span></td>
+                                                                              <td>FUNDACIÓN VALLE DEL LILI</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">7</span></td>
+                                                                              <td>CLÍNICA DEL COUNTRY</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">8</span></td>
+                                                                              <td>CLÍNICA IMBANACO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">9</span></td>
+                                                                              <td>COLMÉDICA</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">10</span></td>
+                                                                              <td>CLÍNICA UNIVERSIDAD DE LA SABANA</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">SERVICIOS INTERNET</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>GOOGLE</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>META</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">TELECOMUNICACIONES</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>TIGO</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>MOVISTAR</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">3</span></td>
+                                                                              <td>CLARO</td>
+                                                                            </tr></tbody>
+                                                               </table><h3 class="title-ranking f-bold">TRANSPORTE DE VIAJEROS</h3><table class="table table-ranking-2 table-red-1 f-light">
+                                                               <thead>
+                                                                   <tr>
+                                                                       <th>Posición</th><th>Empresa</th></tr>
+                                                               </thead>
+                                                               <tbody><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">1</span></td>
+                                                                              <td>LATAM</td>
+                                                                            </tr><tr>
+                                                                              <td><span class="badge-pos-1 bg-white bd-1-red-1 f-red-1">2</span></td>
+                                                                              <td>AVIANCA</td>
+                                                                            </tr></tbody>
+                                                               </table>
+
+
+
+                </div>
