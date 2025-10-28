@@ -4,8 +4,6 @@ Esta aplicación web, desarrollada con Streamlit, automatiza la creación de inf
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ranking-merco.streamlit.app/)  <!-- Reemplaza con la URL de tu app desplegada -->
 
-![Ejemplo de la App](URL-A-UNA-IMAGEN-DE-LA-APP) <!-- Opcional: Sube una captura de pantalla al repo y enlaza aquí -->
-
 <img width="1789" height="814" alt="image" src="https://github.com/user-attachments/assets/71e1aa48-bc73-4e59-bcfe-6be46e2553d7" />
 
 ---
