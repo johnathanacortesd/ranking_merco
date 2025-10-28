@@ -29,7 +29,7 @@ La aplicación no solo recupera datos, sino que los presenta en un formato narra
 *   **Análisis Comparativo Automático:** En lugar de solo mostrar dos números, el informe describe el cambio de un año a otro con frases como:
     *   `un notable avance` (si sube más de 15 puestos)
     *   `un avance` (si sube entre 1 y 15 puestos)
-    *   `un gran retroceso` (si baja más de 10 puestos)
+    *   `un retroceso` (si baja más de 10 puestos)
 *   **Redacción Adaptativa:** El formato del texto cambia automáticamente si el resultado pertenece al ranking de **Merco Líderes**, enfocándose en la persona y su empresa.
 
 ### Eficiencia y Rendimiento
