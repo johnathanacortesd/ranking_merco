@@ -4,7 +4,6 @@ import os
 import re
 import unicodedata
 from io import StringIO
-from streamlit_copy_button import copy_button # <--- NUEVA IMPORTACIÓN
 
 # --- Configuración de la Página ---
 st.set_page_config(
@@ -19,9 +18,11 @@ def normalize_text(text):
     if not isinstance(text, str):
         return ""
     
+    # Quitar tildes y caracteres especiales
     text = ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
     text = text.lower()
     
+    # Eliminar palabras corporativas comunes y contenido entre paréntesis
     words_to_remove = [
         r'\bgrupo\b', r'\bcomercializadora\b', r'\borganizacion\b', r'\bs\.a\.s\b', 
         r'\bsas\b', r'\bs\.a\b', r'\bltda\b', r'\bcompany\b', r'\binternational\b', 
@@ -30,7 +31,10 @@ def normalize_text(text):
     for word_regex in words_to_remove:
         text = re.sub(word_regex, '', text, flags=re.IGNORECASE)
     
+    # Quitar todo lo que no sea letra o número
     text = re.sub(r'[^a-z0-9\s]', '', text)
+    
+    # Eliminar espacios extra
     return ' '.join(text.split()).strip()
 
 # --- Funciones de Carga y Parseo ---
@@ -129,6 +133,7 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
     return None, None, None
 
 # --- Interfaz de Usuario y Lógica Principal ---
+
 st.title("📊 Generador de Informes de Reputación - Ranking Merco")
 st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2025 y 2024 y genera un informe comparativo.")
 
@@ -164,13 +169,7 @@ if company_name_input:
 
     st.markdown("---")
     st.subheader(f"Análisis Reputacional para: **{company_name_input}**")
-    
-    # Lista para recopilar todo el texto que se generará
-    report_parts_to_copy = []
-    
-    # Mostrar y añadir intro al texto para copiar
     st.markdown(INTRO_TEXT)
-    report_parts_to_copy.append(INTRO_TEXT)
     
     found_any = False
     
@@ -199,7 +198,6 @@ if company_name_input:
             else:
                 report_text += " En 2024 no figuraba en este ranking."
             st.success(report_text)
-            report_parts_to_copy.append(report_text.replace("**", "")) # Añadir versión sin markdown para copiar
 
     if "merco_sectores_2025" in files and "merco_sectores_2024" in files:
         sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
@@ -217,33 +215,18 @@ if company_name_input:
             else:
                 report_text += " En 2024 no figuraba en el ranking sectorial."
             st.success(report_text)
-            report_parts_to_copy.append(report_text.replace("**", ""))
     
     if not found_any:
-        warning_text = f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025."
-        info_text = "A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2025' como referencia."
-        st.warning(warning_text)
-        st.info(info_text)
-        report_parts_to_copy.append(warning_text)
-        report_parts_to_copy.append(info_text)
+        st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025.")
+        st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2025' como referencia.")
         
         if "merco_empresas_2025" in files:
             df_empresas_2025 = parse_general_ranking(files["merco_empresas_2025"])
             if df_empresas_2025 is not None and all(c in df_empresas_2025.columns for c in ['posicion', 'empresa', 'puntuacion']):
                 top_10 = df_empresas_2025.head(10)[['posicion', 'empresa', 'puntuacion']]
                 st.dataframe(top_10, use_container_width=True, hide_index=True)
-                # Añadir la tabla como texto plano al contenido para copiar
-                report_parts_to_copy.append("\n" + top_10.to_string(index=False))
 
-    # Mostrar y añadir el texto final
     st.markdown(OUTRO_TEXT)
-    report_parts_to_copy.append(OUTRO_TEXT.replace("---", "").strip())
-    
-    # --- BOTÓN PARA COPIAR TODO EL CONTENIDO ---
-    st.markdown("---")
-    full_report_text_to_copy = "\n\n".join(report_parts_to_copy)
-    copy_button(full_report_text_to_copy, "Copiar informe completo al portapapeles")
-
 else:
     st.info("Por favor, ingrese el nombre de una empresa para comenzar el análisis.")
 
