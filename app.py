@@ -12,7 +12,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# --- FUNCIÓN DE NORMALIZACIÓN (Mejorada) ---
+# --- FUNCIÓN DE NORMALIZACIÓN ---
 def normalize_text(text):
     """Limpia y estandariza el texto para hacer comparaciones robustas."""
     if not isinstance(text, str):
@@ -21,11 +21,10 @@ def normalize_text(text):
     text = ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
     text = text.lower()
     
-    # Lista más completa de palabras a remover
     words_to_remove = [
         r'\bgrupo\b', r'\bcomercializadora\b', r'\borganizacion\b', r'\bs\.a\.s\b', 
         r'\bsas\b', r'\bs\.a\b', r'\bltda\b', r'\bcompany\b', r'\binternational\b', 
-        r'\bessity\b', r'\(.*?\)' # Elimina contenido entre paréntesis como (JUAN VALDEZ)
+        r'\bessity\b', r'\(.*?\)'
     ]
     for word_regex in words_to_remove:
         text = re.sub(word_regex, '', text, flags=re.IGNORECASE)
@@ -33,10 +32,9 @@ def normalize_text(text):
     text = re.sub(r'[^a-z0-9\s]', '', text)
     return ' '.join(text.split()).strip()
 
-# --- Funciones de Carga y Parseo (con Normalización de Columnas) ---
+# --- Funciones de Carga y Parseo ---
 @st.cache_data
 def parse_general_ranking(file_path):
-    """Parsea archivos de ranking generales y normaliza las columnas."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -45,18 +43,12 @@ def parse_general_ranking(file_path):
         if not df_list: return None
         
         df = df_list[0]
-        
-        ### CAMBIO CLAVE: Normalizar nombres de columnas ###
         df.columns = [normalize_text(str(col)) for col in df.columns]
 
         if 'lider' in df.columns:
-            # Maneja el caso de que la columna no contenga el separador
             temp_df = df['lider'].str.split('<em>', expand=True, n=1)
             df['lider_nombre'] = temp_df[0]
-            if temp_df.shape[1] > 1:
-                df['empresa'] = temp_df[1].str.replace(r'</em>', '', regex=True).str.strip()
-            else:
-                df['empresa'] = '' # Si no hay empresa, se deja en blanco
+            df['empresa'] = temp_df[1].str.replace(r'</em>', '', regex=True).str.strip() if temp_df.shape[1] > 1 else ''
             df = df.drop(columns=['lider'])
         
         if 'empresa' in df.columns:
@@ -67,11 +59,11 @@ def parse_general_ranking(file_path):
 
         return df
     except (FileNotFoundError, IndexError, ValueError):
+        st.error(f"Error procesando el archivo: {file_path}. Verifique que el archivo exista y tenga el formato correcto.")
         return None
 
 @st.cache_data
 def parse_sector_ranking(file_path):
-    """Parsea el archivo de ranking por sectores y normaliza columnas."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -85,7 +77,6 @@ def parse_sector_ranking(file_path):
             df_list = pd.read_html(StringIO(full_table_html))
             if df_list:
                 df = df_list[0]
-                ### CAMBIO CLAVE: Normalizar nombres de columnas ###
                 df.columns = [normalize_text(str(col)) for col in df.columns]
                 
                 if 'empresa' in df.columns:
@@ -96,9 +87,10 @@ def parse_sector_ranking(file_path):
         
         return sector_data
     except FileNotFoundError:
+        st.error(f"No se encontró el archivo: {file_path}. Asegúrese de que esté en la carpeta 'data'.")
         return {}
 
-# --- Funciones de Búsqueda (Actualizadas a columnas normalizadas) ---
+# --- Funciones de Búsqueda ---
 def find_company_in_df_robust(df, normalized_query):
     if df is None or 'empresa_normalized' not in df.columns or not normalized_query:
         return None, None
@@ -108,7 +100,6 @@ def find_company_in_df_robust(df, normalized_query):
         match = df[df['empresa_normalized'].str.contains(normalized_query, na=False)]
     
     if not match.empty:
-        ### CAMBIO CLAVE: Usa 'posicion' y 'empresa' (normalizados) ###
         pos = match.iloc[0].get('posicion')
         original_name = match.iloc[0].get('empresa')
         return (int(pos) if pd.notna(pos) else None), original_name
@@ -128,7 +119,6 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
             match = df[df['empresa_normalized'].str.contains(normalized_query, na=False)]
 
         if not match.empty:
-            ### CAMBIO CLAVE: Usa 'posicion' y 'empresa' (normalizados) ###
             pos = match.iloc[0].get('posicion')
             original_name = match.iloc[0].get('empresa')
             return sector, (int(pos) if pd.notna(pos) else None), original_name
@@ -136,12 +126,19 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
     return None, None, None
 
 # --- Interfaz de Usuario y Lógica Principal ---
-
 st.title("📊 Generador de Informes de Reputación - Ranking Merco")
 st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2025 y 2024 y genera un informe comparativo.")
 
-INTRO_TEXT = "..."  # Mantén tus textos aquí
-OUTRO_TEXT = "..."
+INTRO_TEXT = """
+En el ámbito empresarial contemporáneo, la medición de la reputación es una piedra angular para garantizar el éxito sostenible de cualquier empresa. En GlobalNews Group Colombia, somos conscientes de la inestimable naturaleza de la reputación empresarial y, como resultado, proporcionamos una mirada detallada al análisis reputacional.
+
+Nuestro informe de reputación trasciende la mera recolección de datos, ofreciendo un valor agregado de alta relevancia. Para este mes, hemos integrado el posicionamiento en el prestigioso ranking Merco en nuestro análisis. Esta herramienta exhaustiva evalúa la reputación de las empresas en Colombia a través de una metodología multistakeholder que engloba seis evaluaciones y más de veinte fuentes de información. La posición obtenida en este ranking refleja directamente el reconocimiento que la empresa ha logrado entre una amplia gama de grupos de interés. Es importante destacar que la metodología utilizada por Merco Empresas es completamente pública y accesible en su sitio web.
+"""
+
+OUTRO_TEXT = """
+---
+¿Está listo para elevar su estrategia de gestión de la reputación al próximo nivel? Esto es solo el principio, ya que en GlobalNews Group Colombia ofrecemos una variedad de herramientas avanzadas para fortalecer su capacidad de monitoreo de noticias, ya sea en medios tradicionales o en plataformas de redes sociales. ¡Descubra cómo podemos ayudarle a medir, gestionar y mejorar su reputación empresarial de manera efectiva y precisa!
+"""
 
 company_name_input = st.text_input(
     "Introduce el nombre de la empresa a consultar:",
@@ -152,8 +149,17 @@ if company_name_input:
     normalized_input = normalize_text(company_name_input)
     
     DATA_DIR = "data"
-    files = { f.replace('.txt', ''): os.path.join(DATA_DIR, f) for f in os.listdir(DATA_DIR) if f.endswith('.txt') }
     
+    ### CAMBIO CLAVE: Reemplazar espacios por guiones bajos al crear las claves ###
+    try:
+        files = { 
+            f.replace('.txt', '').replace(' ', '_'): os.path.join(DATA_DIR, f) 
+            for f in os.listdir(DATA_DIR) if f.endswith('.txt') 
+        }
+    except FileNotFoundError:
+        st.error(f"No se encontró la carpeta '{DATA_DIR}'. Asegúrate de que exista y contenga los archivos .txt.")
+        st.stop() # Detiene la ejecución si no hay datos
+
     st.markdown("---")
     st.subheader(f"Análisis Reputacional para: **{company_name_input}**")
     st.markdown(INTRO_TEXT)
@@ -167,6 +173,9 @@ if company_name_input:
     }
 
     for rank_name, (key_2025, key_2024) in RANKINGS_CONFIG.items():
+        if key_2025 not in files or key_2024 not in files:
+            continue # Salta este ranking si falta alguno de los archivos
+        
         df_2025 = parse_general_ranking(files[key_2025])
         pos_2025, original_name = find_company_in_df_robust(df_2025, normalized_input)
         
@@ -183,30 +192,32 @@ if company_name_input:
                 report_text += " En 2024 no figuraba en este ranking."
             st.success(report_text)
 
-    sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
-    sector, pos_2025, original_name = find_company_in_sectors_robust(sectors_2025, normalized_input)
+    if "merco_sectores_2025" in files and "merco_sectores_2024" in files:
+        sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
+        sector, pos_2025, original_name = find_company_in_sectors_robust(sectors_2025, normalized_input)
 
-    if sector and pos_2025 and original_name:
-        found_any = True
-        sectors_2024 = parse_sector_ranking(files["merco_sectores_2024"])
-        _, pos_2024, _ = find_company_in_sectors_robust(sectors_2024, normalized_input)
+        if sector and pos_2025 and original_name:
+            found_any = True
+            sectors_2024 = parse_sector_ranking(files["merco_sectores_2024"])
+            _, pos_2024, _ = find_company_in_sectors_robust(sectors_2024, normalized_input)
 
-        report_text = f"En el ranking **Merco Sectores 2025**, la empresa **{original_name}** se posiciona en el puesto **{pos_2025}** dentro del sector **{sector}**."
-        
-        if pos_2024:
-             report_text += f" Comparativamente, en 2024 ocupó el puesto **{pos_2024}** en el mismo sector."
-        else:
-            report_text += " En 2024 no figuraba en el ranking sectorial."
-        st.success(report_text)
+            report_text = f"En el ranking **Merco Sectores 2025**, la empresa **{original_name}** se posiciona en el puesto **{pos_2025}** dentro del sector **{sector}**."
+            
+            if pos_2024:
+                 report_text += f" Comparativamente, en 2024 ocupó el puesto **{pos_2024}** en el mismo sector."
+            else:
+                report_text += " En 2024 no figuraba en el ranking sectorial."
+            st.success(report_text)
     
     if not found_any:
         st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025.")
         st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2025' como referencia.")
         
-        df_empresas_2025 = parse_general_ranking(files["merco_empresas_2025"])
-        if df_empresas_2025 is not None and all(c in df_empresas_2025.columns for c in ['posicion', 'empresa', 'puntuacion']):
-            top_10 = df_empresas_2025.head(10)[['posicion', 'empresa', 'puntuacion']]
-            st.dataframe(top_10, use_container_width=True, hide_index=True)
+        if "merco_empresas_2025" in files:
+            df_empresas_2025 = parse_general_ranking(files["merco_empresas_2025"])
+            if df_empresas_2025 is not None and all(c in df_empresas_2025.columns for c in ['posicion', 'empresa', 'puntuacion']):
+                top_10 = df_empresas_2025.head(10)[['posicion', 'empresa', 'puntuacion']]
+                st.dataframe(top_10, use_container_width=True, hide_index=True)
 
     st.markdown(OUTRO_TEXT)
 else:
