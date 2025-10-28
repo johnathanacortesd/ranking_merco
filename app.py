@@ -183,7 +183,7 @@ if company_name_input:
             elif diff > 0:
                 movement = "un avance"
             elif diff < -10:
-                movement = "un gran retroceso"
+                movement = "un retroceso"
             elif diff < 0:
                 movement = "un ligero retroceso"
             else:
