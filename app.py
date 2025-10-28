@@ -165,10 +165,7 @@ if company_name_input:
     st.markdown("---")
     st.subheader(f"Análisis Reputacional para: **{company_name_input}**")
     
-    report_parts_to_copy = []
-    
     st.markdown(INTRO_TEXT)
-    report_parts_to_copy.append(INTRO_TEXT)
     
     found_any = False
     
@@ -178,7 +175,6 @@ if company_name_input:
         "Para el período 2025, es notable que **{original_name}** ha logrado la posición **{pos_2025}** dentro de la clasificación **{rank_name}**."
     ])
 
-    # ### CAMBIO CLAVE: Lógica de comparación mejorada ###
     def get_comparison_text(pos_2024, pos_2025):
         if pos_2024:
             diff = pos_2024 - pos_2025
@@ -187,7 +183,7 @@ if company_name_input:
             elif diff > 0:
                 movement = "un avance"
             elif diff < -10:
-                movement = "un retroceso"
+                movement = "un gran retroceso"
             elif diff < 0:
                 movement = "un ligero retroceso"
             else:
@@ -220,7 +216,6 @@ if company_name_input:
             report_text = opening + comparison
             
             st.success(report_text)
-            report_parts_to_copy.append(report_text.replace("**", ""))
 
     if "merco_sectores_2025" in files and "merco_sectores_2024" in files:
         sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
@@ -236,35 +231,18 @@ if company_name_input:
             report_text += comparison
 
             st.success(report_text)
-            report_parts_to_copy.append(report_text.replace("**", ""))
     
     if not found_any:
-        warning_text = f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025."
-        info_text = "A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2025' como referencia."
-        st.warning(warning_text)
-        st.info(info_text)
-        report_parts_to_copy.extend([warning_text, info_text])
+        st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025.")
+        st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2025' como referencia.")
         
         if "merco_empresas_2025" in files:
             df_empresas_2025 = parse_general_ranking(files["merco_empresas_2025"])
             if df_empresas_2025 is not None and all(c in df_empresas_2025.columns for c in ['posicion', 'empresa', 'puntuacion']):
                 top_10 = df_empresas_2025.head(10)[['posicion', 'empresa', 'puntuacion']]
                 st.dataframe(top_10, use_container_width=True, hide_index=True)
-                report_parts_to_copy.append("\nTop 10 - Merco Empresas 2025:\n" + top_10.to_string(index=False))
 
     st.markdown(OUTRO_TEXT)
-    report_parts_to_copy.append(OUTRO_TEXT.replace("---", "").strip())
-    
-    st.markdown("---")
-    full_report_text_to_copy = "\n\n".join(report_parts_to_copy)
-    
-    try:
-        from streamlit_copy_button import copy_button
-        copy_button(full_report_text_to_copy, "Copiar informe completo al portapapeles")
-    except ImportError:
-        st.warning("La funcionalidad de copiar no está disponible. Asegúrate de tener 'streamlit-copy-button' en requirements.txt.")
-        st.code(full_report_text_to_copy)
-
 else:
     st.info("Por favor, ingrese el nombre de una empresa para comenzar el análisis.")
 
