@@ -6,7 +6,7 @@ Esta aplicación web, desarrollada con Streamlit, automatiza la creación de inf
 
 <img width="1789" height="814" alt="image" src="https://github.com/user-attachments/assets/71e1aa48-bc73-4e59-bcfe-6be46e2553d7" />
 
----
+
 
 ## 🚀 Ventajas Clave
 
