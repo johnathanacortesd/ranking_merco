@@ -4,6 +4,7 @@ import os
 import re
 import unicodedata
 from io import StringIO
+from itertools import cycle # <--- NUEVA IMPORTACIÓN para variar las frases
 
 # --- Configuración de la Página ---
 st.set_page_config(
@@ -18,11 +19,9 @@ def normalize_text(text):
     if not isinstance(text, str):
         return ""
     
-    # Quitar tildes y caracteres especiales
     text = ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
     text = text.lower()
     
-    # Eliminar palabras corporativas comunes y contenido entre paréntesis
     words_to_remove = [
         r'\bgrupo\b', r'\bcomercializadora\b', r'\borganizacion\b', r'\bs\.a\.s\b', 
         r'\bsas\b', r'\bs\.a\b', r'\bltda\b', r'\bcompany\b', r'\binternational\b', 
@@ -31,10 +30,7 @@ def normalize_text(text):
     for word_regex in words_to_remove:
         text = re.sub(word_regex, '', text, flags=re.IGNORECASE)
     
-    # Quitar todo lo que no sea letra o número
     text = re.sub(r'[^a-z0-9\s]', '', text)
-    
-    # Eliminar espacios extra
     return ' '.join(text.split()).strip()
 
 # --- Funciones de Carga y Parseo ---
@@ -133,7 +129,6 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
     return None, None, None
 
 # --- Interfaz de Usuario y Lógica Principal ---
-
 st.title("📊 Generador de Informes de Reputación - Ranking Merco")
 st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2025 y 2024 y genera un informe comparativo.")
 
@@ -169,10 +164,34 @@ if company_name_input:
 
     st.markdown("---")
     st.subheader(f"Análisis Reputacional para: **{company_name_input}**")
+    
+    report_parts_to_copy = []
+    
     st.markdown(INTRO_TEXT)
+    report_parts_to_copy.append(INTRO_TEXT)
     
     found_any = False
     
+    # ### CAMBIO CLAVE: Listas de frases para dar variedad ###
+    opening_phrases = cycle([
+        "En el análisis de este mes, destacamos que la empresa **{original_name}** ha alcanzado la posición **{pos_2025}** en el ranking **{rank_name} 2025**.",
+        "El informe actual resalta el desempeño de **{original_name}**, que se ubica en el puesto **{pos_2025}** del prestigioso ranking **{rank_name} 2025**.",
+        "Para el período 2025, es notable que **{original_name}** ha logrado la posición **{pos_2025}** dentro de la clasificación **{rank_name}**."
+    ])
+
+    # Se genera una función para crear el texto comparativo
+    def get_comparison_text(pos_2024, pos_2025):
+        if pos_2024:
+            if pos_2024 > pos_2025:
+                movement = "un notable avance"
+            elif pos_2024 < pos_2025:
+                movement = "un ligero retroceso"
+            else:
+                movement = "una consolidación"
+            return f" Este resultado representa {movement} desde el puesto **{pos_2024}** que ocupó en 2024."
+        else:
+            return " En la medición de 2024, la empresa no figuraba en este ranking."
+
     RANKINGS_CONFIG = {
         "Merco Empresas": ("merco_empresas_2025", "merco_empresas_2024"),
         "Merco Talento": ("merco_talento_2025", "merco_talento_2024"),
@@ -191,13 +210,13 @@ if company_name_input:
             df_2024 = parse_general_ranking(files[key_2024])
             pos_2024, _ = find_company_in_df_robust(df_2024, normalized_input)
             
-            report_text = f"Este mes, nos complace informar que la empresa **{original_name}** ha alcanzado la posición **{pos_2025}** en el ranking **{rank_name} 2025**."
+            # Construcción del reporte con frases variadas
+            opening = next(opening_phrases).format(original_name=original_name, pos_2025=pos_2025, rank_name=rank_name)
+            comparison = get_comparison_text(pos_2024, pos_2025)
+            report_text = opening + comparison
             
-            if pos_2024:
-                report_text += f" Comparativamente, en 2024 ocupó el puesto **{pos_2024}**."
-            else:
-                report_text += " En 2024 no figuraba en este ranking."
             st.success(report_text)
+            report_parts_to_copy.append(report_text.replace("**", ""))
 
     if "merco_sectores_2025" in files and "merco_sectores_2024" in files:
         sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
@@ -208,28 +227,43 @@ if company_name_input:
             sectors_2024 = parse_sector_ranking(files["merco_sectores_2024"])
             _, pos_2024, _ = find_company_in_sectors_robust(sectors_2024, normalized_input)
 
-            report_text = f"En el ranking **Merco Sectores 2025**, la empresa **{original_name}** se posiciona en el puesto **{pos_2025}** dentro del sector **{sector}**."
-            
-            if pos_2024:
-                 report_text += f" Comparativamente, en 2024 ocupó el puesto **{pos_2024}** en el mismo sector."
-            else:
-                report_text += " En 2024 no figuraba en el ranking sectorial."
+            report_text = f"Adicionalmente, en el ranking **Merco Sectores 2025**, la empresa **{original_name}** se destaca en la posición **{pos_2025}** dentro del sector **{sector}**."
+            comparison = get_comparison_text(pos_2024, pos_2025)
+            report_text += comparison
+
             st.success(report_text)
+            report_parts_to_copy.append(report_text.replace("**", ""))
     
     if not found_any:
-        st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025.")
-        st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2025' como referencia.")
+        warning_text = f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025."
+        info_text = "A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2025' como referencia."
+        st.warning(warning_text)
+        st.info(info_text)
+        report_parts_to_copy.extend([warning_text, info_text])
         
         if "merco_empresas_2025" in files:
             df_empresas_2025 = parse_general_ranking(files["merco_empresas_2025"])
             if df_empresas_2025 is not None and all(c in df_empresas_2025.columns for c in ['posicion', 'empresa', 'puntuacion']):
                 top_10 = df_empresas_2025.head(10)[['posicion', 'empresa', 'puntuacion']]
                 st.dataframe(top_10, use_container_width=True, hide_index=True)
+                report_parts_to_copy.append("\nTop 10 - Merco Empresas 2025:\n" + top_10.to_string(index=False))
 
     st.markdown(OUTRO_TEXT)
+    report_parts_to_copy.append(OUTRO_TEXT.replace("---", "").strip())
+    
+    st.markdown("---")
+    full_report_text_to_copy = "\n\n".join(report_parts_to_copy)
+    
+    # Esta parte se saltará si la librería no está instalada, evitando el error.
+    try:
+        from streamlit_copy_button import copy_button
+        copy_button(full_report_text_to_copy, "Copiar informe completo al portapapeles")
+    except ImportError:
+        st.warning("La funcionalidad de copiar no está disponible. Asegúrate de tener 'streamlit-copy-button' en requirements.txt.")
+        st.code(full_report_text_to_copy) # Muestra el texto en un cuadro para copiar manualmente
+
 else:
     st.info("Por favor, ingrese el nombre de una empresa para comenzar el análisis.")
 
-# --- Créditos al final de la página ---
 st.markdown("---")
 st.markdown("<div style='text-align: center; color: grey;'>Creada con 🤖 por Johnathan Cortés</div>", unsafe_allow_html=True)
