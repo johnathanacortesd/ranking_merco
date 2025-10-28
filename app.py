@@ -4,6 +4,7 @@ import os
 import re
 import unicodedata
 from io import StringIO
+import streamlit.components.v1 as components
 
 # --- Configuración de la Página ---
 st.set_page_config(
@@ -132,6 +133,34 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
 
     return None, None, None
 
+def select_and_copy_text(element_id):
+    """Función para seleccionar todo el texto de un elemento y copiarlo automáticamente"""
+    components.html(
+        f"""
+        <script>
+        function selectAndCopy() {{
+            const element = window.parent.document.getElementById('{element_id}');
+            if (element) {{
+                const range = document.createRange();
+                range.selectNode(element);
+                const selection = window.parent.window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+                
+                try {{
+                    window.parent.document.execCommand('copy');
+                    console.log('Texto copiado');
+                }} catch (err) {{
+                    console.error('Error al copiar:', err);
+                }}
+            }}
+        }}
+        selectAndCopy();
+        </script>
+        """,
+        height=0
+    )
+
 # --- Interfaz de Usuario y Lógica Principal ---
 
 st.title("📊 Generador de Informes de Reputación - Ranking Merco")
@@ -168,6 +197,10 @@ if company_name_input:
         st.stop()
 
     st.markdown("---")
+    
+    # Contenedor con ID para selección
+    st.markdown('<div id="report-content">', unsafe_allow_html=True)
+    
     st.subheader(f"Análisis Reputacional para: **{company_name_input}**")
     st.markdown(INTRO_TEXT)
     
@@ -227,6 +260,17 @@ if company_name_input:
                 st.dataframe(top_10, use_container_width=True, hide_index=True)
 
     st.markdown(OUTRO_TEXT)
+    
+    # Cerrar contenedor
+    st.markdown('</div>', unsafe_allow_html=True)
+    
+    # Botón para seleccionar y copiar
+    st.markdown("---")
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        if st.button("📋 Seleccionar Todo y Copiar", use_container_width=True, type="primary", key="copy_btn"):
+            select_and_copy_text("report-content")
+            st.success("✅ ¡Texto seleccionado y copiado! Presiona Ctrl+C si no se copió automáticamente.")
 else:
     st.info("Por favor, ingrese el nombre de una empresa para comenzar el análisis.")
 
