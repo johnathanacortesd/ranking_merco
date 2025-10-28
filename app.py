@@ -4,7 +4,6 @@ import os
 import re
 import unicodedata
 from io import StringIO
-import streamlit.components.v1 as components
 
 # --- Configuración de la Página ---
 st.set_page_config(
@@ -133,49 +132,17 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
 
     return None, None, None
 
-def select_and_copy_text(element_id):
-    """Función para seleccionar todo el texto de un elemento y copiarlo automáticamente"""
-    components.html(
-        f"""
-        <script>
-        function selectAndCopy() {{
-            const element = window.parent.document.getElementById('{element_id}');
-            if (element) {{
-                const range = document.createRange();
-                range.selectNode(element);
-                const selection = window.parent.window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-                
-                try {{
-                    window.parent.document.execCommand('copy');
-                    console.log('Texto copiado');
-                }} catch (err) {{
-                    console.error('Error al copiar:', err);
-                }}
-            }}
-        }}
-        selectAndCopy();
-        </script>
-        """,
-        height=0
-    )
-
 # --- Interfaz de Usuario y Lógica Principal ---
 
 st.title("📊 Generador de Informes de Reputación - Ranking Merco")
 st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2025 y 2024 y genera un informe comparativo.")
 
-INTRO_TEXT = """
-En el ámbito empresarial contemporáneo, la medición de la reputación es una piedra angular para garantizar el éxito sostenible de cualquier empresa. En GlobalNews Group Colombia, somos conscientes de la inestimable naturaleza de la reputación empresarial y, como resultado, proporcionamos una mirada detallada al análisis reputacional.
+INTRO_TEXT = """En el ámbito empresarial contemporáneo, la medición de la reputación es una piedra angular para garantizar el éxito sostenible de cualquier empresa. En GlobalNews Group Colombia, somos conscientes de la inestimable naturaleza de la reputación empresarial y, como resultado, proporcionamos una mirada detallada al análisis reputacional.
 
-Nuestro informe de reputación trasciende la mera recolección de datos, ofreciendo un valor agregado de alta relevancia. Para este mes, hemos integrado el posicionamiento en el prestigioso ranking Merco en nuestro análisis. Esta herramienta exhaustiva evalúa la reputación de las empresas en Colombia a través de una metodología multistakeholder que engloba seis evaluaciones y más de veinte fuentes de información. La posición obtenida en este ranking refleja directamente el reconocimiento que la empresa ha logrado entre una amplia gama de grupos de interés. Es importante destacar que la metodología utilizada por Merco Empresas es completamente pública y accesible en su sitio web.
-"""
+Nuestro informe de reputación trasciende la mera recolección de datos, ofreciendo un valor agregado de alta relevancia. Para este mes, hemos integrado el posicionamiento en el prestigioso ranking Merco en nuestro análisis. Esta herramienta exhaustiva evalúa la reputación de las empresas en Colombia a través de una metodología multistakeholder que engloba seis evaluaciones y más de veinte fuentes de información. La posición obtenida en este ranking refleja directamente el reconocimiento que la empresa ha logrado entre una amplia gama de grupos de interés. Es importante destacar que la metodología utilizada por Merco Empresas es completamente pública y accesible en su sitio web."""
 
-OUTRO_TEXT = """
----
-¿Está listo para elevar su estrategia de gestión de la reputación al próximo nivel? Esto es solo el principio, ya que en GlobalNews Group Colombia ofrecemos una variedad de herramientas avanzadas para fortalecer su capacidad de monitoreo de noticias, ya sea en medios tradicionales o en plataformas de redes sociales. ¡Descubra cómo podemos ayudarle a medir, gestionar y mejorar su reputación empresarial de manera efectiva y precisa!
-"""
+OUTRO_TEXT = """---
+¿Está listo para elevar su estrategia de gestión de la reputación al próximo nivel? Esto es solo el principio, ya que en GlobalNews Group Colombia ofrecemos una variedad de herramientas avanzadas para fortalecer su capacidad de monitoreo de noticias, ya sea en medios tradicionales o en plataformas de redes sociales. ¡Descubra cómo podemos ayudarle a medir, gestionar y mejorar su reputación empresarial de manera efectiva y precisa!"""
 
 company_name_input = st.text_input(
     "Introduce el nombre de la empresa a consultar:",
@@ -197,14 +164,11 @@ if company_name_input:
         st.stop()
 
     st.markdown("---")
-    
-    # Contenedor con ID para selección
-    st.markdown('<div id="report-content">', unsafe_allow_html=True)
-    
     st.subheader(f"Análisis Reputacional para: **{company_name_input}**")
     st.markdown(INTRO_TEXT)
     
     found_any = False
+    report_parts = [INTRO_TEXT]
     
     RANKINGS_CONFIG = {
         "Merco Empresas": ("merco_empresas_2025", "merco_empresas_2024"),
@@ -224,13 +188,15 @@ if company_name_input:
             df_2024 = parse_general_ranking(files[key_2024])
             pos_2024, _ = find_company_in_df_robust(df_2024, normalized_input)
             
-            report_text = f"Este mes, nos complace informar que la empresa **{original_name}** ha alcanzado la posición **{pos_2025}** en el ranking **{rank_name} 2025**."
+            report_text = f"Este mes, nos complace informar que la empresa {original_name} ha alcanzado la posición {pos_2025} en el ranking {rank_name} 2025."
             
             if pos_2024:
-                report_text += f" Comparativamente, en 2024 ocupó el puesto **{pos_2024}**."
+                report_text += f" Comparativamente, en 2024 ocupó el puesto {pos_2024}."
             else:
                 report_text += " En 2024 no figuraba en este ranking."
+            
             st.success(report_text)
+            report_parts.append(report_text)
 
     if "merco_sectores_2025" in files and "merco_sectores_2024" in files:
         sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
@@ -241,14 +207,17 @@ if company_name_input:
             sectors_2024 = parse_sector_ranking(files["merco_sectores_2024"])
             _, pos_2024, _ = find_company_in_sectors_robust(sectors_2024, normalized_input)
 
-            report_text = f"En el ranking **Merco Sectores 2025**, la empresa **{original_name}** se posiciona en el puesto **{pos_2025}** dentro del sector **{sector}**."
+            report_text = f"En el ranking Merco Sectores 2025, la empresa {original_name} se posiciona en el puesto {pos_2025} dentro del sector {sector}."
             
             if pos_2024:
-                 report_text += f" Comparativamente, en 2024 ocupó el puesto **{pos_2024}** en el mismo sector."
+                 report_text += f" Comparativamente, en 2024 ocupó el puesto {pos_2024} en el mismo sector."
             else:
                 report_text += " En 2024 no figuraba en el ranking sectorial."
+            
             st.success(report_text)
+            report_parts.append(report_text)
     
+    top_10_df = None
     if not found_any:
         st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025.")
         st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2025' como referencia.")
@@ -256,21 +225,68 @@ if company_name_input:
         if "merco_empresas_2025" in files:
             df_empresas_2025 = parse_general_ranking(files["merco_empresas_2025"])
             if df_empresas_2025 is not None and all(c in df_empresas_2025.columns for c in ['posicion', 'empresa', 'puntuacion']):
-                top_10 = df_empresas_2025.head(10)[['posicion', 'empresa', 'puntuacion']]
-                st.dataframe(top_10, use_container_width=True, hide_index=True)
+                top_10_df = df_empresas_2025.head(10)[['posicion', 'empresa', 'puntuacion']]
+                st.dataframe(top_10_df, use_container_width=True, hide_index=True)
+                
+                # Agregar tabla al reporte
+                table_text = f"\n\nLa empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025.\n\nTop 10 del ranking general 'Merco Empresas 2025':\n\n"
+                for _, row in top_10_df.iterrows():
+                    table_text += f"Posición {int(row['posicion'])}: {row['empresa']} - Puntuación: {row['puntuacion']}\n"
+                report_parts.append(table_text)
 
+    report_parts.append(OUTRO_TEXT)
+    
+    # Crear el texto completo del informe
+    full_report_text = "\n\n".join(report_parts)
+    
     st.markdown(OUTRO_TEXT)
     
-    # Cerrar contenedor
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Botón para seleccionar y copiar
+    # Botón de copiar con HTML y JavaScript
     st.markdown("---")
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        if st.button("📋 Seleccionar Todo y Copiar", use_container_width=True, type="primary", key="copy_btn"):
-            select_and_copy_text("report-content")
-            st.success("✅ ¡Texto seleccionado y copiado! Presiona Ctrl+C si no se copió automáticamente.")
+        # Crear un identificador único para este botón
+        button_key = f"copy_button_{hash(full_report_text)}"
+        
+        # Escapar el texto para JavaScript
+        escaped_text = full_report_text.replace('\\', '\\\\').replace('`', '\\`').replace('${', '\\${')
+        
+        # HTML con botón y script de copiado
+        copy_button_html = f"""
+        <div style="text-align: center;">
+            <button id="{button_key}" style="
+                background-color: #0066cc;
+                color: white;
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                font-size: 1rem;
+                width: 100%;
+                font-weight: 500;
+            " onclick="copyToClipboard()">
+                📋 Copiar Informe Completo
+            </button>
+            <p id="copy-status" style="margin-top: 10px; color: green; display: none;">✅ ¡Copiado al portapapeles!</p>
+        </div>
+        <script>
+        function copyToClipboard() {{
+            const text = `{escaped_text}`;
+            navigator.clipboard.writeText(text).then(function() {{
+                document.getElementById('copy-status').style.display = 'block';
+                setTimeout(function() {{
+                    document.getElementById('copy-status').style.display = 'none';
+                }}, 3000);
+            }}, function(err) {{
+                alert('Error al copiar. Por favor, inténtelo de nuevo.');
+                console.error('Error:', err);
+            }});
+        }}
+        </script>
+        """
+        
+        st.markdown(copy_button_html, unsafe_allow_html=True)
+
 else:
     st.info("Por favor, ingrese el nombre de una empresa para comenzar el análisis.")
 
