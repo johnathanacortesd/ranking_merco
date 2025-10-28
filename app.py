@@ -18,9 +18,11 @@ def normalize_text(text):
     if not isinstance(text, str):
         return ""
     
+    # Quitar tildes y caracteres especiales
     text = ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
     text = text.lower()
     
+    # Eliminar palabras corporativas comunes y contenido entre paréntesis
     words_to_remove = [
         r'\bgrupo\b', r'\bcomercializadora\b', r'\borganizacion\b', r'\bs\.a\.s\b', 
         r'\bsas\b', r'\bs\.a\b', r'\bltda\b', r'\bcompany\b', r'\binternational\b', 
@@ -29,12 +31,16 @@ def normalize_text(text):
     for word_regex in words_to_remove:
         text = re.sub(word_regex, '', text, flags=re.IGNORECASE)
     
+    # Quitar todo lo que no sea letra o número
     text = re.sub(r'[^a-z0-9\s]', '', text)
+    
+    # Eliminar espacios extra
     return ' '.join(text.split()).strip()
 
 # --- Funciones de Carga y Parseo ---
 @st.cache_data
 def parse_general_ranking(file_path):
+    """Parsea archivos de ranking generales y normaliza las columnas."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -64,6 +70,7 @@ def parse_general_ranking(file_path):
 
 @st.cache_data
 def parse_sector_ranking(file_path):
+    """Parsea el archivo de ranking por sectores y normaliza columnas."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -126,6 +133,7 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
     return None, None, None
 
 # --- Interfaz de Usuario y Lógica Principal ---
+
 st.title("📊 Generador de Informes de Reputación - Ranking Merco")
 st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2025 y 2024 y genera un informe comparativo.")
 
@@ -150,7 +158,6 @@ if company_name_input:
     
     DATA_DIR = "data"
     
-    ### CAMBIO CLAVE: Reemplazar espacios por guiones bajos al crear las claves ###
     try:
         files = { 
             f.replace('.txt', '').replace(' ', '_'): os.path.join(DATA_DIR, f) 
@@ -158,7 +165,7 @@ if company_name_input:
         }
     except FileNotFoundError:
         st.error(f"No se encontró la carpeta '{DATA_DIR}'. Asegúrate de que exista y contenga los archivos .txt.")
-        st.stop() # Detiene la ejecución si no hay datos
+        st.stop()
 
     st.markdown("---")
     st.subheader(f"Análisis Reputacional para: **{company_name_input}**")
@@ -174,7 +181,7 @@ if company_name_input:
 
     for rank_name, (key_2025, key_2024) in RANKINGS_CONFIG.items():
         if key_2025 not in files or key_2024 not in files:
-            continue # Salta este ranking si falta alguno de los archivos
+            continue
         
         df_2025 = parse_general_ranking(files[key_2025])
         pos_2025, original_name = find_company_in_df_robust(df_2025, normalized_input)
@@ -222,3 +229,7 @@ if company_name_input:
     st.markdown(OUTRO_TEXT)
 else:
     st.info("Por favor, ingrese el nombre de una empresa para comenzar el análisis.")
+
+# --- Créditos al final de la página ---
+st.markdown("---")
+st.markdown("<div style='text-align: center; color: grey;'>Creada con 🤖 por Johnathan Cortés</div>", unsafe_allow_html=True)
