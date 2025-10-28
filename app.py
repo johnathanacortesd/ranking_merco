@@ -172,7 +172,6 @@ if company_name_input:
     st.markdown(INTRO_TEXT)
     
     found_any = False
-    report_parts = [INTRO_TEXT]  # Almacenar todas las partes del informe
     
     RANKINGS_CONFIG = {
         "Merco Empresas": ("merco_empresas_2025", "merco_empresas_2024"),
@@ -199,7 +198,6 @@ if company_name_input:
             else:
                 report_text += " En 2024 no figuraba en este ranking."
             st.success(report_text)
-            report_parts.append(report_text)
 
     if "merco_sectores_2025" in files and "merco_sectores_2024" in files:
         sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
@@ -217,7 +215,6 @@ if company_name_input:
             else:
                 report_text += " En 2024 no figuraba en el ranking sectorial."
             st.success(report_text)
-            report_parts.append(report_text)
     
     if not found_any:
         st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025.")
@@ -228,22 +225,6 @@ if company_name_input:
             if df_empresas_2025 is not None and all(c in df_empresas_2025.columns for c in ['posicion', 'empresa', 'puntuacion']):
                 top_10 = df_empresas_2025.head(10)[['posicion', 'empresa', 'puntuacion']]
                 st.dataframe(top_10, use_container_width=True, hide_index=True)
-
-    report_parts.append(OUTRO_TEXT)
-    
-    # Botón para copiar el informe completo
-    if found_any:
-        st.markdown("---")
-        
-        # Crear texto plano sin formato markdown
-        plain_text_report = "\n\n".join(report_parts)
-        plain_text_report = plain_text_report.replace("**", "")
-        
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            if st.button("📋 Copiar Informe Completo", use_container_width=True, type="primary"):
-                st.code(plain_text_report, language=None)
-                st.success("✅ Texto listo para copiar. Selecciona el texto de arriba y copia con Ctrl+C (Cmd+C en Mac)")
 
     st.markdown(OUTRO_TEXT)
 else:
