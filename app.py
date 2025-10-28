@@ -15,9 +15,13 @@ st.set_page_config(
 
 # --- FUNCIÓN DE NORMALIZACIÓN ---
 def normalize_text(text):
-    if not isinstance(text, str): return ""
+    """Limpia y estandariza el texto para hacer comparaciones robustas."""
+    if not isinstance(text, str):
+        return ""
+    
     text = ''.join(c for c in unicodedata.normalize('NFD', text) if unicodedata.category(c) != 'Mn')
     text = text.lower()
+    
     words_to_remove = [
         r'\bgrupo\b', r'\bcomercializadora\b', r'\borganizacion\b', r'\bs\.a\.s\b', 
         r'\bsas\b', r'\bs\.a\b', r'\bltda\b', r'\bcompany\b', r'\binternational\b', 
@@ -25,12 +29,14 @@ def normalize_text(text):
     ]
     for word_regex in words_to_remove:
         text = re.sub(word_regex, '', text, flags=re.IGNORECASE)
+    
     text = re.sub(r'[^a-z0-9\s]', '', text)
     return ' '.join(text.split()).strip()
 
 # --- Funciones de Carga y Parseo ---
 @st.cache_data
 def parse_general_ranking(file_path):
+    """Parsea archivos de ranking, con lógica especial para 'Líderes'."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -39,15 +45,17 @@ def parse_general_ranking(file_path):
             rows = re.findall(r'<tr>(.*?)</tr>', content, re.DOTALL)
             data_list = []
             for row_html in rows[1:]:
-                pos_match = re.search(r'<span.*?>(.*?)</span>', row_html)
-                # Modificado para capturar el líder y la empresa
-                leader_company_match = re.search(r'<td>\s*(.*?)\s*<em>(.*?)</em></td>', row_html, re.DOTALL)
-                
-                if pos_match and leader_company_match:
-                    pos = pos_match.group(1).strip()
-                    leader = leader_company_match.group(1).strip()
-                    company = leader_company_match.group(2).strip()
-                    data_list.append({'posicion': pos, 'lider_nombre': leader, 'empresa': company})
+                cells = re.findall(r'<td>(.*?)</td>', row_html, re.DOTALL)
+                if len(cells) > 1:
+                    pos_match = re.search(r'<span.*?>(.*?)</span>', cells[0])
+                    # ### CAMBIO CLAVE: Regex más precisa para líder y empresa ###
+                    leader_company_match = re.search(r'([^<]*)<em>(.*?)</em>', cells[1])
+                    
+                    if pos_match and leader_company_match:
+                        pos = pos_match.group(1).strip()
+                        leader = leader_company_match.group(1).strip()
+                        company = leader_company_match.group(2).strip()
+                        data_list.append({'posicion': pos, 'lider_nombre': leader, 'empresa': company})
             
             if not data_list: return None
             df = pd.DataFrame(data_list)
@@ -71,6 +79,7 @@ def parse_general_ranking(file_path):
 
 @st.cache_data
 def parse_sector_ranking(file_path):
+    """Parsea el archivo de ranking por sectores y normaliza columnas."""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -84,11 +93,13 @@ def parse_sector_ranking(file_path):
             if df_list:
                 df = df_list[0]
                 df.columns = [normalize_text(str(col)) for col in df.columns]
+                
                 if 'empresa' in df.columns:
                     df['empresa_normalized'] = df['empresa'].apply(normalize_text)
                 if 'posicion' in df.columns:
                     df['posicion'] = pd.to_numeric(df['posicion'], errors='coerce')
                 sector_data[sector_name] = df
+        
         return sector_data
     except FileNotFoundError:
         st.error(f"No se encontró el archivo: {file_path}.")
@@ -104,7 +115,7 @@ def find_company_in_df_robust(df, normalized_query):
         row = match.iloc[0]
         pos = row.get('posicion')
         original_name = row.get('empresa')
-        leader_name = row.get('lidernombre') # Obtener el nombre del líder
+        leader_name = row.get('lidernombre')
         return (int(pos) if pd.notna(pos) else None), original_name, leader_name
     return None, None, None
 
@@ -125,9 +136,15 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
 st.title("📊 Generador de Informes de Reputación - Ranking Merco")
 st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2025 y 2024 y genera un informe comparativo.")
 
-INTRO_TEXT = "..." # Mantenido igual
-OUTRO_TEXT = "..." # Mantenido igual
+INTRO_TEXT = """
+En el ámbito empresarial contemporáneo, la medición de la reputación es una piedra angular para garantizar el éxito sostenible de cualquier empresa. En GlobalNews Group Colombia, somos conscientes de la inestimable naturaleza de la reputación empresarial y, como resultado, proporcionamos una mirada detallada al análisis reputacional.
 
+Nuestro informe de reputación trasciende la mera recolección de datos, ofreciendo un valor agregado de alta relevancia. Para este mes, hemos integrado el posicionamiento en el prestigioso ranking Merco en nuestro análisis. Esta herramienta exhaustiva evalúa la reputación de las empresas en Colombia a través de una metodología multistakeholder que engloba seis evaluaciones y más de veinte fuentes de información. La posición obtenida en este ranking refleja directamente el reconocimiento que la empresa ha logrado entre una amplia gama de grupos de interés. Es importante destacar que la metodología utilizada por Merco Empresas es completamente pública y accesible en su sitio web.
+"""
+OUTRO_TEXT = """
+---
+¿Está listo para elevar su estrategia de gestión de la reputación al próximo nivel? Esto es solo el principio, ya que en GlobalNews Group Colombia ofrecemos una variedad de herramientas avanzadas para fortalecer su capacidad de monitoreo de noticias, ya sea en medios tradicionales o en plataformas de redes sociales. ¡Descubra cómo podemos ayudarle a medir, gestionar y mejorar su reputación empresarial de manera efectiva y precisa!
+"""
 company_name_input = st.text_input("Introduce el nombre de la empresa a consultar:", placeholder="Ej: EPM, Nutresa, Crepes & Waffles").strip()
 
 if company_name_input:
@@ -180,7 +197,6 @@ if company_name_input:
             df_2024 = parse_general_ranking(files[key_2024])
             pos_2024, _, _ = find_company_in_df_robust(df_2024, normalized_input)
             
-            # ### CAMBIO CLAVE: Lógica de redacción específica para Líderes ###
             if rank_name == "Merco Líderes" and leader_name:
                 report_text = f"En el ranking **Merco Líderes 2025**, **{leader_name}**, de la empresa **{original_name}**, ha obtenido la posición **{pos_2025}**."
                 if pos_2024:
