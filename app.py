@@ -4,7 +4,7 @@ import os
 import re
 import unicodedata
 from io import StringIO
-from itertools import cycle # <--- NUEVA IMPORTACIÓN para variar las frases
+from itertools import cycle
 
 # --- Configuración de la Página ---
 st.set_page_config(
@@ -172,23 +172,28 @@ if company_name_input:
     
     found_any = False
     
-    # ### CAMBIO CLAVE: Listas de frases para dar variedad ###
     opening_phrases = cycle([
         "En el análisis de este mes, destacamos que la empresa **{original_name}** ha alcanzado la posición **{pos_2025}** en el ranking **{rank_name} 2025**.",
         "El informe actual resalta el desempeño de **{original_name}**, que se ubica en el puesto **{pos_2025}** del prestigioso ranking **{rank_name} 2025**.",
         "Para el período 2025, es notable que **{original_name}** ha logrado la posición **{pos_2025}** dentro de la clasificación **{rank_name}**."
     ])
 
-    # Se genera una función para crear el texto comparativo
+    # ### CAMBIO CLAVE: Lógica de comparación mejorada ###
     def get_comparison_text(pos_2024, pos_2025):
         if pos_2024:
-            if pos_2024 > pos_2025:
+            diff = pos_2024 - pos_2025
+            if diff > 15:
                 movement = "un notable avance"
-            elif pos_2024 < pos_2025:
+            elif diff > 0:
+                movement = "un avance"
+            elif diff < -10:
+                movement = "un retroceso"
+            elif diff < 0:
                 movement = "un ligero retroceso"
             else:
-                movement = "una consolidación"
-            return f" Este resultado representa {movement} desde el puesto **{pos_2024}** que ocupó en 2024."
+                movement = "una consolidación de su posición"
+            
+            return f" Este resultado representa {movement} frente al puesto **{pos_2024}** que ocupó en 2024."
         else:
             return " En la medición de 2024, la empresa no figuraba en este ranking."
 
@@ -210,7 +215,6 @@ if company_name_input:
             df_2024 = parse_general_ranking(files[key_2024])
             pos_2024, _ = find_company_in_df_robust(df_2024, normalized_input)
             
-            # Construcción del reporte con frases variadas
             opening = next(opening_phrases).format(original_name=original_name, pos_2025=pos_2025, rank_name=rank_name)
             comparison = get_comparison_text(pos_2024, pos_2025)
             report_text = opening + comparison
@@ -254,13 +258,12 @@ if company_name_input:
     st.markdown("---")
     full_report_text_to_copy = "\n\n".join(report_parts_to_copy)
     
-    # Esta parte se saltará si la librería no está instalada, evitando el error.
     try:
         from streamlit_copy_button import copy_button
         copy_button(full_report_text_to_copy, "Copiar informe completo al portapapeles")
     except ImportError:
         st.warning("La funcionalidad de copiar no está disponible. Asegúrate de tener 'streamlit-copy-button' en requirements.txt.")
-        st.code(full_report_text_to_copy) # Muestra el texto en un cuadro para copiar manualmente
+        st.code(full_report_text_to_copy)
 
 else:
     st.info("Por favor, ingrese el nombre de una empresa para comenzar el análisis.")
