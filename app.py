@@ -362,109 +362,12 @@ if company_name_input:
             return f" En 2025 ocupó el puesto **{p25}**; en 2024 tampoco figuraba en este ranking."
         return f" Su única aparición de los últimos tres años fue en 2024, en el puesto **{p24}**; tampoco figuró en 2025."
 
-    def _tendencia(p26, p25, p24):
-        """Compara 2026 con el año más antiguo disponible: (frase, signo, año_ref, puesto_ref)."""
-        if not p26: return None
-        if p24: ref_anio, ref = 2024, p24
-        elif p25: ref_anio, ref = 2025, p25
-        else: return None
-        delta = ref - p26
-        sost = ""
-        if p24 and p25 and ((p24 > p25 > p26) or (p24 < p25 < p26)):
-            sost = " sostenida"
-        if delta >= 10: frase = f"una marcada tendencia al alza{sost}"
-        elif delta >= 3: frase = f"una tendencia al alza{sost}"
-        elif delta >= 1: frase = "una ligera mejora"
-        elif delta == 0: frase = "estabilidad"
-        elif delta >= -2: frase = "un ligero descenso"
-        elif delta >= -9: frase = f"una tendencia a la baja{sost}"
-        else: frase = f"una marcada tendencia a la baja{sost}"
-        signo = 1 if delta > 0 else (-1 if delta < 0 else 0)
-        return (frase, signo, ref_anio, ref)
-
-    def generar_conclusiones(nombre, resumen):
-        """Párrafos de conclusiones con juicios de valor y tendencia del trienio."""
-        if not resumen: return []
-        con26 = [r for r in resumen if r["pos"][2026]]
-        pars = []
-        if not con26:
-            pasados = ", ".join(r["ranking"] for r in resumen)
-            pars.append(f"En 2026, **{nombre}** no aparece en ninguno de los rankings del Ranking Merco, "
-                        f"pese a haber figurado en años anteriores en {pasados}.")
-            return pars
-        # P1: presencia en 2026 y continuidad
-        lista26 = ", ".join(r["ranking"] for r in con26)
-        p1 = (f"En 2026, **{nombre}** figura en {len(con26)} de los cuatro rankings del Ranking Merco "
-              f"({lista26}).")
-        constantes = [r["ranking"] for r in resumen if all(r["pos"][y] for y in YEARS)]
-        if constantes:
-            p1 += (f" Mantiene presencia en {', '.join(constantes)} durante los tres años analizados "
-                   f"(2024, 2025 y 2026), lo que evidencia una visibilidad reputacional constante.")
-        nuevos = [r["ranking"] for r in con26 if not r["pos"][2025] and not r["pos"][2024]]
-        for rk in nuevos:
-            p1 += f" En {rk} ingresa por primera vez en el periodo analizado."
-        sec = next((r for r in con26 if r["ranking"] == "Merco Sectores"), None)
-        if sec and sec["sector"]:
-            if sec["pos"][2026] == 1:
-                p1 += (f" En el ámbito sectorial, ocupa la **posición 1** en el sector {sec['sector']}, "
-                       f"consolidándose como la empresa con mejor reputación de su sector en 2026.")
-            elif sec["pos"][2026] <= 3:
-                p1 += (f" En el ámbito sectorial, se ubica entre las tres primeras posiciones de su sector "
-                       f"({sec['sector']}), con el puesto **{sec['pos'][2026]}**.")
-        salen = [r["ranking"] for r in resumen if not r["pos"][2026] and (r["pos"][2025] or r["pos"][2024])]
-        if salen:
-            p1 += (f" En contraste, en 2026 deja de aparecer en {', '.join(salen)}, donde figuraba en "
-                   f"años anteriores.")
-        pars.append(p1)
-        # P2: tendencia por ranking y balance global
-        clausulas, signos, suben, bajan = [], [], [], []
-        for r in con26:
-            t = _tendencia(r["pos"][2026], r["pos"][2025], r["pos"][2024])
-            if not t: continue
-            frase, signo, ref_anio, ref = t
-            clausulas.append(f"en **{r['ranking']}** muestra {frase} (del puesto {ref} en {ref_anio} "
-                             f"al puesto {r['pos'][2026]} en 2026)")
-            signos.append(signo)
-            if signo > 0: suben.append(r["ranking"])
-            elif signo < 0: bajan.append(r["ranking"])
-        if clausulas:
-            p2 = "En cuanto a la tendencia del trienio, " + "; ".join(clausulas) + "."
-            hay_pos = any(x > 0 for x in signos)
-            hay_neg = any(x < 0 for x in signos)
-            hay_cero = any(x == 0 for x in signos)
-            if hay_pos and hay_neg:
-                balance = "mixta"
-                p2 += (f" En balance, la trayectoria 2024-2026 es **mixta**: los avances en "
-                       f"{', '.join(suben)} contrastan con los retrocesos en {', '.join(bajan)}, "
-                       "un desempeño desigual entre rankings.")
-            elif hay_pos:
-                balance = "positiva"
-                detalle = ("mejora o se mantiene estable en todos los rankings comparables" if hay_cero
-                           else "mejora en todos los rankings comparables")
-                p2 += (f" En balance, la trayectoria 2024-2026 de la empresa es **positiva**: {detalle}, "
-                       "lo que refleja un fortalecimiento de su reputación corporativa.")
-            elif hay_neg:
-                balance = "negativa"
-                detalle = ("retrocede o se mantiene estable en todos los rankings comparables" if hay_cero
-                           else "cede posiciones en todos los rankings comparables")
-                p2 += (f" En balance, la trayectoria 2024-2026 de la empresa es **negativa**: {detalle}, "
-                       "lo que evidencia un debilitamiento de su posicionamiento reputacional.")
-            else:
-                balance = "estable"
-                p2 += (" En balance, la trayectoria 2024-2026 es de **estabilidad**: mantiene sus posiciones "
-                       "sin variaciones, un desempeño constante aunque sin avances.")
-            pars.append(p2)
-        else:
-            balance = "nueva"
-        return pars
-
     opening_phrases = cycle([
         "En el ranking **{rank} 2026**, la empresa **{nombre}** ocupa la posición **{pos}**.",
         "En **{rank} 2026**, la empresa **{nombre}** se ubica en el puesto **{pos}**.",
         "La empresa **{nombre}** registra la posición **{pos}** en el ranking **{rank} 2026**."
     ])
 
-    resumen_rankings = []
     RANKINGS_CONFIG = {
         "Merco Empresas": ("merco_empresas_2026", "merco_empresas_2025", "merco_empresas_2024"),
         "Merco Talento": ("merco_talento_2026", "merco_talento_2025", "merco_talento_2024"),
@@ -487,10 +390,6 @@ if company_name_input:
         nombre = next(datos[y][1] for y in YEARS if y in datos)
         if nombre_empresa is None: nombre_empresa = nombre
 
-        resumen_rankings.append({
-            "ranking": rank_name, "pos": pos, "sector": None,
-            "lider": (datos[anio_ref][2] if rank_name == "Merco Líderes" and (anio_ref := next((y for y in YEARS if y in datos), None)) else None),
-        })
         if rank_name == "Merco Líderes":
             anio_ref = next(y for y in YEARS if y in datos)
             lider_ref = datos[anio_ref][2]
@@ -528,14 +427,6 @@ if company_name_input:
                          f"en la clasificación (en {anio_ref} figuró en el sector **{sector_ref}**).")
             texto += historial(pos)
             mostrar_tarjeta("MERCO SECTORES", texto)
-            resumen_rankings.append({"ranking": "Merco Sectores", "pos": pos, "sector": sector_ref, "lider": None})
-
-    conclusiones = generar_conclusiones(nombre_empresa or company_name_input, resumen_rankings)
-    if conclusiones:
-        st.markdown("---")
-        for _parrafo in conclusiones:
-            st.markdown(_parrafo)
-            textos_informe.append(_parrafo)
 
     # --- Sector probable cuando el cliente no tiene data en el ranking sectorial ---
     SECTORES_POR_PALABRA = [
