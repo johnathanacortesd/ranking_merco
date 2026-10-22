@@ -161,7 +161,7 @@ st.markdown("""
 <div class="app-header">
   <h1>📊 Generador de Informes de Reputación · Merco</h1>
   <p>Consulta la posición de una empresa en los rankings Merco Empresas, Talento, Líderes y Sectores de 2024, 2025 y 2026, y genera el texto comparativo listo para tu informe.</p>
-  <p style="font-size:13px; opacity:0.75; margin-top:6px;">Creada con (Muse AI) por Johnathan Cortés</p>
+  <p style="font-size:13px; opacity:0.85; margin-top:6px;">Creada con <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D97757" stroke-width="3.2" stroke-linecap="round" style="vertical-align:-2px; margin:0 1px;"><path d="M12 3v18M5.6 7.5l12.8 9M18.4 7.5l-12.8 9M3.6 12h16.8"/></svg> Muse AI por Johnathan Cortés</p>
 </div>
 """, unsafe_allow_html=True)
 
