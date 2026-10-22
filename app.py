@@ -533,7 +533,6 @@ if company_name_input:
     conclusiones = generar_conclusiones(nombre_empresa or company_name_input, resumen_rankings)
     if conclusiones:
         st.markdown("---")
-        st.subheader("📝 Conclusiones")
         for _parrafo in conclusiones:
             st.markdown(_parrafo)
             textos_informe.append(_parrafo)
