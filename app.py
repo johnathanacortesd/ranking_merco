@@ -26,7 +26,9 @@ html, body, [class*="css"], .stApp { font-family: 'Inter', system-ui, -apple-sys
 .app-header p { font-size: 16px; color: #6E6257; margin: 0; line-height: 1.55; }
 .result-card { background: #FFFFFF; border: 1px solid #E9E1D4; border-left: 5px solid #C4562C; border-radius: 14px; padding: 18px 22px; margin: 12px 0 16px 0; box-shadow: 0 2px 10px rgba(90, 55, 25, 0.05); font-size: 16.5px; line-height: 1.6; color: #26221D; }
 .result-card .chip { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #B34A24; background: #F9E9DF; border-radius: 999px; padding: 3px 11px; margin-bottom: 9px; }
-div[data-testid="stTextInput"] input { border-radius: 12px; border: 1.5px solid #DCD1BF; background: #FFFFFF; padding: 12px 16px; font-size: 17px; }
+div[data-testid="stTextInput"] input { border-radius: 12px; border: 1.5px solid #DCD1BF; background: #FFFFFF; padding: 12px 16px; font-size: 17px; color: #26221D !important; caret-color: #B34A24; -webkit-text-fill-color: #26221D; }
+div[data-testid="stTextInput"] input::placeholder { color: #A2937F !important; opacity: 1; -webkit-text-fill-color: #A2937F; }
+div[data-testid="stTextInput"] label p { color: #3A342C !important; font-weight: 600; font-size: 16px; }
 div[data-testid="stTextInput"] input:focus { border-color: #C4562C; box-shadow: 0 0 0 3px rgba(196, 86, 44, 0.15); }
 div[data-testid="stCodeBlock"] { border-radius: 12px; border: 1px solid #E9E1D4; }
 p, li { font-size: 16px; line-height: 1.65; }
