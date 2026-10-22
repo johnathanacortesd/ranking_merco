@@ -323,12 +323,13 @@ if company_name_input:
         )
 
     # --- Redacción del informe comparativo 2026 / 2025 / 2024 (solo datos, sin juicios de valor) ---
-    def frase_cambio(pos_ref, pos_new, anio_ref):
-        """Describe el cambio entre dos puestos solo con cifras."""
+    def frase_cambio(pos_ref, pos_new):
+        """Describe el cambio entre dos puestos solo con cifras, sin nombrar el año:
+        el año de referencia siempre va dicho justo antes en la oración."""
         diff = pos_ref - pos_new
-        if diff > 0: return f"subió {diff} puesto{'s' if diff != 1 else ''} frente a {anio_ref}"
-        if diff < 0: return f"bajó {abs(diff)} puesto{'s' if diff != -1 else ''} frente a {anio_ref}"
-        return f"se mantuvo en el mismo puesto que en {anio_ref}"
+        if diff > 0: return f"subió {diff} puesto{'s' if diff != 1 else ''}"
+        if diff < 0: return f"bajó {abs(diff)} puesto{'s' if diff != -1 else ''}"
+        return "se mantuvo en el mismo puesto"
 
     def historial(pos):
         """Frases de historial según en qué años aparece (pos: {2026, 2025, 2024} -> puesto o None)."""
@@ -340,27 +341,27 @@ if company_name_input:
                             f"se mantuvo en el mismo puesto durante los tres años.")
                 if p25 == p24:
                     return (f" En 2025 y en 2024 ocupó el puesto **{p25}**: "
-                            f"{frase_cambio(p25, p26, '2025 y 2024')}.")
+                            f"{frase_cambio(p25, p26)}.")
                 if p25 == p26:
                     return (f" En 2025 ocupó el mismo puesto (**{p25}**) y en 2024 el puesto **{p24}**: "
-                            f"{frase_cambio(p24, p26, 2024)}.")
+                            f"{frase_cambio(p24, p26)}.")
                 if p24 == p26:
                     return (f" En 2025 ocupó el puesto **{p25}** y en 2024 el mismo puesto (**{p24}**): "
-                            f"{frase_cambio(p25, p26, 2025)}.")
+                            f"{frase_cambio(p25, p26)}.")
                 return (f" En 2025 ocupó el puesto **{p25}** y en 2024 el puesto **{p24}**: "
-                        f"{frase_cambio(p25, p26, 2025)} y {frase_cambio(p24, p26, 2024)}.")
+                        f"{frase_cambio(p25, p26)} y {frase_cambio(p24, p26)}, respectivamente.")
             if p25:
                 if p25 == p26:
                     return (f" En 2025 ocupó el mismo puesto (**{p25}**). "
                             f"En 2024 no figuraba en este ranking.")
-                return (f" En 2025 ocupó el puesto **{p25}**: {frase_cambio(p25, p26, 2025)}. "
+                return (f" En 2025 ocupó el puesto **{p25}**: {frase_cambio(p25, p26)}. "
                         f"En 2024 no figuraba en este ranking.")
             if p24:
                 if p24 == p26:
                     return (f" No figuró en la edición de 2025. "
                             f"En 2024 ocupó el mismo puesto (**{p24}**).")
                 return (f" No figuró en la edición de 2025. En 2024 ocupó el puesto **{p24}**: "
-                        f"{frase_cambio(p24, p26, 2024)}.")
+                        f"{frase_cambio(p24, p26)}.")
             return " No figuró en las ediciones de 2025 ni de 2024."
         # Sin aparición en 2026
         if p25 and p24:
