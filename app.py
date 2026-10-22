@@ -302,7 +302,7 @@ if company_name_input:
                 document.execCommand('copy'); document.body.removeChild(ta);
               }
               btn.textContent = '\u2705 \u00a1Copiado! Ya puedes pegarlo donde lo necesites';
-              setTimeout(() => { btn.textContent = '\ud83d\udccb Copiar el informe completo'; }, 3000);
+              setTimeout(() => { btn.textContent = '📋 Copiar el informe completo'; }, 3000);
             });
             </script>
             """.replace("__PAYLOAD__", payload),
