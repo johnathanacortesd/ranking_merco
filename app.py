@@ -391,10 +391,6 @@ if company_name_input:
             pasados = ", ".join(r["ranking"] for r in resumen)
             pars.append(f"En 2026, **{nombre}** no aparece en ninguno de los rankings del Ranking Merco, "
                         f"pese a haber figurado en años anteriores en {pasados}.")
-            pars.append("En conclusión, la ausencia en la edición 2026 representa una pérdida de visibilidad "
-                        "reputacional frente a los años anteriores y marca una tendencia a la baja en su "
-                        "posicionamiento: recuperar presencia en el Ranking Merco debería ser una prioridad "
-                        "de su estrategia de reputación.")
             return pars
         # P1: presencia en 2026 y continuidad
         lista26 = ", ".join(r["ranking"] for r in con26)
@@ -460,32 +456,6 @@ if company_name_input:
             pars.append(p2)
         else:
             balance = "nueva"
-        # P3: cierre interpretativo
-        if balance == "positiva":
-            p3 = (f"En conclusión, los resultados del Ranking Merco 2026 consolidan a **{nombre}** como una "
-                  "organización con una reputación en fortalecimiento. Mantener esta tendencia dependerá de "
-                  "sostener las prácticas que la han posicionado favorablemente ante sus grupos de interés.")
-        elif balance == "negativa":
-            p3 = (f"En conclusión, los resultados del Ranking Merco 2026 plantean un reto reputacional para "
-                  f"**{nombre}**: la tendencia a la baja sugiere revisar las estrategias de comunicación y "
-                  "relacionamiento con sus grupos de interés para revertir el deterioro de su posicionamiento.")
-        elif balance == "estable":
-            p3 = (f"En conclusión, **{nombre}** mantiene una reputación estable en el Ranking Merco; el reto "
-                  "para las próximas ediciones será convertir esa estabilidad en un avance de posiciones "
-                  "frente a sus competidores.")
-        elif balance == "mixta":
-            p3 = (f"En conclusión, el panorama de **{nombre}** en el Ranking Merco 2026 es mixto: capitalizar "
-                  "los rankings en los que avanza y atender aquellos en los que retrocede será clave para "
-                  "consolidar su reputación en las próximas ediciones.")
-        else:
-            p3 = (f"En conclusión, el registro de **{nombre}** en el Ranking Merco 2026 constituye su línea "
-                  "base en el periodo analizado; las próximas ediciones permitirán establecer si logra "
-                  "consolidar y mejorar esta presencia inicial.")
-        lid = next((r for r in con26 if r["ranking"] == "Merco Líderes" and r["lider"]), None)
-        if lid:
-            p3 += (f" La presencia de {lid['lider']} en el ranking de Líderes suma, además, un activo de "
-                   "visibilidad personal que respalda la reputación institucional.")
-        pars.append(p3)
         return pars
 
     opening_phrases = cycle([
