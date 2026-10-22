@@ -350,9 +350,15 @@ if company_name_input:
                 return (f" En 2025 ocupó el puesto **{p25}** y en 2024 el puesto **{p24}**: "
                         f"{frase_cambio(p25, p26, 2025)} y {frase_cambio(p24, p26, 2024)}.")
             if p25:
+                if p25 == p26:
+                    return (f" En 2025 ocupó el mismo puesto (**{p25}**). "
+                            f"En 2024 no figuraba en este ranking.")
                 return (f" En 2025 ocupó el puesto **{p25}**: {frase_cambio(p25, p26, 2025)}. "
                         f"En 2024 no figuraba en este ranking.")
             if p24:
+                if p24 == p26:
+                    return (f" No figuró en la edición de 2025. "
+                            f"En 2024 ocupó el mismo puesto (**{p24}**).")
                 return (f" No figuró en la edición de 2025. En 2024 ocupó el puesto **{p24}**: "
                         f"{frase_cambio(p24, p26, 2024)}.")
             return " No figuró en las ediciones de 2025 ni de 2024."
