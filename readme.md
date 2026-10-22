@@ -1,6 +1,6 @@
 # 📊 Generador de Informes de Reputación - Ranking Merco
 
-Esta aplicación web, desarrollada con Streamlit, automatiza la creación de informes de reputación basados en los prestigiosos rankings Merco. Permite a los usuarios consultar rápidamente la posición de cualquier empresa en Colombia para los años 2024 y 2025, generando un texto comparativo listo para ser utilizado en reportes, correos electrónicos o presentaciones.
+Esta aplicación web, desarrollada con Streamlit, automatiza la creación de informes de reputación basados en los prestigiosos rankings Merco. Permite a los usuarios consultar rápidamente la posición de cualquier empresa en Colombia para los años 2025 y 2026, generando un texto comparativo listo para ser utilizado en reportes, correos electrónicos o presentaciones.
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ranking-merco.streamlit.app/)  <!-- Reemplaza con la URL de tu app desplegada -->
 
@@ -48,12 +48,16 @@ El repositorio está organizado de la siguiente manera para un despliegue sencil
 ├── data/
 │   ├── merco_empresas_2024.txt
 │   ├── merco_empresas_2025.txt
+│   ├── merco_empresas_2026.txt
 │   ├── merco_lideres_2024.txt
 │   ├── merco_lideres_2025.txt
+│   ├── merco_lideres_2026.txt
 │   ├── merco_sectores_2024.txt
 │   ├── merco_sectores_2025.txt
+│   ├── merco_sectores_2026.txt
 │   ├── merco_talento_2024.txt
-│   └── merco_talento_2025.txt
+│   ├── merco_talento_2025.txt
+│   └── merco_talento_2026.txt
 ├── app.py
 └── requirements.txt
 ```
@@ -67,7 +71,7 @@ La aplicación sigue un enfoque de **Recuperación y Generación Aumentada (RAG)
 1.  **Recuperación (Retrieval):** Cuando un usuario ingresa un nombre de empresa, la aplicación lo "normaliza" (limpia, convierte a minúsculas, etc.). Luego, busca este nombre normalizado en los archivos de datos `.txt`, que han sido previamente parseados y normalizados.
 2.  **Generación Aumentada (Augmented Generation):** Una vez que se recuperan los datos (posición actual, posición anterior, nombre del ranking, etc.), estos se inyectan en plantillas de texto predefinidas para generar un informe coherente y bien redactado.
 
-Si no se encuentra ninguna coincidencia para el año 2025, la aplicación informa al usuario y, como recurso útil, muestra el Top 10 del ranking general `Merco Empresas`.
+Si no se encuentra ninguna coincidencia para el año 2026, la aplicación informa al usuario y, como recurso útil, muestra el Top 10 del ranking general `Merco Empresas`.
 
 ---
 

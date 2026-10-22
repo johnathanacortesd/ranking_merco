@@ -134,7 +134,7 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
 
 # --- Interfaz de Usuario y Lógica Principal ---
 st.title("📊 Generador de Informes de Reputación - Ranking Merco")
-st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2025 y 2024 y genera un informe comparativo.")
+st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2026 y 2025 y genera un informe comparativo.")
 
 INTRO_TEXT = """
 En el ámbito empresarial contemporáneo, la medición de la reputación es una piedra angular para garantizar el éxito sostenible de cualquier empresa. En GlobalNews Group Colombia, somos conscientes de la inestimable naturaleza de la reputación empresarial y, como resultado, proporcionamos una mirada detallada al análisis reputacional.
@@ -163,71 +163,71 @@ if company_name_input:
     found_any = False
     
     opening_phrases = cycle([
-        "En el análisis de este mes, destacamos que la empresa **{original_name}** ha alcanzado la posición **{pos_2025}** en el ranking **{rank_name} 2025**.",
-        "El informe actual resalta el desempeño de **{original_name}**, que se ubica en el puesto **{pos_2025}** del prestigioso ranking **{rank_name} 2025**.",
-        "Para el período 2025, es notable que **{original_name}** ha logrado la posición **{pos_2025}** dentro de la clasificación **{rank_name}**."
+        "En el análisis de este mes, destacamos que la empresa **{original_name}** ha alcanzado la posición **{pos_2026}** en el ranking **{rank_name} 2026**.",
+        "El informe actual resalta el desempeño de **{original_name}**, que se ubica en el puesto **{pos_2026}** del prestigioso ranking **{rank_name} 2026**.",
+        "Para el período 2026, es notable que **{original_name}** ha logrado la posición **{pos_2026}** dentro de la clasificación **{rank_name}**."
     ])
 
-    def get_comparison_text(pos_2024, pos_2025):
-        if pos_2024:
-            diff = pos_2024 - pos_2025
+    def get_comparison_text(pos_2025, pos_2026):
+        if pos_2025:
+            diff = pos_2025 - pos_2026
             if diff > 15: movement = "un notable avance"
             elif diff > 0: movement = "un avance"
             elif diff < -10: movement = "un gran retroceso"
             elif diff < 0: movement = "un ligero retroceso"
             else: movement = "una consolidación de su posición"
-            return f" Este resultado representa {movement} frente al puesto **{pos_2024}** que ocupó en 2024."
+            return f" Este resultado representa {movement} frente al puesto **{pos_2025}** que ocupó en 2025."
         else:
-            return " En la medición de 2024, la empresa no figuraba en este ranking."
+            return " En la medición de 2025, la empresa no figuraba en este ranking."
 
     RANKINGS_CONFIG = {
-        "Merco Empresas": ("merco_empresas_2025", "merco_empresas_2024"),
-        "Merco Talento": ("merco_talento_2025", "merco_talento_2024"),
-        "Merco Líderes": ("merco_lideres_2025", "merco_lideres_2024"),
+        "Merco Empresas": ("merco_empresas_2026", "merco_empresas_2025"),
+        "Merco Talento": ("merco_talento_2026", "merco_talento_2025"),
+        "Merco Líderes": ("merco_lideres_2026", "merco_lideres_2025"),
     }
 
-    for rank_name, (key_2025, key_2024) in RANKINGS_CONFIG.items():
-        if key_2025 not in files or key_2024 not in files: continue
+    for rank_name, (key_2026, key_2025) in RANKINGS_CONFIG.items():
+        if key_2026 not in files or key_2025 not in files: continue
         
-        df_2025 = parse_general_ranking(files[key_2025])
-        pos_2025, original_name, leader_name = find_company_in_df_robust(df_2025, normalized_input)
+        df_2026 = parse_general_ranking(files[key_2026])
+        pos_2026, original_name, leader_name = find_company_in_df_robust(df_2026, normalized_input)
         
-        if pos_2025 and original_name:
+        if pos_2026 and original_name:
             found_any = True
-            df_2024 = parse_general_ranking(files[key_2024])
-            pos_2024, _, _ = find_company_in_df_robust(df_2024, normalized_input)
+            df_2025 = parse_general_ranking(files[key_2025])
+            pos_2025, _, _ = find_company_in_df_robust(df_2025, normalized_input)
             
             if rank_name == "Merco Líderes" and leader_name:
-                report_text = f"En el ranking **Merco Líderes 2025**, **{leader_name}**, de la empresa **{original_name}**, ha obtenido la posición **{pos_2025}**."
-                if pos_2024:
-                    report_text += f" Para el año 2024, su posición fue la **{pos_2024}**."
+                report_text = f"En el ranking **Merco Líderes 2026**, **{leader_name}**, de la empresa **{original_name}**, ha obtenido la posición **{pos_2026}**."
+                if pos_2025:
+                    report_text += f" Para el año 2025, su posición fue la **{pos_2025}**."
                 else:
-                    report_text += " En 2024, no figuraba en este ranking."
+                    report_text += " En 2025, no figuraba en este ranking."
             else:
-                opening = next(opening_phrases).format(original_name=original_name, pos_2025=pos_2025, rank_name=rank_name)
-                comparison = get_comparison_text(pos_2024, pos_2025)
+                opening = next(opening_phrases).format(original_name=original_name, pos_2026=pos_2026, rank_name=rank_name)
+                comparison = get_comparison_text(pos_2025, pos_2026)
                 report_text = opening + comparison
             
             st.success(report_text)
 
-    if "merco_sectores_2025" in files and "merco_sectores_2024" in files:
-        sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
-        sector, pos_2025, original_name = find_company_in_sectors_robust(sectors_2025, normalized_input)
-        if sector and pos_2025 and original_name:
+    if "merco_sectores_2026" in files and "merco_sectores_2025" in files:
+        sectors_2026 = parse_sector_ranking(files["merco_sectores_2026"])
+        sector, pos_2026, original_name = find_company_in_sectors_robust(sectors_2026, normalized_input)
+        if sector and pos_2026 and original_name:
             found_any = True
-            sectors_2024 = parse_sector_ranking(files["merco_sectores_2024"])
-            _, pos_2024, _ = find_company_in_sectors_robust(sectors_2024, normalized_input)
-            report_text = f"Adicionalmente, en el ranking **Merco Sectores 2025**, la empresa **{original_name}** se destaca en la posición **{pos_2025}** dentro del sector **{sector}**."
-            report_text += get_comparison_text(pos_2024, pos_2025)
+            sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
+            _, pos_2025, _ = find_company_in_sectors_robust(sectors_2025, normalized_input)
+            report_text = f"Adicionalmente, en el ranking **Merco Sectores 2026**, la empresa **{original_name}** se destaca en la posición **{pos_2026}** dentro del sector **{sector}**."
+            report_text += get_comparison_text(pos_2025, pos_2026)
             st.success(report_text)
     
     if not found_any:
-        st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2025.")
-        st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2025' como referencia.")
-        if "merco_empresas_2025" in files:
-            df_empresas_2025 = parse_general_ranking(files["merco_empresas_2025"])
-            if df_empresas_2025 is not None and all(c in df_empresas_2025.columns for c in ['posicion', 'empresa', 'puntuacion']):
-                top_10 = df_empresas_2025.head(10)[['posicion', 'empresa', 'puntuacion']]
+        st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2026.")
+        st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2026' como referencia.")
+        if "merco_empresas_2026" in files:
+            df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
+            if df_empresas_2026 is not None and all(c in df_empresas_2026.columns for c in ['posicion', 'empresa', 'puntuacion']):
+                top_10 = df_empresas_2026.head(10)[['posicion', 'empresa', 'puntuacion']]
                 st.dataframe(top_10, use_container_width=True, hide_index=True)
 
     st.markdown(OUTRO_TEXT)
