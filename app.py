@@ -173,10 +173,94 @@ OUTRO_TEXT = """
 ---
 ¿Está listo para elevar su estrategia de gestión de la reputación al próximo nivel? Esto es solo el principio, ya que en GlobalNews Group ofrecemos una variedad de herramientas avanzadas para fortalecer su capacidad de monitoreo de noticias, ya sea en medios tradicionales o en plataformas de redes sociales. ¡Descubra cómo podemos ayudarle a medir, gestionar y mejorar su reputación empresarial de manera efectiva y precisa!
 """
+# --- Clientes frecuentes (lista del usuario en data/clientes_merco.txt) ---
+CLIENTES_FRECUENTES = []
+_clientes_path = os.path.join("data", "clientes_merco.txt")
+if os.path.exists(_clientes_path):
+    with open(_clientes_path, encoding="utf-8") as _f:
+        CLIENTES_FRECUENTES = [l.strip() for l in _f if l.strip()]
+
+# Sector de cada cliente frecuente, para mostrar su tabla sectorial aunque
+# el cliente no aparezca en los rankings.
+CLIENTE_SECTORES = {
+    "Alcaldía de Cartagena": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Carnaval de Barranquilla": "ENTRETENIMIENTO",
+    "Colpensiones": "FONDOS DE PENSIONES Y CESANTÍAS",
+    "Corferias": "ENTRETENIMIENTO",
+    "Financiera de Desarrollo Territorial": "FINANCIERO",
+    "Universidad de la Salle": "EDUCACIÓN-UNIVERSIDADES",
+    "Universidad Pontificia Bolivariana": "EDUCACIÓN-UNIVERSIDADES",
+    "Universidad Santo Tomás": "EDUCACIÓN-UNIVERSIDADES",
+    "Agencia Nacional de Seguridad Vial": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Banco de Crédito de Perú": "FINANCIERO",
+    "Federación Colombiana de Fútbol": "ENTRETENIMIENTO",
+    "Instituto Nacional de Cancerología": "SALUD",
+    "Seguros Mundial": "ASEGURADORAS",
+    "Universidad EIA": "EDUCACIÓN-UNIVERSIDADES",
+    "Universidad Nacional Abierta y a Distancia": "EDUCACIÓN-UNIVERSIDADES",
+    "Armada Nacional de Colombia": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Deloitte": "AUDITORÍA Y CONSULTORÍA",
+    "División Mayor del Fútbol Colombiano": "ENTRETENIMIENTO",
+    "Editorial Planeta": "MEDIOS DE COMUNICACIÓN",
+    "Editorial Planeta, Competencia": "MEDIOS DE COMUNICACIÓN",
+    "Gobernación de Sucre": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Organización Internacional para las Migraciones": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Triple A": "ENERGÍA, GAS Y AGUA",
+    "Universidad Jorge Tadeo Lozano": "EDUCACIÓN-UNIVERSIDADES",
+    "Alcaldía de Barranquilla": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Cusezar": "CONSTRUCCIÓN E INFRAESTRUCTURA",
+    "Cusezar, Competencias": "CONSTRUCCIÓN E INFRAESTRUCTURA",
+    "On Vacation": "ENTRETENIMIENTO",
+    "Penguin Random House": "MEDIOS DE COMUNICACIÓN",
+    "Positiva Compañía de Seguros": "ASEGURADORAS",
+    "Procolombia": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Universidad de Antioquia": "EDUCACIÓN-UNIVERSIDADES",
+    "Consejo Superior de la Judicatura": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Coosalud": "SALUD",
+    "Fundación Cardio Infantil": "SALUD",
+    "Genus PLC": "AGROINDUSTRIAL",
+    "Nueva EPS": "SALUD",
+    "Petrobras": "PETROLERAS Y DISTRIBUCIÓN DE HIDROCARBUROS",
+    "Universidad Minuto de Dios": "EDUCACIÓN-UNIVERSIDADES",
+    "Yawa": "ENTRETENIMIENTO",
+    "Asociación Bancaria y de Entidades Financieras de Colombia": "FINANCIERO",
+    "Constructora Jaramillo Mora": "CONSTRUCCIÓN E INFRAESTRUCTURA",
+    "Defensoría del Pueblo": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Federación Colombiana de Golf": "ENTRETENIMIENTO",
+    "Savia Salud EPS": "SALUD",
+    "Tecnoquímicas S.A": "FARMACÉUTICO",
+    "Unidad para la Atención y Reparación Integral a las Víctimas": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Unión Europea": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Agrosavia": "AGROINDUSTRIAL",
+    "Alcaldía de Santa Marta": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Asociación Colombiana de Agencias de Viajes y Turismo": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Ban100": "FINANCIERO",
+    "Federación Colombiana de Municipios": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Sanofi": "FARMACÉUTICO",
+    "Secretaría General de la Alcaldía de Bogotá": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "Tigo": "TELECOMUNICACIONES",
+}
+
+cliente_elegido = ""
+if CLIENTES_FRECUENTES:
+    cliente_elegido = st.selectbox("…o elige uno de los clientes frecuentes:", [""] + CLIENTES_FRECUENTES)
+
 company_name_input = st.text_input("Introduce el nombre de la empresa a consultar:", placeholder="Ej: EPM, Nutresa, Crepes & Waffles").strip()
+if not company_name_input and cliente_elegido:
+    company_name_input = cliente_elegido
 
 if company_name_input:
     normalized_input = normalize_text(company_name_input)
+    # Las variantes ", Competencia(s)" de la lista buscan por el nombre base
+    _base_input = re.sub(r',\s*competencias?$', '', company_name_input, flags=re.IGNORECASE).strip()
+    if _base_input != company_name_input:
+        normalized_input = normalize_text(_base_input)
+    cliente_actual = None
+    for _c in CLIENTES_FRECUENTES:
+        _c_base = re.sub(r',\s*competencias?$', '', _c, flags=re.IGNORECASE).strip()
+        if normalize_text(_c) == normalized_input or normalize_text(_c_base) == normalized_input:
+            cliente_actual = _c
+            break
     DATA_DIR = "data"
     try:
         files = {f.replace('.txt', '').replace(' ', '_'): os.path.join(DATA_DIR, f) for f in os.listdir(DATA_DIR) if f.endswith('.txt')}
@@ -367,7 +451,11 @@ if company_name_input:
 
     sector_sugerido = None
     if not sector_mostrado and "merco_sectores_2026" in files:
-        sec_prob = sector_probable(nombre_empresa or company_name_input)
+        sec_prob = None
+        if cliente_actual and cliente_actual in CLIENTE_SECTORES:
+            sec_prob = CLIENTE_SECTORES[cliente_actual]
+        if not sec_prob:
+            sec_prob = sector_probable(nombre_empresa or company_name_input)
         if sec_prob:
             sectores_2026 = parse_sector_ranking(files["merco_sectores_2026"])
             if sec_prob in sectores_2026:
