@@ -1,6 +1,6 @@
 # 📊 Generador de Informes de Reputación - Ranking Merco
 
-Esta aplicación web, desarrollada con Streamlit, automatiza la creación de informes de reputación basados en los prestigiosos rankings Merco. Permite a los usuarios consultar rápidamente la posición de cualquier empresa en Colombia para los años 2025 y 2026, generando un texto comparativo listo para ser utilizado en reportes, correos electrónicos o presentaciones.
+Esta aplicación web, desarrollada con Streamlit, automatiza la creación de informes de reputación basados en los prestigiosos rankings Merco. Permite a los usuarios consultar rápidamente la posición de cualquier empresa en Colombia para los años 2024, 2025 y 2026, generando un texto comparativo con la trayectoria de los tres años, listo para ser utilizado en reportes, correos electrónicos o presentaciones.
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ranking-merco.streamlit.app/)  <!-- Reemplaza con la URL de tu app desplegada -->
 
@@ -26,10 +26,11 @@ El corazón de la aplicación es su **motor de búsqueda normalizado**, que gara
 La aplicación no solo recupera datos, sino que los presenta en un formato narrativo coherente y profesional.
 
 *   **Redacción Variada:** Utiliza diferentes frases de apertura para evitar la monotonía en los informes.
-*   **Análisis Comparativo Automático:** En lugar de solo mostrar dos números, el informe describe el cambio de un año a otro con frases como:
+*   **Análisis Comparativo Automático a Tres Años:** En lugar de solo mostrar números, el informe describe la trayectoria 2024 → 2025 → 2026 con frases como:
     *   `un notable avance` (si sube más de 15 puestos)
     *   `un avance` (si sube entre 1 y 15 puestos)
     *   `un retroceso` (si baja más de 10 puestos)
+    *   Califica además la trayectoria completa (`trayectoria ascendente y sostenida`, `mejora neta en el trienio`, etc.) y contempla todos los casos: si la empresa no tuvo datos en 2025 compara 2024 con 2026, si no apareció en 2026 lo indica con su historial, si es nueva lo señala, y si no estuvo en 2024 también lo dice.
 *   **Redacción Adaptativa:** El formato del texto cambia automáticamente si el resultado pertenece al ranking de **Merco Líderes**, enfocándose en la persona y su empresa.
 
 ### Eficiencia y Rendimiento

@@ -134,7 +134,7 @@ def find_company_in_sectors_robust(sector_data, normalized_query):
 
 # --- Interfaz de Usuario y Lógica Principal ---
 st.title("📊 Generador de Informes de Reputación - Ranking Merco")
-st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2026 y 2025 y genera un informe comparativo.")
+st.markdown("Esta herramienta recupera la posición de una empresa en los rankings Merco 2026, 2025 y 2024 y genera un informe comparativo con su trayectoria de los últimos tres años.")
 
 INTRO_TEXT = """
 En el ámbito empresarial contemporáneo, la medición de la reputación es una piedra angular para garantizar el éxito sostenible de cualquier empresa. En GlobalNews Group Colombia, somos conscientes de la inestimable naturaleza de la reputación empresarial y, como resultado, proporcionamos una mirada detallada al análisis reputacional.
@@ -161,68 +161,113 @@ if company_name_input:
     st.markdown(INTRO_TEXT)
     
     found_any = False
-    
+
+    # --- Redacción del informe comparativo 2026 / 2025 / 2024 ---
+    def movimiento(pos_ref, pos_new):
+        """Frase que califica el cambio del puesto pos_ref al puesto pos_new."""
+        diff = pos_ref - pos_new
+        if diff > 15: return "un notable avance"
+        if diff > 0: return "un avance"
+        if diff < -10: return "un gran retroceso"
+        if diff < 0: return "un ligero retroceso"
+        return "una consolidación de su posición"
+
+    def trayectoria_tres_anios(p24, p25, p26):
+        """Califica la trayectoria completa cuando están los tres años."""
+        if p26 < p25 < p24: return "una trayectoria ascendente y sostenida durante los últimos tres años"
+        if p26 > p25 > p24: return "una trayectoria descendente durante los últimos tres años"
+        if p26 == p25 == p24: return "una posición estable durante los últimos tres años"
+        if p26 < p24: return "una mejora neta en el trienio, pese a las variaciones intermedias"
+        if p26 > p24: return "un retroceso neto en el trienio, pese a las variaciones intermedias"
+        return "una posición neta estable en el trienio, con variaciones intermedias"
+
+    def historial(pos):
+        """Frases de historial según en qué años aparece (pos: {2026, 2025, 2024} -> puesto o None)."""
+        p26, p25, p24 = pos[2026], pos[2025], pos[2024]
+        if p26:
+            if p25 and p24:
+                return (f" En 2025 ocupó el puesto **{p25}**, lo que representa {movimiento(p25, p26)} frente a esa edición. "
+                        f"En 2024 se ubicó en el puesto **{p24}**, con lo que completa {trayectoria_tres_anios(p24, p25, p26)}.")
+            if p25:
+                return (f" Este resultado representa {movimiento(p25, p26)} frente al puesto **{p25}** que ocupó en 2025. "
+                        f"En 2024 no figuraba en este ranking.")
+            if p24:
+                return (f" No figuró en la edición de 2025; su antecedente más cercano es 2024, cuando ocupó el puesto **{p24}**, "
+                        f"frente al cual registra {movimiento(p24, p26)} en dos años.")
+            return " Se trata de una aparición nueva en este ranking: no figuró en las ediciones de 2025 ni de 2024."
+        # Sin aparición en 2026
+        if p25 and p24:
+            return (f" Su registro más reciente corresponde a 2025, cuando ocupó el puesto **{p25}**; "
+                    f"en 2024 se ubicó en el puesto **{p24}**.")
+        if p25:
+            return f" En 2025 ocupó el puesto **{p25}**; en 2024 tampoco figuraba en este ranking."
+        return f" Su única aparición de los últimos tres años fue en 2024, en el puesto **{p24}**; tampoco figuró en 2025."
+
     opening_phrases = cycle([
-        "En el análisis de este mes, destacamos que la empresa **{original_name}** ha alcanzado la posición **{pos_2026}** en el ranking **{rank_name} 2026**.",
-        "El informe actual resalta el desempeño de **{original_name}**, que se ubica en el puesto **{pos_2026}** del prestigioso ranking **{rank_name} 2026**.",
-        "Para el período 2026, es notable que **{original_name}** ha logrado la posición **{pos_2026}** dentro de la clasificación **{rank_name}**."
+        "En el análisis de este mes, destacamos que la empresa **{nombre}** ha alcanzado la posición **{pos}** en el ranking **{rank} 2026**.",
+        "El informe actual resalta el desempeño de **{nombre}**, que se ubica en el puesto **{pos}** del prestigioso ranking **{rank} 2026**.",
+        "Para el período 2026, es notable que **{nombre}** ha logrado la posición **{pos}** dentro de la clasificación **{rank} 2026**."
     ])
 
-    def get_comparison_text(pos_2025, pos_2026):
-        if pos_2025:
-            diff = pos_2025 - pos_2026
-            if diff > 15: movement = "un notable avance"
-            elif diff > 0: movement = "un avance"
-            elif diff < -10: movement = "un gran retroceso"
-            elif diff < 0: movement = "un ligero retroceso"
-            else: movement = "una consolidación de su posición"
-            return f" Este resultado representa {movement} frente al puesto **{pos_2025}** que ocupó en 2025."
-        else:
-            return " En la medición de 2025, la empresa no figuraba en este ranking."
-
     RANKINGS_CONFIG = {
-        "Merco Empresas": ("merco_empresas_2026", "merco_empresas_2025"),
-        "Merco Talento": ("merco_talento_2026", "merco_talento_2025"),
-        "Merco Líderes": ("merco_lideres_2026", "merco_lideres_2025"),
+        "Merco Empresas": ("merco_empresas_2026", "merco_empresas_2025", "merco_empresas_2024"),
+        "Merco Talento": ("merco_talento_2026", "merco_talento_2025", "merco_talento_2024"),
+        "Merco Líderes": ("merco_lideres_2026", "merco_lideres_2025", "merco_lideres_2024"),
     }
+    YEARS = (2026, 2025, 2024)
 
-    for rank_name, (key_2026, key_2025) in RANKINGS_CONFIG.items():
-        if key_2026 not in files or key_2025 not in files: continue
-        
-        df_2026 = parse_general_ranking(files[key_2026])
-        pos_2026, original_name, leader_name = find_company_in_df_robust(df_2026, normalized_input)
-        
-        if pos_2026 and original_name:
-            found_any = True
-            df_2025 = parse_general_ranking(files[key_2025])
-            pos_2025, _, _ = find_company_in_df_robust(df_2025, normalized_input)
-            
-            if rank_name == "Merco Líderes" and leader_name:
-                report_text = f"En el ranking **Merco Líderes 2026**, **{leader_name}**, de la empresa **{original_name}**, ha obtenido la posición **{pos_2026}**."
-                if pos_2025:
-                    report_text += f" Para el año 2025, su posición fue la **{pos_2025}**."
-                else:
-                    report_text += " En 2025, no figuraba en este ranking."
+    for rank_name, keys in RANKINGS_CONFIG.items():
+        datos = {}
+        for year, key in zip(YEARS, keys):
+            if key not in files: continue
+            df = parse_general_ranking(files[key])
+            if df is None: continue
+            pos, nombre, lider = find_company_in_df_robust(df, normalized_input)
+            if pos: datos[year] = (pos, nombre, lider)
+        if not datos: continue
+        found_any = True
+
+        pos = {y: (datos[y][0] if y in datos else None) for y in YEARS}
+        nombre = next(datos[y][1] for y in YEARS if y in datos)
+
+        if rank_name == "Merco Líderes":
+            anio_ref = next(y for y in YEARS if y in datos)
+            lider_ref = datos[anio_ref][2]
+            if pos[2026]:
+                texto = (f"En el ranking **Merco Líderes 2026**, **{lider_ref}**, de la empresa **{nombre}**, "
+                         f"ha obtenido la posición **{pos[2026]}**.")
             else:
-                opening = next(opening_phrases).format(original_name=original_name, pos_2026=pos_2026, rank_name=rank_name)
-                comparison = get_comparison_text(pos_2025, pos_2026)
-                report_text = opening + comparison
-            
-            st.success(report_text)
+                texto = (f"En la edición 2026 del ranking **Merco Líderes**, la empresa **{nombre}** no aparece en la clasificación.")
+            texto += historial(pos)
+        elif pos[2026]:
+            texto = next(opening_phrases).format(nombre=nombre, pos=pos[2026], rank=rank_name) + historial(pos)
+        else:
+            texto = (f"En la edición 2026 del ranking **{rank_name}**, la empresa **{nombre}** no aparece en la clasificación."
+                     + historial(pos))
+        st.success(texto)
 
-    if "merco_sectores_2026" in files and "merco_sectores_2025" in files:
-        sectors_2026 = parse_sector_ranking(files["merco_sectores_2026"])
-        sector, pos_2026, original_name = find_company_in_sectors_robust(sectors_2026, normalized_input)
-        if sector and pos_2026 and original_name:
+    if all(f"merco_sectores_{y}" in files for y in YEARS):
+        datos_sec = {}
+        for year in YEARS:
+            sectores = parse_sector_ranking(files[f"merco_sectores_{year}"])
+            sector, pos, nombre = find_company_in_sectors_robust(sectores, normalized_input)
+            if pos: datos_sec[year] = (sector, pos, nombre)
+        if datos_sec:
             found_any = True
-            sectors_2025 = parse_sector_ranking(files["merco_sectores_2025"])
-            _, pos_2025, _ = find_company_in_sectors_robust(sectors_2025, normalized_input)
-            report_text = f"Adicionalmente, en el ranking **Merco Sectores 2026**, la empresa **{original_name}** se destaca en la posición **{pos_2026}** dentro del sector **{sector}**."
-            report_text += get_comparison_text(pos_2025, pos_2026)
-            st.success(report_text)
-    
+            pos = {y: (datos_sec[y][1] if y in datos_sec else None) for y in YEARS}
+            anio_ref = next(y for y in YEARS if y in datos_sec)
+            sector_ref, _, nombre = datos_sec[anio_ref]
+            if pos[2026]:
+                texto = (f"Adicionalmente, en el ranking **Merco Sectores 2026**, la empresa **{nombre}** se destaca "
+                         f"en la posición **{pos[2026]}** dentro del sector **{sector_ref}**.")
+            else:
+                texto = (f"Adicionalmente, en el ranking **Merco Sectores 2026**, la empresa **{nombre}** no aparece; "
+                         f"su registro más reciente es de {anio_ref}, en el sector **{sector_ref}**.")
+            texto += historial(pos)
+            st.success(texto)
+
     if not found_any:
-        st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco para el año 2026.")
+        st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco de 2024, 2025 o 2026.")
         st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2026' como referencia.")
         if "merco_empresas_2026" in files:
             df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
