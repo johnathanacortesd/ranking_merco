@@ -179,6 +179,11 @@ _clientes_path = os.path.join("data", "clientes_merco.txt")
 if os.path.exists(_clientes_path):
     with open(_clientes_path, encoding="utf-8") as _f:
         CLIENTES_FRECUENTES = [l.strip() for l in _f if l.strip()]
+# Orden alfabético (sin distinguir mayúsculas ni tildes) para el selector
+import unicodedata as _ud
+def _clave_alfabetica(nombre):
+    return "".join(c for c in _ud.normalize("NFKD", nombre) if not _ud.combining(c)).lower()
+CLIENTES_FRECUENTES.sort(key=_clave_alfabetica)
 
 # Sector de cada cliente frecuente, para mostrar su tabla sectorial aunque
 # el cliente no aparezca en los rankings.
