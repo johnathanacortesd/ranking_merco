@@ -322,6 +322,18 @@ if company_name_input:
         p26, p25, p24 = pos[2026], pos[2025], pos[2024]
         if p26:
             if p25 and p24:
+                if p25 == p26 and p24 == p26:
+                    return (f" En 2025 y en 2024 también ocupó el puesto **{p26}**: "
+                            f"se mantuvo en el mismo puesto durante los tres años.")
+                if p25 == p24:
+                    return (f" En 2025 y en 2024 ocupó el puesto **{p25}**: "
+                            f"{frase_cambio(p25, p26, '2025 y 2024')}.")
+                if p25 == p26:
+                    return (f" En 2025 ocupó el mismo puesto (**{p25}**) y en 2024 el puesto **{p24}**: "
+                            f"{frase_cambio(p24, p26, 2024)}.")
+                if p24 == p26:
+                    return (f" En 2025 ocupó el puesto **{p25}** y en 2024 el mismo puesto (**{p24}**): "
+                            f"{frase_cambio(p25, p26, 2025)}.")
                 return (f" En 2025 ocupó el puesto **{p25}** y en 2024 el puesto **{p24}**: "
                         f"{frase_cambio(p25, p26, 2025)} y {frase_cambio(p24, p26, 2024)}.")
             if p25:
@@ -333,6 +345,9 @@ if company_name_input:
             return " No figuró en las ediciones de 2025 ni de 2024."
         # Sin aparición en 2026
         if p25 and p24:
+            if p25 == p24:
+                return (f" Su registro más reciente corresponde a 2025, cuando ocupó el puesto **{p25}**, "
+                        f"el mismo que en 2024.")
             return (f" Su registro más reciente corresponde a 2025, cuando ocupó el puesto **{p25}**; "
                     f"en 2024 se ubicó en el puesto **{p24}**.")
         if p25:
