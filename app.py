@@ -255,6 +255,14 @@ if company_name_input:
     _base_input = re.sub(r',\s*competencias?$', '', company_name_input, flags=re.IGNORECASE).strip()
     if _base_input != company_name_input:
         normalized_input = normalize_text(_base_input)
+    # Alias: nombres de cliente que en Merco figuran con otro nombre
+    ALIAS_MERCO = {
+        "fundacion cardio infantil": "LACARDIO",
+        "fundacion cardioinfantil": "LACARDIO",
+        "la cardio": "LACARDIO",
+    }
+    if normalized_input in ALIAS_MERCO:
+        normalized_input = normalize_text(ALIAS_MERCO[normalized_input])
     cliente_actual = None
     for _c in CLIENTES_FRECUENTES:
         _c_base = re.sub(r',\s*competencias?$', '', _c, flags=re.IGNORECASE).strip()
