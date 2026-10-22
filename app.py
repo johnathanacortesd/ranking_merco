@@ -1,5 +1,7 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
+import json
 import os
 import re
 import unicodedata
@@ -163,13 +165,13 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 INTRO_TEXT = """
-En el ámbito empresarial contemporáneo, la medición de la reputación es una piedra angular para garantizar el éxito sostenible de cualquier empresa. En GlobalNews Group Colombia, somos conscientes de la inestimable naturaleza de la reputación empresarial y, como resultado, proporcionamos una mirada detallada al análisis reputacional.
+En el ámbito empresarial contemporáneo, la medición de la reputación es una piedra angular para garantizar el éxito sostenible de cualquier empresa. En GlobalNews Group, somos conscientes de la inestimable naturaleza de la reputación empresarial y, como resultado, proporcionamos una mirada detallada al análisis reputacional.
 
 Nuestro informe de reputación trasciende la mera recolección de datos, ofreciendo un valor agregado de alta relevancia. Para este mes, hemos integrado el posicionamiento en el ranking Merco en nuestro análisis. Esta herramienta exhaustiva evalúa la reputación de las empresas en Colombia a través de una metodología multistakeholder que engloba seis evaluaciones y más de veinte fuentes de información. La posición obtenida en este ranking refleja directamente el reconocimiento que la empresa ha logrado entre una amplia gama de grupos de interés. Es importante destacar que la metodología utilizada por Merco Empresas es completamente pública y accesible en su sitio web.
 """
 OUTRO_TEXT = """
 ---
-¿Está listo para elevar su estrategia de gestión de la reputación al próximo nivel? Esto es solo el principio, ya que en GlobalNews Group Colombia ofrecemos una variedad de herramientas avanzadas para fortalecer su capacidad de monitoreo de noticias, ya sea en medios tradicionales o en plataformas de redes sociales. ¡Descubra cómo podemos ayudarle a medir, gestionar y mejorar su reputación empresarial de manera efectiva y precisa!
+¿Está listo para elevar su estrategia de gestión de la reputación al próximo nivel? Esto es solo el principio, ya que en GlobalNews Group ofrecemos una variedad de herramientas avanzadas para fortalecer su capacidad de monitoreo de noticias, ya sea en medios tradicionales o en plataformas de redes sociales. ¡Descubra cómo podemos ayudarle a medir, gestionar y mejorar su reputación empresarial de manera efectiva y precisa!
 """
 company_name_input = st.text_input("Introduce el nombre de la empresa a consultar:", placeholder="Ej: EPM, Nutresa, Crepes & Waffles").strip()
 
@@ -187,6 +189,7 @@ if company_name_input:
     st.markdown(INTRO_TEXT)
     
     found_any = False
+    nombre_empresa = None
 
     textos_informe = []
 
@@ -195,6 +198,32 @@ if company_name_input:
         textos_informe.append(texto_md)
         html_txt = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', texto_md)
         st.markdown(f'<div class="result-card"><span class="chip">{etiqueta}</span><br>{html_txt}</div>', unsafe_allow_html=True)
+
+    def boton_copiar(texto):
+        """Botón grande y visible que copia el texto al portapapeles."""
+        payload = json.dumps(texto)
+        components.html(
+            """
+            <button id="btnCopiarInforme" style="width:100%; background:#C4562C; color:#FFFFFF; border:none; border-radius:12px; padding:14px 22px; font-family:Inter, system-ui, sans-serif; font-size:17px; font-weight:700; cursor:pointer; box-shadow:0 3px 10px rgba(90,55,25,.25);">&#128203; Copiar el informe completo</button>
+            <script>
+            const TEXTO_INFORME = __PAYLOAD__;
+            const btn = document.getElementById('btnCopiarInforme');
+            btn.addEventListener('click', async () => {
+              try { await navigator.clipboard.writeText(TEXTO_INFORME); }
+              catch (e) {
+                const ta = document.createElement('textarea');
+                ta.value = TEXTO_INFORME;
+                ta.style.position = 'fixed'; ta.style.opacity = '0';
+                document.body.appendChild(ta); ta.select();
+                document.execCommand('copy'); document.body.removeChild(ta);
+              }
+              btn.textContent = '\u2705 \u00a1Copiado! Ya puedes pegarlo donde lo necesites';
+              setTimeout(() => { btn.textContent = '\ud83d\udccb Copiar el informe completo'; }, 3000);
+            });
+            </script>
+            """.replace("__PAYLOAD__", payload),
+            height=62
+        )
 
     # --- Redacción del informe comparativo 2026 / 2025 / 2024 (solo datos, sin juicios de valor) ---
     def frase_cambio(pos_ref, pos_new, anio_ref):
@@ -252,6 +281,7 @@ if company_name_input:
 
         pos = {y: (datos[y][0] if y in datos else None) for y in YEARS}
         nombre = next(datos[y][1] for y in YEARS if y in datos)
+        if nombre_empresa is None: nombre_empresa = nombre
 
         if rank_name == "Merco Líderes":
             anio_ref = next(y for y in YEARS if y in datos)
@@ -269,6 +299,7 @@ if company_name_input:
                      + historial(pos))
         mostrar_tarjeta(rank_name.upper(), texto)
 
+    sector_mostrado = False
     if all(f"merco_sectores_{y}" in files for y in YEARS):
         datos_sec = {}
         for year in YEARS:
@@ -277,6 +308,7 @@ if company_name_input:
             if pos: datos_sec[year] = (sector, pos, nombre)
         if datos_sec:
             found_any = True
+            sector_mostrado = True
             pos = {y: (datos_sec[y][1] if y in datos_sec else None) for y in YEARS}
             anio_ref = next(y for y in YEARS if y in datos_sec)
             sector_ref, _, nombre = datos_sec[anio_ref]
@@ -289,14 +321,86 @@ if company_name_input:
             texto += historial(pos)
             mostrar_tarjeta("MERCO SECTORES", texto)
 
+    # --- Sector probable cuando el cliente no tiene data en el ranking sectorial ---
+    SECTORES_POR_PALABRA = [
+        ("universidad", "EDUCACIÓN-UNIVERSIDADES"), ("universitaria", "EDUCACIÓN-UNIVERSIDADES"),
+        ("clinica", "SALUD"), ("hospital", "SALUD"),
+        ("banco", "FINANCIERO"), ("financiera", "FINANCIERO"),
+        ("seguros", "ASEGURADORAS"), ("aseguradora", "ASEGURADORAS"),
+        ("caja de compensacion", "CAJAS DE COMPENSACIÓN"), ("compensacion familiar", "CAJAS DE COMPENSACIÓN"),
+        ("pensiones y cesantias", "FONDOS DE PENSIONES Y CESANTÍAS"), ("fondo de pensiones", "FONDOS DE PENSIONES Y CESANTÍAS"),
+        ("constructora", "CONSTRUCCIÓN E INFRAESTRUCTURA"), ("construccion", "CONSTRUCCIÓN E INFRAESTRUCTURA"),
+        ("petrolera", "PETROLERAS Y DISTRIBUCIÓN DE HIDROCARBUROS"), ("petroleo", "PETROLERAS Y DISTRIBUCIÓN DE HIDROCARBUROS"),
+        ("energia", "ENERGÍA, GAS Y AGUA"), ("electrica", "ENERGÍA, GAS Y AGUA"), ("acueducto", "ENERGÍA, GAS Y AGUA"),
+        ("minera", "MINERÍA"), ("mineria", "MINERÍA"),
+        ("farmaceutica", "FARMACÉUTICO"), ("laboratorio", "FARMACÉUTICO"),
+        ("restaurante", "RESTAURANTES Y CAFÉS"), ("cafe", "RESTAURANTES Y CAFÉS"),
+        ("agroindustrial", "AGROINDUSTRIAL"), ("ingenio", "AGROINDUSTRIAL"), ("agropecuaria", "AGROINDUSTRIAL"),
+        ("cementera", "CEMENTERAS"), ("cemento", "CEMENTERAS"),
+        ("auditoria", "AUDITORÍA Y CONSULTORÍA"), ("consultoria", "AUDITORÍA Y CONSULTORÍA"),
+        ("automotriz", "AUTOMOTRIZ"), ("vehiculos", "AUTOMOTRIZ"),
+        ("bebidas", "BEBIDAS"), ("cerveceria", "BEBIDAS"),
+        ("telecomunicaciones", "TELECOMUNICACIONES"),
+        ("aerolinea", "TRANSPORTE DE VIAJEROS"), ("aviacion", "TRANSPORTE DE VIAJEROS"),
+        ("supermercado", "GRANDES SUPERFICIES, RETAIL"), ("retail", "GRANDES SUPERFICIES, RETAIL"),
+        ("internet", "SERVICIOS INTERNET"),
+        ("confeccion", "CONFECCIÓN Y MARROQUINERÍA"), ("textil", "CONFECCIÓN Y MARROQUINERÍA"),
+        ("electrodomesticos", "ELECTRODOMÉSTICOS Y EQUIPAMIENTO"),
+        ("fundacion", "ASOCIACIONES, CORPORACIONES, FUNDACIONES"), ("asociacion", "ASOCIACIONES, CORPORACIONES, FUNDACIONES"), ("corporacion", "ASOCIACIONES, CORPORACIONES, FUNDACIONES"),
+        ("alimentos", "ALIMENTOS"),
+        ("entretenimiento", "ENTRETENIMIENTO"),
+        ("industrial", "INDUSTRIAL"),
+    ]
+
+    def sector_probable(texto):
+        if not texto: return None
+        t = normalize_text(texto)
+        for clave, sector in SECTORES_POR_PALABRA:
+            if clave in t: return sector
+        return None
+
+    def mostrar_tabla_sector(nombre_sector, df_sec, nota):
+        st.markdown(f"**Merco Sectores 2026 · {nombre_sector}**")
+        st.caption(nota)
+        tabla = df_sec[['posicion', 'empresa']].rename(columns={'posicion': 'Posición', 'empresa': 'Empresa'})
+        st.dataframe(tabla, use_container_width=True, hide_index=True)
+
+    sector_sugerido = None
+    if not sector_mostrado and "merco_sectores_2026" in files:
+        sec_prob = sector_probable(nombre_empresa or company_name_input)
+        if sec_prob:
+            sectores_2026 = parse_sector_ranking(files["merco_sectores_2026"])
+            if sec_prob in sectores_2026:
+                sector_sugerido = (sec_prob, sectores_2026[sec_prob])
+
     if not found_any:
         st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco de 2024, 2025 o 2026.")
-        st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2026' como referencia.")
         if "merco_empresas_2026" in files:
             df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
+            top_10 = None
             if df_empresas_2026 is not None and all(c in df_empresas_2026.columns for c in ['posicion', 'empresa', 'puntuacion']):
                 top_10 = df_empresas_2026.head(10)[['posicion', 'empresa', 'puntuacion']]
+            if sector_sugerido and top_10 is not None:
+                col_top, col_sector = st.columns(2)
+                with col_top:
+                    st.markdown("**Top 10 · Merco Empresas 2026**")
+                    st.caption("Referencia del ranking general.")
+                    st.dataframe(top_10, use_container_width=True, hide_index=True)
+                with col_sector:
+                    mostrar_tabla_sector(
+                        sector_sugerido[0], sector_sugerido[1],
+                        "La empresa buscada no figura en los rankings; por su nombre, este es su sector probable y las empresas que sí aparecen en él en 2026."
+                    )
+            elif top_10 is not None:
+                st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2026' como referencia.")
                 st.dataframe(top_10, use_container_width=True, hide_index=True)
+    elif sector_sugerido:
+        st.markdown("---")
+        st.subheader("🧭 Sector probable de la empresa")
+        mostrar_tabla_sector(
+            sector_sugerido[0], sector_sugerido[1],
+            "La empresa no figura en el ranking sectorial 2026; por su nombre, este es su sector probable y las empresas que sí aparecen en él."
+        )
 
     if textos_informe:
         informe_completo = (
@@ -305,15 +409,10 @@ if company_name_input:
             + "\n\n" + OUTRO_TEXT.replace("---", "").strip()
         )
         st.markdown("---")
+        boton_copiar(informe_completo)
         st.subheader("📋 Informe completo para copiar")
-        st.caption("El bloque reúne la introducción, los resultados y el texto de cierre. Botón de copiar en la esquina superior derecha del bloque.")
+        st.caption("El bloque reúne la introducción, los resultados y el texto de cierre, en texto plano y sin formato. También puedes copiarlo con el ícono en la esquina superior derecha del bloque.")
         st.code(informe_completo, language=None)
-        st.download_button(
-            "⬇️ Descargar el informe en .txt",
-            data=informe_completo,
-            file_name=f"informe_merco_{normalized_input.replace(' ', '_')}.txt",
-            mime="text/plain"
-        )
 
     st.markdown(OUTRO_TEXT)
 else:

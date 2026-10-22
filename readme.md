@@ -27,7 +27,8 @@ La aplicación no solo recupera datos, sino que los presenta en un formato narra
 
 *   **Redacción Variada:** Utiliza diferentes frases de apertura para evitar la monotonía en los informes.
 *   **Análisis Comparativo Automático a Tres Años, sin juicios de valor:** El informe presenta las posiciones 2024 → 2025 → 2026 y los cambios solo en cifras (`subió 6 puestos frente a 2025`, `se mantuvo en el mismo puesto`), sin calificativos. Contempla todos los casos: si la empresa no tuvo datos en 2025 compara 2024 con 2026, si no apareció en 2026 lo indica con su historial, si no figuró en 2025 ni en 2024 lo señala, y si no estuvo en 2024 también lo dice.
-*   **Informe Completo para Copiar:** Al final de los resultados, un bloque reúne la introducción, los resultados y el cierre en texto plano, con botón de copiar y opción de descarga en .txt.
+*   **Informe Completo para Copiar:** Al final de los resultados, un botón grande y visible copia el informe completo (introducción, resultados y cierre, en texto plano); debajo queda el mismo texto en un bloque como respaldo.
+*   **Sector Probable Inteligente:** Si la empresa no tiene datos en el ranking sectorial (o no aparece en ningún ranking), la app infiere su sector por el nombre (ej. una universidad → Educación-Universidades, una clínica → Salud, un banco → Financiero) y muestra la tabla 2026 de ese sector: junto al Top 10 general cuando no hay ningún dato, o como sección propia cuando sí hay resultados en otros rankings.
 *   **Interfaz Moderna:** Tema claro, resultados en tarjetas por ranking y tipografía amplia y legible.
 *   **Redacción Adaptativa:** El formato del texto cambia automáticamente si el resultado pertenece al ranking de **Merco Líderes**, enfocándose en la persona y su empresa.
 
