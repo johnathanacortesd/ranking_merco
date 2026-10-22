@@ -468,20 +468,6 @@ if company_name_input:
             df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
             if df_empresas_2026 is not None and all(c in df_empresas_2026.columns for c in ['posicion', 'empresa', 'puntuacion']):
                 top_10 = df_empresas_2026.head(10)[['posicion', 'empresa', 'puntuacion']]
-        # Botón Copiar también cuando no aparece: copia el aviso + la(s) tabla(s)
-        # mostradas, en texto con tabulaciones (pega como tabla en Excel/Word).
-        lineas_copia = [
-            f"{_base_input} no aparece en los rankings Merco Empresas, Talento, Líderes y Sectores de las ediciones 2024, 2025 y 2026."
-        ]
-        if sector_sugerido:
-            lineas_copia += ["", f"Tabla del sector {sector_sugerido[0]} · Merco Sectores 2026:", "Posición\tEmpresa"]
-            for fila in sector_sugerido[1].itertuples(index=False):
-                lineas_copia.append(f"{fila.posicion}\t{fila.empresa}")
-        if top_10 is not None:
-            lineas_copia += ["", "Top 10 · Merco Empresas 2026:", "Posición\tEmpresa\tPuntuación"]
-            for fila in top_10.itertuples(index=False):
-                lineas_copia.append(f"{fila.posicion}\t{fila.empresa}\t{fila.puntuacion}")
-        boton_copiar("\n".join(lineas_copia))
         if "merco_empresas_2026" in files:
             if sector_sugerido and top_10 is not None:
                 col_top, col_sector = st.columns(2)
@@ -497,6 +483,31 @@ if company_name_input:
             elif top_10 is not None:
                 st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2026' como referencia.")
                 st.dataframe(top_10, use_container_width=True, hide_index=True)
+        # El informe para copiar tiene la MISMA estructura que cuando la empresa
+        # sí aparece (intro + contenido + outro); el contenido son las tablas.
+        cuerpo_no = [
+            f"{_base_input} no aparece en los rankings Merco Empresas, Talento, Líderes y Sectores de las ediciones 2024, 2025 y 2026."
+        ]
+        if sector_sugerido:
+            filas_sec = "\n".join(
+                f"{f.posicion}\t{f.empresa}" for f in sector_sugerido[1].itertuples(index=False)
+            )
+            cuerpo_no.append(f"Tabla del sector {sector_sugerido[0]} · Merco Sectores 2026:\nPosición\tEmpresa\n{filas_sec}")
+        if top_10 is not None:
+            filas_top = "\n".join(
+                f"{f.posicion}\t{f.empresa}\t{f.puntuacion}" for f in top_10.itertuples(index=False)
+            )
+            cuerpo_no.append(f"Top 10 · Merco Empresas 2026:\nPosición\tEmpresa\tPuntuación\n{filas_top}")
+        informe_no_encontrado = (
+            INTRO_TEXT.strip()
+            + "\n\n" + "\n\n".join(cuerpo_no)
+            + "\n\n" + OUTRO_TEXT.replace("---", "").strip()
+        )
+        st.markdown("---")
+        boton_copiar(informe_no_encontrado)
+        st.subheader("📋 Informe completo para copiar")
+        st.caption("El bloque reúne la introducción, el aviso con las tablas y el texto de cierre, en texto plano y sin formato. También puedes copiarlo con el ícono en la esquina superior derecha del bloque.")
+        st.code(informe_no_encontrado, language=None)
     elif sector_sugerido:
         st.markdown("---")
         st.subheader("🧭 Sector probable de la empresa")
