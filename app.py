@@ -161,6 +161,7 @@ st.markdown("""
 <div class="app-header">
   <h1>📊 Generador de Informes de Reputación · Merco</h1>
   <p>Consulta la posición de una empresa en los rankings Merco Empresas, Talento, Líderes y Sectores de 2024, 2025 y 2026, y genera el texto comparativo listo para tu informe.</p>
+  <p style="font-size:13px; opacity:0.75; margin-top:6px;">Creada con (Muse AI) por Johnathan Cortés</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -246,11 +247,12 @@ CLIENTE_SECTORES = {
     "Tigo": "TELECOMUNICACIONES",
 }
 
+company_name_input = st.text_input("Introduce el nombre de la empresa a consultar:", placeholder="Ej: EPM, Nutresa, Crepes & Waffles").strip()
+
 cliente_elegido = ""
 if CLIENTES_FRECUENTES:
     cliente_elegido = st.selectbox("…o elige uno de los clientes frecuentes:", [""] + CLIENTES_FRECUENTES)
 
-company_name_input = st.text_input("Introduce el nombre de la empresa a consultar:", placeholder="Ej: EPM, Nutresa, Crepes & Waffles").strip()
 if not company_name_input and cliente_elegido:
     company_name_input = cliente_elegido
 
@@ -568,4 +570,4 @@ else:
     st.info("Por favor, ingrese el nombre de una empresa para comenzar el análisis.")
 
 st.markdown("---")
-st.markdown("<div style='text-align: center; color: grey;'>Creada con 🤖 por Johnathan Cortés</div>", unsafe_allow_html=True)
+
