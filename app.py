@@ -6,7 +6,6 @@ import os
 import re
 import unicodedata
 from io import StringIO
-from itertools import cycle
 
 # --- Configuración de la Página ---
 st.set_page_config(
@@ -324,65 +323,43 @@ if company_name_input:
             height=62
         )
 
-    # --- Redacción del informe comparativo 2026 / 2025 / 2024 (solo datos, sin juicios de valor) ---
-    def frase_cambio(pos_ref, pos_new):
-        """Describe el cambio entre dos puestos solo con cifras, sin nombrar el año:
-        el año de referencia siempre va dicho justo antes en la oración."""
-        diff = pos_ref - pos_new
-        if diff > 0: return f"subió {diff} puesto{'s' if diff != 1 else ''}"
-        if diff < 0: return f"bajó {abs(diff)} puesto{'s' if diff != -1 else ''}"
-        return "se mantuvo en el mismo puesto"
+    # --- Redacción del informe comparativo 2026 / 2025 / 2024 ---
+    # Especificación del usuario: tono neutro y claro; estructura fija por párrafo
+    # (ranking y año -> posición actual -> comparación con 2025 -> comparación con
+    # 2024); las comparaciones son siempre de 2026 contra cada año anterior, con
+    # el puesto de ese año entre paréntesis; verbos subir/bajar/mantenerse.
+    def _posiciones_txt(d):
+        return f"{d} posición" if d == 1 else f"{d} posiciones"
+
+    def comparacion(anio, p_ref, p_new):
+        """Comparación de 2026 contra un año anterior (puesto menor = mejor)."""
+        d = p_ref - p_new
+        if d > 0: verbo = f"subió {_posiciones_txt(d)}"
+        elif d < 0: verbo = f"bajó {_posiciones_txt(-d)}"
+        else: verbo = "se mantuvo en la misma posición"
+        return f"En comparación con {anio} (puesto **{p_ref}**), {verbo}."
 
     def historial(pos):
-        """Frases de historial según en qué años aparece (pos: {2026, 2025, 2024} -> puesto o None)."""
+        """Comparaciones de 2026 contra 2025 y contra 2024, en ese orden.
+        Sin 2026 no hay comparaciones: solo el dato de cada año."""
         p26, p25, p24 = pos[2026], pos[2025], pos[2024]
         if p26:
-            if p25 and p24:
-                if p25 == p26 and p24 == p26:
-                    return (f" En 2025 y en 2024 también ocupó el puesto **{p26}**: "
-                            f"se mantuvo en el mismo puesto durante los tres años.")
-                if p25 == p24:
-                    return (f" En 2025 y en 2024 ocupó el puesto **{p25}**: "
-                            f"{frase_cambio(p25, p26)}.")
-                if p25 == p26:
-                    return (f" En 2025 ocupó el mismo puesto (**{p25}**) y en 2024 el puesto **{p24}**: "
-                            f"{frase_cambio(p24, p26)}.")
-                if p24 == p26:
-                    return (f" En 2025 ocupó el puesto **{p25}** y en 2024 el mismo puesto (**{p24}**): "
-                            f"{frase_cambio(p25, p26)}.")
-                return (f" En 2025 ocupó el puesto **{p25}** y en 2024 el puesto **{p24}**: "
-                        f"{frase_cambio(p25, p26)} y {frase_cambio(p24, p26)}, respectivamente.")
-            if p25:
-                if p25 == p26:
-                    return (f" Se mantuvo en el mismo puesto que en 2025 (**{p25}**); "
-                            f"en 2024 no figuraba en este ranking.")
-                cambio = frase_cambio(p25, p26)
-                return (f" {cambio[0].upper() + cambio[1:]} en comparación con 2025, "
-                        f"cuando ocupó el puesto **{p25}**; en 2024 no figuraba en este ranking.")
-            if p24:
-                if p24 == p26:
-                    return (f" Se mantuvo en el mismo puesto que en 2024 (**{p24}**); "
-                            f"en 2025 no figuró en el ranking.")
-                cambio = frase_cambio(p24, p26)
-                return (f" {cambio[0].upper() + cambio[1:]} en comparación con 2024, "
-                        f"cuando ocupó el puesto **{p24}**; en 2025 no figuró en el ranking.")
-            return " No figuró en las ediciones de 2025 ni de 2024."
-        # Sin aparición en 2026
-        if p25 and p24:
-            if p25 == p24:
-                return (f" Su registro más reciente corresponde a 2025, cuando ocupó el puesto **{p25}**, "
-                        f"el mismo que en 2024.")
-            return (f" Su registro más reciente corresponde a 2025, cuando ocupó el puesto **{p25}**; "
-                    f"en 2024 se ubicó en el puesto **{p24}**.")
-        if p25:
-            return f" En 2025 ocupó el puesto **{p25}**; en 2024 tampoco figuraba en este ranking."
-        return f" Su única aparición de los últimos tres años fue en 2024, en el puesto **{p24}**; tampoco figuró en 2025."
+            if not p25 and not p24:
+                return " No figuró en el ranking en 2025 ni en 2024."
+            partes = []
+            for anio, p in ((2025, p25), (2024, p24)):
+                if p: partes.append(comparacion(anio, p, p26))
+                else: partes.append(f"En {anio} no figuró en el ranking.")
+            return " " + " ".join(partes)
+        partes = []
+        for anio, p in ((2025, p25), (2024, p24)):
+            if p: partes.append(f"En {anio} ocupó el puesto **{p}**.")
+            else: partes.append(f"En {anio} no figuró en el ranking.")
+        return " " + " ".join(partes)
 
-    opening_phrases = cycle([
-        "En el ranking **{rank} 2026**, la empresa **{nombre}** ocupa la posición **{pos}**.",
-        "En **{rank} 2026**, la empresa **{nombre}** se ubica en el puesto **{pos}**.",
-        "La empresa **{nombre}** registra la posición **{pos}** en el ranking **{rank} 2026**."
-    ])
+    def nombre_titulo(nombre):
+        """'FRANCISCO JOSÉ BARBERI OSPINA' -> 'Francisco José Barberi Ospina'."""
+        return " ".join(w.capitalize() for w in str(nombre).lower().split())
 
     RANKINGS_CONFIG = {
         "Merco Empresas": ("merco_empresas_2026", "merco_empresas_2025", "merco_empresas_2024"),
@@ -408,17 +385,27 @@ if company_name_input:
 
         if rank_name == "Merco Líderes":
             anio_ref = next(y for y in YEARS if y in datos)
-            lider_ref = datos[anio_ref][2]
+            lider_ref = nombre_titulo(datos[anio_ref][2])
             if pos[2026]:
-                texto = (f"En el ranking **Merco Líderes 2026**, **{lider_ref}**, de la empresa **{nombre}**, "
-                         f"ocupa la posición **{pos[2026]}**.")
+                texto = (f"**Merco Líderes 2026.** **{lider_ref}**, de la empresa **{nombre}**, "
+                         f"ocupa la posición **{pos[2026]}**.") + historial(pos)
             else:
-                texto = (f"En la edición 2026 del ranking **Merco Líderes**, la empresa **{nombre}** no aparece en la clasificación.")
-            texto += historial(pos)
+                texto = f"**Merco Líderes 2026.** La empresa **{nombre}** no figura en el ranking."
+                frases = []
+                for anio in (2025, 2024):
+                    if pos[anio]:
+                        if anio == anio_ref:
+                            frases.append(f"En {anio}, su líder **{lider_ref}** ocupó el puesto **{pos[anio]}**.")
+                        else:
+                            frases.append(f"En {anio} ocupó el puesto **{pos[anio]}**.")
+                    else:
+                        frases.append(f"En {anio} no figuró en el ranking.")
+                texto += " " + " ".join(frases)
         elif pos[2026]:
-            texto = next(opening_phrases).format(nombre=nombre, pos=pos[2026], rank=rank_name) + historial(pos)
+            texto = (f"**{rank_name} 2026.** La empresa **{nombre}** ocupa la posición **{pos[2026]}**."
+                     + historial(pos))
         else:
-            texto = (f"En la edición 2026 del ranking **{rank_name}**, la empresa **{nombre}** no aparece en la clasificación."
+            texto = (f"**{rank_name} 2026.** La empresa **{nombre}** no figura en el ranking."
                      + historial(pos))
         mostrar_tarjeta(rank_name.upper(), texto)
 
@@ -436,12 +423,16 @@ if company_name_input:
             anio_ref = next(y for y in YEARS if y in datos_sec)
             sector_ref, _, nombre = datos_sec[anio_ref]
             if pos[2026]:
-                texto = (f"Adicionalmente, en el ranking **Merco Sectores 2026**, la empresa **{nombre}** ocupa "
-                         f"la posición **{pos[2026]}** dentro del sector **{sector_ref}**.")
+                texto = (f"**Merco Sectores 2026.** La empresa **{nombre}** ocupa la posición **{pos[2026]}** "
+                         f"dentro del sector **{sector_ref}**.") + historial(pos)
+                notas = [f"En {anio} figuró en el sector **{datos_sec[anio][0]}**."
+                         for anio in (2025, 2024)
+                         if anio in datos_sec and datos_sec[anio][0] != sector_ref]
+                if notas: texto += " " + " ".join(notas)
             else:
-                texto = (f"Adicionalmente, en el ranking **Merco Sectores 2026**, la empresa **{nombre}** no aparece "
-                         f"en la clasificación (en {anio_ref} figuró en el sector **{sector_ref}**).")
-            texto += historial(pos)
+                texto = (f"**Merco Sectores 2026.** La empresa **{nombre}** no figura en el ranking."
+                         + historial(pos)
+                         + f" En {anio_ref} figuró en el sector **{sector_ref}**.")
             mostrar_tarjeta("MERCO SECTORES", texto)
 
     # --- Sector probable cuando el cliente no tiene data en el ranking sectorial ---
