@@ -160,7 +160,7 @@ st.markdown("""
 <div class="app-header">
   <h1>📊 Generador de Informes de Reputación · Merco</h1>
   <p>Consulta la posición de una empresa en los rankings Merco Empresas, Talento, Líderes y Sectores de 2024, 2025 y 2026, y genera el texto comparativo listo para tu informe.</p>
-  <p style="font-size:13px; opacity:0.85; margin-top:6px;">Creada por Johnathan Cortés</p>
+  <p style="font-size:13px; opacity:0.85; margin-top:6px;">Creado por Johnathan Cortés</p>
 </div>
 """, unsafe_allow_html=True)
 
