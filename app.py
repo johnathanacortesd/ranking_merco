@@ -179,11 +179,7 @@ _clientes_path = os.path.join("data", "clientes_merco.txt")
 if os.path.exists(_clientes_path):
     with open(_clientes_path, encoding="utf-8") as _f:
         CLIENTES_FRECUENTES = [l.strip() for l in _f if l.strip()]
-# Orden alfabético (sin distinguir mayúsculas ni tildes) para el selector
-import unicodedata as _ud
-def _clave_alfabetica(nombre):
-    return "".join(c for c in _ud.normalize("NFKD", nombre) if not _ud.combining(c)).lower()
-CLIENTES_FRECUENTES.sort(key=_clave_alfabetica)
+# El selector conserva el orden exacto del archivo del usuario (sin reordenar).
 
 # Sector de cada cliente frecuente, para mostrar su tabla sectorial aunque
 # el cliente no aparezca en los rankings.
@@ -242,7 +238,29 @@ CLIENTE_SECTORES = {
     "Sanofi": "FARMACÉUTICO",
     "Secretaría General de la Alcaldía de Bogotá": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
     "Tigo": "TELECOMUNICACIONES",
+    "FUNDACIÓN PARA EL FUTURO DE COLOMBIA": "EDUCACIÓN-UNIVERSIDADES",
+    "COTELCO": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "WWF COLOMBIA": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "REGISTRADURÍA NACIONAL DEL ESTADO CIVIL": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "UNIVERSIDAD AUTÓNOMA DE OCCIDENTE": "EDUCACIÓN-UNIVERSIDADES",
+    "UNIVERSIDAD DE LA COSTA": "EDUCACIÓN-UNIVERSIDADES",
+    "AGENCIA NACIONAL DE CONTRATACIÓN PÚBLICA": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "HOLCIM COLOMBIA": "CEMENTERAS",
+    "UNIDAD NACIONAL PARA LA GESTIÓN DE RIESGOS Y DESASTRES": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
+    "COMFENALCO VALLE": "CAJAS DE COMPENSACIÓN",
+    "FUNDACIÓN SANTA FE DE BOGOTÁ": "SALUD",
+    "NISSAN": "AUTOMOTRIZ",
+    "CHERY - CHANGAN": "AUTOMOTRIZ",
+    "SIEMENS HEALTHINEERS": "SALUD",
+    "FEDERACIÓN NACIONAL DE AVICULTORES DE COLOMBIA": "AGROINDUSTRIAL",
+    "UNIVERSIDAD SIMÓN BOLÍVAR": "EDUCACIÓN-UNIVERSIDADES",
+    "UNIVERSIDAD TECNOLÓGICA DE BOLÍVAR": "EDUCACIÓN-UNIVERSIDADES",
+    "DROPI": "COMERCIO ELECTRÓNICO Y DISTRIBUCIÓN",
 }
+# Lookup por nombre normalizado: el mapa manda sin importar mayúsculas/tildes.
+_CLIENTE_SECTORES_NORM = {}
+for _k, _v in CLIENTE_SECTORES.items():
+    _CLIENTE_SECTORES_NORM.setdefault(normalize_text(_k), _v)
 
 # Buscador manual y lista de clientes frecuentes: manda el control que el
 # usuario tocó de último (sin tener que borrar el otro). Los on_change
@@ -283,6 +301,7 @@ if company_name_input:
         "fundacion cardioinfantil": "LACARDIO",
         "la cardio": "LACARDIO",
         "unal": "UNIVERSIDAD NACIONAL DE COLOMBIA",
+        "holcim colombia": "HOLCIM",
     }
     if normalized_input in ALIAS_MERCO:
         normalized_input = normalize_text(ALIAS_MERCO[normalized_input])
@@ -567,8 +586,8 @@ if company_name_input:
     sector_sugerido = None
     if not sector_mostrado and "merco_sectores_2026" in files:
         sec_prob = None
-        if cliente_actual and cliente_actual in CLIENTE_SECTORES:
-            sec_prob = CLIENTE_SECTORES[cliente_actual]
+        if cliente_actual and normalize_text(cliente_actual) in _CLIENTE_SECTORES_NORM:
+            sec_prob = _CLIENTE_SECTORES_NORM[normalize_text(cliente_actual)]
         if not sec_prob:
             sec_prob = sector_probable(nombre_empresa or company_name_input)
         if sec_prob:
