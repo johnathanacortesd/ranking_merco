@@ -57,6 +57,30 @@ def normalize_text(text):
     return ' '.join(text.split()).strip()
 
 # --- Funciones de Carga y Parseo ---
+_PARTICULAS_NOMBRE = {"de", "del", "la", "las", "el", "los", "y", "e", "en", "a"}
+# Siglas que se conservan en mayúscula (no son palabras: EIA, WWF, EPM...).
+_SIGLAS_NOMBRE = {"eia": "EIA", "eafit": "EAFIT", "wwf": "WWF", "epm": "EPM",
+                  "isa": "ISA", "s.a": "S.A", "s.a.s": "S.A.S"}
+
+def formato_empresa(nombre):
+    """Formato de exhibición de los nombres de empresa (regla del usuario):
+    solo la primera letra de la primera palabra en mayúscula y el resto en
+    minúscula; las universidades van en formato capital (cada palabra
+    significativa con mayúscula inicial y las partículas en minúscula).
+    Las siglas conocidas se conservan en mayúscula."""
+    s = " ".join(str(nombre).split())
+    if not s:
+        return s
+    if "universidad" in normalize_text(s):
+        palabras = s.lower().split()
+        out = " ".join(
+            w if (i > 0 and w in _PARTICULAS_NOMBRE) else w.capitalize()
+            for i, w in enumerate(palabras)
+        )
+    else:
+        out = s[0].upper() + s[1:].lower()
+    return " ".join(_SIGLAS_NOMBRE.get(w.lower(), w) for w in out.split())
+
 @st.cache_data
 def parse_general_ranking(file_path):
     """Parsea archivos de ranking, con lógica especial para 'Líderes'."""
@@ -280,7 +304,7 @@ company_name_input = st.text_input(
 cliente_elegido = ""
 if CLIENTES_FRECUENTES:
     cliente_elegido = st.selectbox(
-        "…o elige uno de los clientes frecuentes:", [""] + CLIENTES_FRECUENTES,
+        "…o elige uno de los clientes frecuentes:", [""] + [formato_empresa(c) for c in CLIENTES_FRECUENTES],
         key="cliente_lista", on_change=_fuente_lista,
     )
 
@@ -438,6 +462,7 @@ if company_name_input:
         pos = {y: (datos[y][0] if y in datos else None) for y in YEARS}
         nombre = next(datos[y][1] for y in YEARS if y in datos)
         if nombre_empresa is None: nombre_empresa = nombre
+        nombre = formato_empresa(nombre)
 
         if rank_name == "Merco Líderes":
             anio_ref = next(y for y in YEARS if y in datos)
@@ -526,6 +551,7 @@ if company_name_input:
             pos = {y: (datos_sec[y][1] if y in datos_sec else None) for y in YEARS}
             anio_ref = next(y for y in YEARS if y in datos_sec)
             sector_ref, _, nombre = datos_sec[anio_ref]
+            nombre = formato_empresa(nombre)
             if pos[2026]:
                 texto = (f"En el ranking **Merco Sectores 2026**, la empresa **{nombre}** ocupa la posición **{pos[2026]}** "
                          f"dentro del sector **{sector_ref}**.") + historial(pos)
@@ -581,6 +607,7 @@ if company_name_input:
         st.markdown(f"**Merco Sectores 2026 · {nombre_sector}**")
         st.caption(nota)
         tabla = df_sec[['posicion', 'empresa']].rename(columns={'posicion': 'Posición', 'empresa': 'Empresa'})
+        tabla['Empresa'] = tabla['Empresa'].apply(formato_empresa)
         st.dataframe(tabla, use_container_width=True, hide_index=True)
 
     sector_sugerido = None
@@ -601,7 +628,8 @@ if company_name_input:
         if "merco_empresas_2026" in files:
             df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
             if df_empresas_2026 is not None and all(c in df_empresas_2026.columns for c in ['posicion', 'empresa', 'puntuacion']):
-                top_10 = df_empresas_2026.head(10)[['posicion', 'empresa', 'puntuacion']]
+                top_10 = df_empresas_2026.head(10)[['posicion', 'empresa', 'puntuacion']].copy()
+                top_10['empresa'] = top_10['empresa'].apply(formato_empresa)
         if "merco_empresas_2026" in files:
             if sector_sugerido and top_10 is not None:
                 col_top, col_sector = st.columns(2)
@@ -624,7 +652,7 @@ if company_name_input:
         ]
         if sector_sugerido:
             filas_sec = "\n".join(
-                f"{f.posicion}\t{f.empresa}" for f in sector_sugerido[1].itertuples(index=False)
+                f"{f.posicion}\t{formato_empresa(f.empresa)}" for f in sector_sugerido[1].itertuples(index=False)
             )
             cuerpo_no.append(f"Tabla del sector {sector_sugerido[0]} · Merco Sectores 2026:\nPosición\tEmpresa\n{filas_sec}")
         if top_10 is not None:
