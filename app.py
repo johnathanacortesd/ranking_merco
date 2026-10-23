@@ -287,6 +287,14 @@ if company_name_input:
     if normalized_input in ALIAS_MERCO:
         normalized_input = normalize_text(ALIAS_MERCO[normalized_input])
 
+    # Vocero ACTUAL de cada cliente para el ranking Líderes (lo define el
+    # usuario). El párrafo de Líderes sigue al vocero, pero los puestos de
+    # años anteriores se atribuyen SIEMPRE a la persona que los obtuvo
+    # según la data: un puesto histórico jamás se traslada a otra persona.
+    VOCEROS_LIDERES = {
+        "universidad nacional de colombia": "JOSÉ ISMAEL PEÑA REYES",
+    }
+
     cliente_actual = None
     for _c in CLIENTES_FRECUENTES:
         _c_base = re.sub(r',\s*competencias?$', '', _c, flags=re.IGNORECASE).strip()
@@ -413,6 +421,36 @@ if company_name_input:
             anio_ref = next(y for y in YEARS if y in datos)
             lider_ref = nombre_titulo(datos[anio_ref][2])
             empresa_ref = datos[anio_ref][1]
+            _emp_base = normalize_text(empresa_ref)
+            if _emp_base.startswith("ex "):
+                _emp_base = _emp_base[3:]
+            vocero = VOCEROS_LIDERES.get(_emp_base)
+            if vocero:
+                vocero_t = nombre_titulo(vocero)
+
+                def _lider_de(anio):
+                    return nombre_titulo(datos[anio][2]) if anio in datos else None
+
+                p26_vocero = pos[2026] if (2026 in datos and _lider_de(2026) == vocero_t) else None
+                if p26_vocero:
+                    texto = (f"En el ranking **Merco Líderes 2026**, **{vocero_t}**, de la empresa "
+                             f"**{nombre}**, ocupa la posición **{p26_vocero}**.")
+                else:
+                    texto = f"En el ranking **Merco Líderes 2026**, **{vocero_t}** no figura en el ranking."
+                frases = []
+                for anio in (2025, 2024):
+                    if anio not in datos:
+                        frases.append(f"En {anio} no figuró en el ranking.")
+                    elif _lider_de(anio) == vocero_t:
+                        if p26_vocero:
+                            frases.append(comparacion(anio, pos[anio], p26_vocero))
+                        else:
+                            frases.append(f"En {anio}, ocupó el puesto **{pos[anio]}**.")
+                    else:
+                        frases.append(f"En {anio}, **{_lider_de(anio)}** ocupó el puesto **{pos[anio]}**.")
+                texto += " " + " ".join(frases)
+                mostrar_tarjeta(rank_name.upper(), texto)
+                continue
             if normalize_text(empresa_ref).startswith("ex "):
                 # La empresa del registro es "EX - ...": no se nombra la ex empresa;
                 # el párrafo es sobre la PERSONA (el líder), como dictó el usuario.
