@@ -246,13 +246,31 @@ CLIENTE_SECTORES = {
     "Tigo": "TELECOMUNICACIONES",
 }
 
-company_name_input = st.text_input("Introduce el nombre de la empresa a consultar:", placeholder="Ej: EPM, Nutresa, Crepes & Waffles").strip()
+# Buscador manual y lista de clientes frecuentes: manda el control que el
+# usuario tocó de último (sin tener que borrar el otro). Los on_change
+# registran la fuente más reciente en la sesión.
+def _fuente_manual():
+    st.session_state["ultima_fuente"] = "manual"
+
+def _fuente_lista():
+    st.session_state["ultima_fuente"] = "lista"
+
+company_name_input = st.text_input(
+    "Introduce el nombre de la empresa a consultar:",
+    placeholder="Ej: EPM, Nutresa, Crepes & Waffles",
+    key="busqueda_manual", on_change=_fuente_manual,
+).strip()
 
 cliente_elegido = ""
 if CLIENTES_FRECUENTES:
-    cliente_elegido = st.selectbox("…o elige uno de los clientes frecuentes:", [""] + CLIENTES_FRECUENTES)
+    cliente_elegido = st.selectbox(
+        "…o elige uno de los clientes frecuentes:", [""] + CLIENTES_FRECUENTES,
+        key="cliente_lista", on_change=_fuente_lista,
+    )
 
-if not company_name_input and cliente_elegido:
+if st.session_state.get("ultima_fuente") == "lista" and cliente_elegido:
+    company_name_input = cliente_elegido
+elif not company_name_input and cliente_elegido:
     company_name_input = cliente_elegido
 
 if company_name_input:
