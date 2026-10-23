@@ -412,6 +412,24 @@ if company_name_input:
         if rank_name == "Merco Líderes":
             anio_ref = next(y for y in YEARS if y in datos)
             lider_ref = nombre_titulo(datos[anio_ref][2])
+            empresa_ref = datos[anio_ref][1]
+            if normalize_text(empresa_ref).startswith("ex "):
+                # La empresa del registro es "EX - ...": no se nombra la ex empresa;
+                # el párrafo es sobre la PERSONA (el líder), como dictó el usuario.
+                if pos[2026]:
+                    texto = (f"En el ranking **Merco Líderes 2026**, **{lider_ref}** "
+                             f"ocupa la posición **{pos[2026]}**.") + historial(pos)
+                else:
+                    texto = f"En el ranking **Merco Líderes 2026**, **{lider_ref}** no figura en el ranking."
+                    frases = []
+                    for anio in (2025, 2024):
+                        if pos[anio]:
+                            frases.append(f"En {anio}, ocupó el puesto **{pos[anio]}**.")
+                        else:
+                            frases.append(f"En {anio} no figuró en el ranking.")
+                    texto += " " + " ".join(frases)
+                mostrar_tarjeta(rank_name.upper(), texto)
+                continue
             if pos[2026]:
                 texto = (f"En el ranking **Merco Líderes 2026**, **{lider_ref}**, de la empresa **{nombre}**, "
                          f"ocupa la posición **{pos[2026]}**.") + historial(pos)
