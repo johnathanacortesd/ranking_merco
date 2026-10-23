@@ -331,21 +331,29 @@ if company_name_input:
     def _posiciones_txt(d):
         return f"{d} posición" if d == 1 else f"{d} posiciones"
 
+    def verbo_cambio(p_ref, p_new):
+        """Verbo y magnitud del cambio de 2026 contra un año anterior."""
+        d = p_ref - p_new
+        if d > 0: return f"subió {_posiciones_txt(d)}"
+        if d < 0: return f"bajó {_posiciones_txt(-d)}"
+        return "se mantuvo en la misma posición"
+
     def comparacion(anio, p_ref, p_new):
         """Comparación de 2026 contra un año anterior (puesto menor = mejor)."""
-        d = p_ref - p_new
-        if d > 0: verbo = f"subió {_posiciones_txt(d)}"
-        elif d < 0: verbo = f"bajó {_posiciones_txt(-d)}"
-        else: verbo = "se mantuvo en la misma posición"
-        return f"En comparación con {anio} (puesto **{p_ref}**), {verbo}."
+        return f"En comparación con {anio} (puesto **{p_ref}**), {verbo_cambio(p_ref, p_new)}."
 
     def historial(pos):
         """Comparaciones de 2026 contra 2025 y contra 2024, en ese orden.
+        Si 2025 y 2024 tienen el mismo puesto, la comparación es una sola
+        (mismo cambio frente a ambos años, sin repetir la frase).
         Sin 2026 no hay comparaciones: solo el dato de cada año."""
         p26, p25, p24 = pos[2026], pos[2025], pos[2024]
         if p26:
             if not p25 and not p24:
                 return " No figuró en el ranking en 2025 ni en 2024."
+            if p25 and p24 and p25 == p24:
+                return (f" En comparación con 2025 (puesto **{p25}**) y 2024 (puesto **{p24}**), "
+                        f"{verbo_cambio(p25, p26)}.")
             partes = []
             for anio, p in ((2025, p25), (2024, p24)):
                 if p: partes.append(comparacion(anio, p, p26))
