@@ -287,11 +287,6 @@ if company_name_input:
     if normalized_input in ALIAS_MERCO:
         normalized_input = normalize_text(ALIAS_MERCO[normalized_input])
 
-    # Vocero oficial de cada cliente para el ranking Líderes: si el cliente
-    # tiene vocero definido aquí, ese nombre manda sobre el de la data.
-    VOCEROS_LIDERES = {
-        "universidad nacional de colombia": "JOSÉ ISMAEL PEÑA REYES",
-    }
     cliente_actual = None
     for _c in CLIENTES_FRECUENTES:
         _c_base = re.sub(r',\s*competencias?$', '', _c, flags=re.IGNORECASE).strip()
@@ -418,11 +413,6 @@ if company_name_input:
             anio_ref = next(y for y in YEARS if y in datos)
             lider_ref = nombre_titulo(datos[anio_ref][2])
             empresa_ref = datos[anio_ref][1]
-            _emp_base = normalize_text(empresa_ref)
-            if _emp_base.startswith("ex "):
-                _emp_base = _emp_base[3:]
-            if _emp_base in VOCEROS_LIDERES:
-                lider_ref = nombre_titulo(VOCEROS_LIDERES[_emp_base])
             if normalize_text(empresa_ref).startswith("ex "):
                 # La empresa del registro es "EX - ...": no se nombra la ex empresa;
                 # el párrafo es sobre la PERSONA (el líder), como dictó el usuario.
