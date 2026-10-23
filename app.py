@@ -387,10 +387,10 @@ if company_name_input:
             anio_ref = next(y for y in YEARS if y in datos)
             lider_ref = nombre_titulo(datos[anio_ref][2])
             if pos[2026]:
-                texto = (f"**Merco Líderes 2026.** **{lider_ref}**, de la empresa **{nombre}**, "
+                texto = (f"En el ranking **Merco Líderes 2026**, **{lider_ref}**, de la empresa **{nombre}**, "
                          f"ocupa la posición **{pos[2026]}**.") + historial(pos)
             else:
-                texto = f"**Merco Líderes 2026.** La empresa **{nombre}** no figura en el ranking."
+                texto = f"En el ranking **Merco Líderes 2026**, la empresa **{nombre}** no figura en el ranking."
                 frases = []
                 for anio in (2025, 2024):
                     if pos[anio]:
@@ -402,10 +402,10 @@ if company_name_input:
                         frases.append(f"En {anio} no figuró en el ranking.")
                 texto += " " + " ".join(frases)
         elif pos[2026]:
-            texto = (f"**{rank_name} 2026.** La empresa **{nombre}** ocupa la posición **{pos[2026]}**."
+            texto = (f"En el ranking **{rank_name} 2026**, la empresa **{nombre}** ocupa la posición **{pos[2026]}**."
                      + historial(pos))
         else:
-            texto = (f"**{rank_name} 2026.** La empresa **{nombre}** no figura en el ranking."
+            texto = (f"En el ranking **{rank_name} 2026**, la empresa **{nombre}** no figura en el ranking."
                      + historial(pos))
         mostrar_tarjeta(rank_name.upper(), texto)
 
@@ -423,14 +423,14 @@ if company_name_input:
             anio_ref = next(y for y in YEARS if y in datos_sec)
             sector_ref, _, nombre = datos_sec[anio_ref]
             if pos[2026]:
-                texto = (f"**Merco Sectores 2026.** La empresa **{nombre}** ocupa la posición **{pos[2026]}** "
+                texto = (f"En el ranking **Merco Sectores 2026**, la empresa **{nombre}** ocupa la posición **{pos[2026]}** "
                          f"dentro del sector **{sector_ref}**.") + historial(pos)
                 notas = [f"En {anio} figuró en el sector **{datos_sec[anio][0]}**."
                          for anio in (2025, 2024)
                          if anio in datos_sec and datos_sec[anio][0] != sector_ref]
                 if notas: texto += " " + " ".join(notas)
             else:
-                texto = (f"**Merco Sectores 2026.** La empresa **{nombre}** no figura en el ranking."
+                texto = (f"En el ranking **Merco Sectores 2026**, la empresa **{nombre}** no figura en el ranking."
                          + historial(pos)
                          + f" En {anio_ref} figuró en el sector **{sector_ref}**.")
             mostrar_tarjeta("MERCO SECTORES", texto)
