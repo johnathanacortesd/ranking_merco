@@ -65,7 +65,9 @@ _SIGLAS_NOMBRE = {"eia": "EIA", "eafit": "EAFIT", "wwf": "WWF", "epm": "EPM",
 def formato_empresa(nombre):
     """Formato de exhibición de los nombres de empresa (regla del usuario):
     solo la primera letra de la primera palabra en mayúscula y el resto en
-    minúscula; las universidades van en formato capital (cada palabra
+    minúscula, PERO van en formato capital: la palabra que sigue a "de"/"del",
+    la última palabra del nombre y los segmentos "Santa/Santo + nombre".
+    Las universidades van en formato capital completo (cada palabra
     significativa con mayúscula inicial y las partículas en minúscula).
     Las siglas conocidas se conservan en mayúscula."""
     s = " ".join(str(nombre).split())
@@ -78,10 +80,25 @@ def formato_empresa(nombre):
             for i, w in enumerate(palabras)
         )
     else:
-        out = s[0].upper() + s[1:].lower()
+        palabras = s.lower().split()
+        n = len(palabras)
+        cap = [False] * n
+        cap[0] = True
+        cap[n - 1] = True  # la última palabra va en capital
+        for i, w in enumerate(palabras):
+            if w in ("de", "del"):
+                j = i + 1
+                if j < n and palabras[j] in ("la", "el", "los", "las"):
+                    j += 1  # el artículo queda en minúscula; capital la siguiente
+                if j < n:
+                    cap[j] = True
+            if w in ("santa", "santo"):
+                cap[i] = True
+                if i + 1 < n:
+                    cap[i + 1] = True
+        out = " ".join(w.capitalize() if cap[i] else w for i, w in enumerate(palabras))
     return " ".join(_SIGLAS_NOMBRE.get(w.lower(), w) for w in out.split())
 
-@st.cache_data
 def parse_general_ranking(file_path):
     """Parsea archivos de ranking, con lógica especial para 'Líderes'."""
     try:
@@ -274,7 +291,7 @@ CLIENTE_SECTORES = {
     "COMFENALCO VALLE": "CAJAS DE COMPENSACIÓN",
     "FUNDACIÓN SANTA FE DE BOGOTÁ": "SALUD",
     "NISSAN": "AUTOMOTRIZ",
-    "CHERY - CHANGAN": "AUTOMOTRIZ",
+    "CHANGAN - DEEPAL": "AUTOMOTRIZ",
     "SIEMENS HEALTHINEERS": "SALUD",
     "FEDERACIÓN NACIONAL DE AVICULTORES DE COLOMBIA": "AGROINDUSTRIAL",
     "UNIVERSIDAD SIMÓN BOLÍVAR": "EDUCACIÓN-UNIVERSIDADES",
