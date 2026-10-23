@@ -355,6 +355,7 @@ if company_name_input:
         "universidad nacional de colombia": "JOSÉ ISMAEL PEÑA REYES",
         "tigo": "CARLOS BLANCO",
         "universidad eia": "JUAN MANUEL RESTREPO CADAVID",
+        "deloitte": "FRANCISCO O'BONAGA",
     }
 
     cliente_actual = None
@@ -455,8 +456,10 @@ if company_name_input:
         return " " + " ".join(partes)
 
     def nombre_titulo(nombre):
-        """'FRANCISCO JOSÉ BARBERI OSPINA' -> 'Francisco José Barberi Ospina'."""
-        return " ".join(w.capitalize() for w in str(nombre).lower().split())
+        """'FRANCISCO JOSÉ BARBERI OSPINA' -> 'Francisco José Barberi Ospina'.
+        La letra después de un apóstrofo también va en mayúscula: O'Bonaga."""
+        base = " ".join(w.capitalize() for w in str(nombre).lower().split())
+        return re.sub(r"'([a-záéíóúñ])", lambda m: "'" + m.group(1).upper(), base)
 
     RANKINGS_CONFIG = {
         "Merco Empresas": ("merco_empresas_2026", "merco_empresas_2025", "merco_empresas_2024"),
@@ -473,7 +476,16 @@ if company_name_input:
             if df is None: continue
             pos, nombre, lider = find_company_in_df_robust(df, normalized_input)
             if pos: datos[year] = (pos, nombre, lider)
-        if not datos: continue
+        if not datos:
+            if rank_name == "Merco Líderes" and normalized_input in VOCEROS_LIDERES:
+                # El cliente no tiene registros en Líderes, pero tiene vocero
+                # definido: el párrafo sigue al vocero (no figura en ningún año).
+                _voc = nombre_titulo(VOCEROS_LIDERES[normalized_input])
+                texto = (f"En el ranking **Merco Líderes 2026**, **{_voc}** no figura en el ranking."
+                         " En 2025 no figuró en el ranking. En 2024 no figuró en el ranking.")
+                mostrar_tarjeta(rank_name.upper(), texto)
+                found_any = True
+            continue
         found_any = True
 
         pos = {y: (datos[y][0] if y in datos else None) for y in YEARS}
