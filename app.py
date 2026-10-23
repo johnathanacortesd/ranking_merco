@@ -333,13 +333,6 @@ if company_name_input:
         if diff < 0: return f"bajó {abs(diff)} puesto{'s' if diff != -1 else ''}"
         return "se mantuvo en el mismo puesto"
 
-    def frase_regreso(pos_ref, pos_new):
-        """Cambio al regresar tras un año ausente, referido a su última aparición."""
-        diff = pos_ref - pos_new
-        if diff > 0: return f"regresa {diff} puesto{'s' if diff != 1 else ''} más arriba que en su última aparición"
-        if diff < 0: return f"regresa {abs(diff)} puesto{'s' if diff != -1 else ''} más abajo que en su última aparición"
-        return "regresa en el mismo puesto de su última aparición"
-
     def historial(pos):
         """Frases de historial según en qué años aparece (pos: {2026, 2025, 2024} -> puesto o None)."""
         p26, p25, p24 = pos[2026], pos[2025], pos[2024]
@@ -361,13 +354,18 @@ if company_name_input:
                         f"{frase_cambio(p25, p26)} y {frase_cambio(p24, p26)}, respectivamente.")
             if p25:
                 if p25 == p26:
-                    return (f" En 2024 no figuraba en este ranking. "
-                            f"En 2025 ocupó el mismo puesto (**{p25}**).")
-                return (f" En 2024 no figuraba en este ranking. "
-                        f"En 2025 ocupó el puesto **{p25}**: {frase_cambio(p25, p26)}.")
+                    return (f" Se mantuvo en el mismo puesto que en 2025 (**{p25}**); "
+                            f"en 2024 no figuraba en este ranking.")
+                cambio = frase_cambio(p25, p26)
+                return (f" {cambio[0].upper() + cambio[1:]} en comparación con 2025, "
+                        f"cuando ocupó el puesto **{p25}**; en 2024 no figuraba en este ranking.")
             if p24:
-                return (f" En 2024 ocupó el puesto **{p24}** y en 2025 no figuró: "
-                        f"{frase_regreso(p24, p26)}.")
+                if p24 == p26:
+                    return (f" Se mantuvo en el mismo puesto que en 2024 (**{p24}**); "
+                            f"en 2025 no figuró en el ranking.")
+                cambio = frase_cambio(p24, p26)
+                return (f" {cambio[0].upper() + cambio[1:]} en comparación con 2024, "
+                        f"cuando ocupó el puesto **{p24}**; en 2025 no figuró en el ranking.")
             return " No figuró en las ediciones de 2025 ni de 2024."
         # Sin aparición en 2026
         if p25 and p24:
