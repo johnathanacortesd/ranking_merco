@@ -748,7 +748,7 @@
                                     
                                         <tr>
                                             <td><span class="badge-pos-1 bg-white bd-1-blue-1 f-blue-1">93</span></td>
-                                            <td>DOLLY MONTOYA CASTAÑO<em>EX - UNIVERSIDAD NACIONAL DE COLOMBIA</em></td>
+                                            <td>JOSÉ ISMAEL PEÑA REYES<em>EX - UNIVERSIDAD NACIONAL DE COLOMBIA</em></td>
                                             <td class="t-center f-monospace">3514</td>
                                             <td class="t-center " title="Posición 2023"><img class="evol-arr" src="/_img/evolucion-down.png"><span class="badge-pos-2 bg-white bd-1-grey-5 f-grey-4">62</span></td>
                                         </tr>

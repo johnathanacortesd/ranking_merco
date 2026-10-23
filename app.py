@@ -282,6 +282,7 @@ if company_name_input:
         "fundacion cardio infantil": "LACARDIO",
         "fundacion cardioinfantil": "LACARDIO",
         "la cardio": "LACARDIO",
+        "unal": "UNIVERSIDAD NACIONAL DE COLOMBIA",
     }
     if normalized_input in ALIAS_MERCO:
         normalized_input = normalize_text(ALIAS_MERCO[normalized_input])
