@@ -293,6 +293,8 @@ if company_name_input:
     # según la data: un puesto histórico jamás se traslada a otra persona.
     VOCEROS_LIDERES = {
         "universidad nacional de colombia": "JOSÉ ISMAEL PEÑA REYES",
+        "tigo": "CARLOS BLANCO",
+        "universidad eia": "JUAN MANUEL RESTREPO CADAVID",
     }
 
     cliente_actual = None
@@ -321,6 +323,7 @@ if company_name_input:
         """Muestra el resultado en una tarjeta y lo acumula para el informe completo."""
         textos_informe.append(texto_md)
         html_txt = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', texto_md)
+        html_txt = re.sub(r'\*(.+?)\*', r'<em>\1</em>', html_txt)
         st.markdown(f'<div class="result-card"><span class="chip">{etiqueta}</span><br>{html_txt}</div>', unsafe_allow_html=True)
 
     def boton_copiar(texto):
@@ -447,7 +450,7 @@ if company_name_input:
                         else:
                             frases.append(f"En {anio}, ocupó el puesto **{pos[anio]}**.")
                     else:
-                        frases.append(f"En {anio}, **{_lider_de(anio)}** ocupó el puesto **{pos[anio]}**.")
+                        frases.append(f"En {anio}, *{_lider_de(anio)}* ocupó el puesto **{pos[anio]}**.")
                 texto += " " + " ".join(frases)
                 mostrar_tarjeta(rank_name.upper(), texto)
                 continue
@@ -631,7 +634,7 @@ if company_name_input:
     if textos_informe:
         informe_completo = (
             INTRO_TEXT.strip()
-            + "\n\n" + "\n\n".join(t.replace("**", "") for t in textos_informe)
+            + "\n\n" + "\n\n".join(t.replace("**", "").replace("*", "") for t in textos_informe)
             + "\n\n" + OUTRO_TEXT.replace("---", "").strip()
         )
         st.markdown("---")
