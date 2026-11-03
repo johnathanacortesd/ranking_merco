@@ -371,7 +371,7 @@ if company_name_input:
         return ('<table class="tabla-merco" style="border-collapse:collapse; background:transparent;">'
                 f'<thead><tr>{cab}</tr></thead><tbody>{"".join(cuerpo)}</tbody></table>')
 
-    def mostrar_tablas(tablas):
+    def mostrar_tablas(tablas, al_informe=True):
         """Muestra una o varias tablas una al lado de otra (copiables y sin
         fondo), las agrega al informe y ofrece copiarlas como imagen PNG
         transparente. Cada tabla: dict(titulo, columnas, filas, nota)."""
@@ -383,16 +383,18 @@ if company_name_input:
             nota_html = f'<p class="nota-tabla">{html.escape(t["nota"])}</p>' if t.get("nota") else ""
             bloques.append(f'<div class="col-tabla"><p class="titulo-tabla">{html.escape(t["titulo"])}</p>{nota_html}{t_html}</div>')
             plano = "\n".join(["\t".join(map(str, t["columnas"]))] + ["\t".join(map(str, f)) for f in t["filas"]])
-            informe_bloques.append((f'{t["titulo"]}:\n{plano}', None))
+            if al_informe:
+                informe_bloques.append((f'{t["titulo"]}:\n{plano}', None))
             celdas_word.append(
                 f'<td style="vertical-align:top; padding:0 14px 0 0; border:none; background:transparent;">'
                 f'<p><strong>{html.escape(t["titulo"])}</strong></p>{t_html}</td>')
         st.markdown(f'<div class="grid-tablas">{"".join(bloques)}</div>', unsafe_allow_html=True)
         # En el informe enriquecido las tablas también van lado a lado
         # (una tabla de maquetación sin bordes ni fondo).
-        informe_bloques.append((None,
-            '<table style="border-collapse:collapse; border:none; background:transparent;"><tr>'
-            + "".join(celdas_word) + "</tr></table>"))
+        if al_informe:
+            informe_bloques.append((None,
+                '<table style="border-collapse:collapse; border:none; background:transparent;"><tr>'
+                + "".join(celdas_word) + "</tr></table>"))
         boton_imagen_tablas(tablas)
 
     def boton_imagen_tablas(tablas):
@@ -788,6 +790,13 @@ if company_name_input:
 
     nombre_marca = formato_empresa(nombre_empresa or _base_input)
 
+    def formato_miles(v):
+        """Puntuación con punto de mil y sin decimales: 10000 -> 10.000."""
+        try:
+            return f"{round(float(str(v).replace(',', '.'))):,}".replace(",", ".")
+        except (TypeError, ValueError):
+            return v
+
     def tabla_sector(nota):
         nombre_sector, df_sec = sector_sugerido
         filas = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa))
@@ -800,8 +809,6 @@ if company_name_input:
         agregar_al_informe(
             f"**{nombre_marca}** no aparece en los rankings Merco Empresas, Talento, Líderes y Sectores "
             "de las ediciones 2024, 2025 y 2026."
-            + (f" A continuación se presenta el ranking **Merco Sectores 2026** del sector "
-               f"**{sector_sugerido[0]}**, al que pertenece la marca." if sector_sugerido else "")
         )
         tablas = []
         if sector_sugerido:
@@ -810,11 +817,13 @@ if company_name_input:
             df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
             if df_empresas_2026 is not None and all(c in df_empresas_2026.columns for c in ['posicion', 'empresa', 'puntuacion']):
                 top_10 = df_empresas_2026.head(10)
-                filas_top = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa), f.puntuacion)
+                filas_top = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa), formato_miles(f.puntuacion))
                              for f in top_10.itertuples(index=False)]
                 tablas.append(dict(titulo="Top 10 · Merco Empresas 2026", columnas=["Posición", "Empresa", "Puntuación"],
                                    filas=filas_top, nota="Referencia del ranking general."))
-        mostrar_tablas(tablas)
+        # Las tablas se ven en pantalla (y se copian como imagen), pero el
+        # informe de texto solo lleva la introducción, el aviso y el cierre.
+        mostrar_tablas(tablas, al_informe=False)
     elif sector_sugerido:
         # Si hubo data en años anteriores, la tarjeta de Merco Sectores ya
         # dijo que no figura en 2026; si no, se agrega esa tarjeta.
