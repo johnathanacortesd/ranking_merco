@@ -365,7 +365,7 @@ if company_name_input:
         for r, fila in enumerate(filas):
             celdas = "".join(
                 f'<td style="{_BORDE} text-align:{alin[i]};'
-                f'{" font-weight:600;" if i == 0 or r == destacar else ""}">{html.escape(str(v))}</td>'
+                f'{" font-weight:700; color:#B34A24;" if r == destacar else (" font-weight:600;" if i == 0 else "")}">{html.escape(str(v))}</td>'
                 for i, v in enumerate(fila))
             cuerpo.append(f"<tr>{celdas}</tr>")
         return ('<table class="tabla-merco" style="border-collapse:collapse; background:transparent;">'
@@ -374,24 +374,26 @@ if company_name_input:
     def mostrar_tablas(tablas, al_informe=True):
         """Muestra una o varias tablas una al lado de otra (copiables y sin
         fondo), las agrega al informe y ofrece copiarlas como imagen PNG
-        transparente. Cada tabla: dict(titulo, columnas, filas, nota)."""
+        transparente. Cada tabla: dict(titulo, columnas, filas, nota) y,
+        opcionales, destacar (fila de la marca) e informe (si va al texto)."""
         if not tablas:
             return
         bloques, celdas_word = [], []
         for t in tablas:
-            t_html = tabla_html(t["columnas"], t["filas"])
+            t_html = tabla_html(t["columnas"], t["filas"], t.get("destacar"))
             nota_html = f'<p class="nota-tabla">{html.escape(t["nota"])}</p>' if t.get("nota") else ""
             bloques.append(f'<div class="col-tabla"><p class="titulo-tabla">{html.escape(t["titulo"])}</p>{nota_html}{t_html}</div>')
             plano = "\n".join(["\t".join(map(str, t["columnas"]))] + ["\t".join(map(str, f)) for f in t["filas"]])
-            if al_informe:
-                informe_bloques.append((f'{t["titulo"]}:\n{plano}', None))
+            if not t.get("informe", al_informe):
+                continue
+            informe_bloques.append((f'{t["titulo"]}:\n{plano}', None))
             celdas_word.append(
                 f'<td style="vertical-align:top; padding:0 14px 0 0; border:none; background:transparent;">'
                 f'<p><strong>{html.escape(t["titulo"])}</strong></p>{t_html}</td>')
         st.markdown(f'<div class="grid-tablas">{"".join(bloques)}</div>', unsafe_allow_html=True)
         # En el informe enriquecido las tablas también van lado a lado
         # (una tabla de maquetación sin bordes ni fondo).
-        if al_informe:
+        if celdas_word:
             informe_bloques.append((None,
                 '<table style="border-collapse:collapse; border:none; background:transparent;"><tr>'
                 + "".join(celdas_word) + "</tr></table>"))
@@ -402,7 +404,8 @@ if company_name_input:
         de la app) y las copia al portapapeles como imagen PNG; también permite
         descargarla."""
         datos = [{"titulo": t["titulo"], "columnas": [str(c) for c in t["columnas"]],
-                  "filas": [[str(v) for v in f] for f in t["filas"]]} for t in tablas]
+                  "filas": [[str(v) for v in f] for f in t["filas"]],
+                  "destacar": t.get("destacar")} for t in tablas]
         etiqueta = "Copiar tablas como imagen" if len(tablas) > 1 else "Copiar tabla como imagen"
         components.html(
             """
@@ -422,8 +425,10 @@ if company_name_input:
               const anchos = t.columnas.map((c, i) => {
                 ctx.font = '700 13px ' + FUENTE;
                 let w = ctx.measureText(c.toUpperCase()).width + 1.2 * c.length;
-                ctx.font = '400 15px ' + FUENTE;
-                for (const f of t.filas) w = Math.max(w, ctx.measureText(f[i] || '').width);
+                t.filas.forEach((f, r) => {
+                  ctx.font = (r === t.destacar ? '700 ' : '400 ') + '15px ' + FUENTE;
+                  w = Math.max(w, ctx.measureText(f[i] || '').width);
+                });
                 return Math.ceil(w + 2 * PAD);
               });
               ctx.font = '700 16px ' + FUENTE;
@@ -472,8 +477,12 @@ if company_name_input:
                   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.6px';
                   ctx.fillText(t.columnas[i].toUpperCase(), pos[1], yT + CAB / 2);
                   if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
-                  ctx.fillStyle = C.texto; ctx.font = (i === 0 ? '600 ' : '400 ') + '15px ' + FUENTE;
-                  t.filas.forEach((f, r) => ctx.fillText(f[i] || '', pos[1], yT + CAB + FILA * r + FILA / 2 + 1));
+                  t.filas.forEach((f, r) => {
+                    const marca = r === t.destacar;
+                    ctx.fillStyle = marca ? C.acento : C.texto;
+                    ctx.font = (marca ? '700 ' : (i === 0 ? '600 ' : '400 ')) + '15px ' + FUENTE;
+                    ctx.fillText(f[i] || '', pos[1], yT + CAB + FILA * r + FILA / 2 + 1);
+                  });
                   cx += w;
                 });
                 x0 += ancho + SEP;
@@ -797,12 +806,32 @@ if company_name_input:
         except (TypeError, ValueError):
             return v
 
-    def tabla_sector(nota):
-        nombre_sector, df_sec = sector_sugerido
-        filas = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa))
-                 for f in df_sec.itertuples(index=False)]
+    def tabla_sector(nombre_sector, df_sec, nota, nombre_destacar=None):
+        filas, destacar = [], None
+        for k, f in enumerate(df_sec.itertuples(index=False)):
+            filas.append((int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa)))
+            if nombre_destacar is not None and f.empresa == nombre_destacar:
+                destacar = k
         return dict(titulo=f"Merco Sectores 2026 · {nombre_sector}", columnas=["Posición", "Empresa"],
-                    filas=filas, nota=nota)
+                    filas=filas, nota=nota, destacar=destacar)
+
+    def tabla_top10():
+        """Top 10 de Merco Empresas 2026 (con la marca resaltada si está)."""
+        if "merco_empresas_2026" not in files:
+            return None
+        df_emp = parse_general_ranking(files["merco_empresas_2026"])
+        if df_emp is None or not all(c in df_emp.columns for c in ['posicion', 'empresa', 'puntuacion']):
+            return None
+        top_10 = df_emp.head(10)
+        _, nombre_top, _ = find_company_in_df_robust(top_10, normalized_input)
+        filas, destacar = [], None
+        for k, f in enumerate(top_10.itertuples(index=False)):
+            filas.append((int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa),
+                          formato_miles(f.puntuacion)))
+            if nombre_top is not None and f.empresa == nombre_top:
+                destacar = k
+        return dict(titulo="Top 10 · Merco Empresas 2026", columnas=["Posición", "Empresa", "Puntuación"],
+                    filas=filas, nota="Referencia del ranking general.", destacar=destacar, informe=False)
 
     if not found_any:
         st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco de 2024, 2025 o 2026.")
@@ -812,30 +841,41 @@ if company_name_input:
         )
         tablas = []
         if sector_sugerido:
-            tablas.append(tabla_sector("Empresas que figuran en 2026 en el sector de la marca."))
-        if "merco_empresas_2026" in files:
-            df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
-            if df_empresas_2026 is not None and all(c in df_empresas_2026.columns for c in ['posicion', 'empresa', 'puntuacion']):
-                top_10 = df_empresas_2026.head(10)
-                filas_top = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa), formato_miles(f.puntuacion))
-                             for f in top_10.itertuples(index=False)]
-                tablas.append(dict(titulo="Top 10 · Merco Empresas 2026", columnas=["Posición", "Empresa", "Puntuación"],
-                                   filas=filas_top, nota="Referencia del ranking general."))
+            tablas.append(tabla_sector(*sector_sugerido, "Empresas que figuran en 2026 en el sector de la marca."))
+        top = tabla_top10()
+        if top:
+            tablas.append(top)
         # Las tablas se ven en pantalla (y se copian como imagen), pero el
         # informe de texto solo lleva la introducción, el aviso y el cierre.
         mostrar_tablas(tablas, al_informe=False)
-    elif sector_sugerido:
-        # Si hubo data en años anteriores, la tarjeta de Merco Sectores ya
-        # dijo que no figura en 2026; si no, se agrega esa tarjeta.
-        if not datos_sec:
-            mostrar_tarjeta(
-                "MERCO SECTORES",
-                f"En el ranking **Merco Sectores 2026**, la empresa **{nombre_marca}** no figura en el ranking. "
-                f"A continuación se presenta el ranking del sector **{sector_sugerido[0]}**, al que pertenece la marca."
-            )
-        st.markdown("---")
-        st.subheader("🧭 Merco Sectores 2026 del sector de la marca")
-        mostrar_tablas([tabla_sector("Empresas que figuran en 2026 en el sector de la marca.")])
+    else:
+        # La marca sí aparece: se muestran lado a lado la tabla de su sector
+        # (con la marca resaltada si figura en 2026) y el Top 10 general.
+        tablas = []
+        if en_sectores_2026:
+            sec_2026, _, nombre_sec = datos_sec[2026]
+            df_sec_2026 = parse_sector_ranking(files["merco_sectores_2026"]).get(sec_2026)
+            if df_sec_2026 is not None:
+                tablas.append(tabla_sector(sec_2026, df_sec_2026, "La marca aparece resaltada.",
+                                           nombre_destacar=nombre_sec))
+                tablas[-1]["informe"] = False
+        elif sector_sugerido:
+            # Si hubo data en años anteriores, la tarjeta de Merco Sectores ya
+            # dijo que no figura en 2026; si no, se agrega esa tarjeta.
+            if not datos_sec:
+                mostrar_tarjeta(
+                    "MERCO SECTORES",
+                    f"En el ranking **Merco Sectores 2026**, la empresa **{nombre_marca}** no figura en el ranking. "
+                    f"A continuación se presenta el ranking del sector **{sector_sugerido[0]}**, al que pertenece la marca."
+                )
+            tablas.append(tabla_sector(*sector_sugerido, "Empresas que figuran en 2026 en el sector de la marca."))
+        top = tabla_top10()
+        if top:
+            tablas.append(top)
+        if tablas:
+            st.markdown("---")
+            st.subheader("🧭 Merco Sectores 2026 y ranking general")
+            mostrar_tablas(tablas)
 
     if informe_bloques:
         intro = INTRO_TEXT.strip()
