@@ -788,6 +788,13 @@ if company_name_input:
 
     nombre_marca = formato_empresa(nombre_empresa or _base_input)
 
+    def formato_miles(v):
+        """Puntuación con punto de mil y sin decimales: 10000 -> 10.000."""
+        try:
+            return f"{round(float(str(v).replace(',', '.'))):,}".replace(",", ".")
+        except (TypeError, ValueError):
+            return v
+
     def tabla_sector(nota):
         nombre_sector, df_sec = sector_sugerido
         filas = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa))
@@ -810,7 +817,7 @@ if company_name_input:
             df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
             if df_empresas_2026 is not None and all(c in df_empresas_2026.columns for c in ['posicion', 'empresa', 'puntuacion']):
                 top_10 = df_empresas_2026.head(10)
-                filas_top = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa), f.puntuacion)
+                filas_top = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa), formato_miles(f.puntuacion))
                              for f in top_10.itertuples(index=False)]
                 tablas.append(dict(titulo="Top 10 · Merco Empresas 2026", columnas=["Posición", "Empresa", "Puntuación"],
                                    filas=filas_top, nota="Referencia del ranking general."))
