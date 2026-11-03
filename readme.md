@@ -27,10 +27,10 @@ La aplicación no solo recupera datos, sino que los presenta en un formato narra
 
 *   **Redacción Variada:** Utiliza diferentes frases de apertura para evitar la monotonía en los informes.
 *   **Análisis Comparativo Automático a Tres Años, sin juicios de valor:** El informe presenta las posiciones 2024 → 2025 → 2026 y los cambios solo en cifras (`subió 6 puestos frente a 2025`, `se mantuvo en el mismo puesto`), sin calificativos. Contempla todos los casos: si la empresa no tuvo datos en 2025 compara 2024 con 2026, si no apareció en 2026 lo indica con su historial, si no figuró en 2025 ni en 2024 lo señala, y si no estuvo en 2024 también lo dice.
-*   **Informe Completo para Copiar:** Al final de los resultados, un botón grande y visible copia el informe completo (introducción, resultados y cierre, en texto plano); debajo queda el mismo texto en un bloque como respaldo.
-*   **Clientes Frecuentes:** Un selector con los ~56 clientes habituales del usuario (`data/clientes_merco.txt`) ejecuta el informe con un clic; cada cliente tiene su sector asignado, así que aunque no aparezca en Merco se muestra la tabla 2026 de su sector. Las variantes ", Competencia(s)" buscan por el nombre base.
-*   **Sector Probable Inteligente:** Si la empresa no tiene datos en el ranking sectorial (o no aparece en ningún ranking), la app infiere su sector por el nombre (ej. una universidad → Educación-Universidades, una clínica → Salud, un banco → Financiero) y muestra la tabla 2026 de ese sector: junto al Top 10 general cuando no hay ningún dato, o como sección propia cuando sí hay resultados en otros rankings.
-*   **Interfaz Moderna:** Tema claro, resultados en tarjetas por ranking y tipografía amplia y legible.
+*   **Informe Completo para Copiar:** Al final de los resultados, un botón grande y visible copia el informe completo (introducción, resultados, tablas y cierre); debajo queda el mismo texto plano en un bloque como respaldo.
+*   **Clientes Frecuentes:** Un selector con los clientes habituales (lista en [`data/clientes_merco.csv`](data/clientes_merco.csv)) ejecuta el informe con un clic. Las variantes ", Competencia(s)" buscan por el nombre base.
+*   **Merco Sectores 2026 cuando la marca no sale:** Si la marca no figura en Merco Sectores 2026, la app muestra (y agrega al informe) la tabla 2026 de su sector: una universidad ve el ranking de **EDUCACIÓN-UNIVERSIDADES**, una EPS el de **SALUD**, una aseguradora el de **ASEGURADORAS**, etc. El sector se elige en este orden: 1) el asignado al cliente en `data/clientes_merco.csv`; 2) el sector en el que la marca figuró en 2025 o 2024; 3) el inferido por el nombre (universidad, clínica, banco, seguros...).
+*   **Texto y tablas copiables, sin fondo:** Las tarjetas, chips y tablas no tienen fondo y todo el texto se puede seleccionar. Las tablas son HTML (no una grilla), así que se copian con el mouse. El botón "Copiar el informe completo" copia el informe con negritas y tablas en formato enriquecido transparente (para Word, correo o PowerPoint) y también en texto plano.
 *   **Redacción Adaptativa:** El formato del texto cambia automáticamente si el resultado pertenece al ranking de **Merco Líderes**, enfocándose en la persona y su empresa.
 
 ### Eficiencia y Rendimiento
@@ -47,6 +47,7 @@ El repositorio está organizado de la siguiente manera para un despliegue sencil
 ```
 .
 ├── data/
+│   ├── clientes_merco.csv      # listado de clientes y su sector Merco
 │   ├── merco_empresas_2024.txt
 │   ├── merco_empresas_2025.txt
 │   ├── merco_empresas_2026.txt
@@ -62,6 +63,19 @@ El repositorio está organizado de la siguiente manera para un despliegue sencil
 ├── app.py
 └── requirements.txt
 ```
+
+---
+
+## 👥 Listado de clientes
+
+Los clientes que usa la app están en [`data/clientes_merco.csv`](data/clientes_merco.csv), con dos columnas:
+
+| Columna | Contenido |
+|---|---|
+| `cliente` | Nombre del cliente tal como aparece en el selector (el orden del archivo es el orden del selector). |
+| `sector_merco` | Sector de Merco Sectores 2026 que se muestra cuando la marca no figura en ese ranking. Debe escribirse igual que en Merco (ej. `EDUCACIÓN-UNIVERSIDADES`, `SALUD`, `FINANCIERO`); si contiene comas va entre comillas. |
+
+Para agregar un cliente basta con añadir una fila al CSV (se puede editar en Excel o directamente en GitHub).
 
 ---
 

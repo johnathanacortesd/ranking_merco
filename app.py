@@ -1,6 +1,8 @@
 import streamlit as st
 import streamlit.components.v1 as components
 import pandas as pd
+import csv
+import html
 import json
 import os
 import re
@@ -19,14 +21,25 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 html, body, [class*="css"], .stApp { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; }
-.stApp { background-color: #FAF8F6; }
+.stApp { background-color: #FFFFFF; }
 #MainMenu, footer { visibility: hidden; }
 .block-container { max-width: 920px; padding-top: 2rem; padding-bottom: 3rem; }
-.app-header { background: linear-gradient(135deg, #FFFFFF 0%, #FBF2EA 100%); border: 1px solid #EAE0D2; border-radius: 18px; padding: 28px 32px; margin-bottom: 24px; box-shadow: 0 4px 18px rgba(90, 55, 25, 0.06); }
+/* Todo el contenido se puede seleccionar y copiar; tarjetas, chips y tablas
+   no tienen fondo para que al pegarlos (Word, correo, PowerPoint) salgan
+   transparentes. */
+.stApp, .stApp * { -webkit-user-select: text; user-select: text; }
+.app-header { background: transparent; border: 1px solid #EAE0D2; border-radius: 18px; padding: 28px 32px; margin-bottom: 24px; }
 .app-header h1 { font-size: 29px; font-weight: 800; color: #221C15; margin: 0 0 6px 0; letter-spacing: -0.02em; }
 .app-header p { font-size: 16px; color: #6E6257; margin: 0; line-height: 1.55; }
-.result-card { background: #FFFFFF; border: 1px solid #E9E1D4; border-left: 5px solid #C4562C; border-radius: 14px; padding: 18px 22px; margin: 12px 0 16px 0; box-shadow: 0 2px 10px rgba(90, 55, 25, 0.05); font-size: 16.5px; line-height: 1.6; color: #26221D; }
-.result-card .chip { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #B34A24; background: #F9E9DF; border-radius: 999px; padding: 3px 11px; margin-bottom: 9px; }
+.result-card { background: transparent; border: 1px solid #E9E1D4; border-left: 5px solid #C4562C; border-radius: 14px; padding: 18px 22px; margin: 12px 0 16px 0; font-size: 16.5px; line-height: 1.6; color: #26221D; }
+.result-card .chip { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #B34A24; background: transparent; padding: 0; margin-bottom: 6px; }
+table.tabla-merco { border-collapse: collapse; width: 100%; background: transparent; margin: 6px 0 18px 0; font-size: 15.5px; color: #26221D; }
+table.tabla-merco th, table.tabla-merco td { background: transparent; border: 1px solid #D9CFC0; padding: 7px 12px; text-align: left; }
+table.tabla-merco th { font-weight: 700; }
+table.tabla-merco td.num, table.tabla-merco th.num { text-align: center; width: 90px; }
+table.tabla-merco tr.destacada td { font-weight: 700; }
+.titulo-tabla { font-weight: 700; font-size: 16.5px; margin: 14px 0 2px 0; color: #221C15; }
+.nota-tabla { font-size: 14px; color: #6E6257; margin: 0 0 6px 0; }
 div[data-testid="stTextInput"] input { border-radius: 12px; border: 1.5px solid #DCD1BF; background: #FFFFFF; padding: 12px 16px; font-size: 17px; color: #26221D !important; caret-color: #B34A24; -webkit-text-fill-color: #26221D; }
 div[data-testid="stTextInput"] input::placeholder { color: #A2937F !important; opacity: 1; -webkit-text-fill-color: #A2937F; }
 div[data-testid="stTextInput"] label p { color: #3A342C !important; font-weight: 600; font-size: 16px; }
@@ -214,90 +227,23 @@ OUTRO_TEXT = """
 ---
 ¿Está listo para elevar su estrategia de gestión de la reputación al próximo nivel? Esto es solo el principio, ya que en GlobalNews Group ofrecemos una variedad de herramientas avanzadas para fortalecer su capacidad de monitoreo de noticias, ya sea en medios tradicionales o en plataformas de redes sociales. ¡Descubra cómo podemos ayudarle a medir, gestionar y mejorar su reputación empresarial de manera efectiva y precisa!
 """
-# --- Clientes frecuentes (lista del usuario en data/clientes_merco.txt) ---
+# --- Clientes (lista del usuario en data/clientes_merco.csv) ---
+# Cada fila: cliente, sector_merco. El sector es el de Merco Sectores 2026 que
+# se muestra cuando la marca no figura en ese ranking. El selector conserva
+# el orden exacto del archivo (sin reordenar).
 CLIENTES_FRECUENTES = []
-_clientes_path = os.path.join("data", "clientes_merco.txt")
+CLIENTE_SECTORES = {}
+_clientes_path = os.path.join("data", "clientes_merco.csv")
 if os.path.exists(_clientes_path):
-    with open(_clientes_path, encoding="utf-8") as _f:
-        CLIENTES_FRECUENTES = [l.strip() for l in _f if l.strip()]
-# El selector conserva el orden exacto del archivo del usuario (sin reordenar).
-
-# Sector de cada cliente frecuente, para mostrar su tabla sectorial aunque
-# el cliente no aparezca en los rankings.
-CLIENTE_SECTORES = {
-    "Alcaldía de Cartagena": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Carnaval de Barranquilla": "ENTRETENIMIENTO",
-    "Colpensiones": "FONDOS DE PENSIONES Y CESANTÍAS",
-    "Corferias": "ENTRETENIMIENTO",
-    "Financiera de Desarrollo Territorial": "FINANCIERO",
-    "Universidad de la Salle": "EDUCACIÓN-UNIVERSIDADES",
-    "Universidad Pontificia Bolivariana": "EDUCACIÓN-UNIVERSIDADES",
-    "Universidad Santo Tomás": "EDUCACIÓN-UNIVERSIDADES",
-    "Agencia Nacional de Seguridad Vial": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Banco de Crédito de Perú": "FINANCIERO",
-    "Federación Colombiana de Fútbol": "ENTRETENIMIENTO",
-    "Instituto Nacional de Cancerología": "SALUD",
-    "Seguros Mundial": "ASEGURADORAS",
-    "Universidad EIA": "EDUCACIÓN-UNIVERSIDADES",
-    "Universidad Nacional Abierta y a Distancia": "EDUCACIÓN-UNIVERSIDADES",
-    "Armada Nacional de Colombia": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Deloitte": "AUDITORÍA Y CONSULTORÍA",
-    "División Mayor del Fútbol Colombiano": "ENTRETENIMIENTO",
-    "Editorial Planeta": "MEDIOS DE COMUNICACIÓN",
-    "Gobernación de Sucre": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Organización Internacional para las Migraciones": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Triple A": "ENERGÍA, GAS Y AGUA",
-    "Universidad Jorge Tadeo Lozano": "EDUCACIÓN-UNIVERSIDADES",
-    "Alcaldía de Barranquilla": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Cusezar": "CONSTRUCCIÓN E INFRAESTRUCTURA",
-    "On Vacation": "ENTRETENIMIENTO",
-    "Penguin Random House": "MEDIOS DE COMUNICACIÓN",
-    "Positiva Compañía de Seguros": "ASEGURADORAS",
-    "Procolombia": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Universidad de Antioquia": "EDUCACIÓN-UNIVERSIDADES",
-    "Consejo Superior de la Judicatura": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Coosalud": "SALUD",
-    "Fundación Cardio Infantil": "SALUD",
-    "Genus PLC": "AGROINDUSTRIAL",
-    "Nueva EPS": "SALUD",
-    "Petrobras": "PETROLERAS Y DISTRIBUCIÓN DE HIDROCARBUROS",
-    "Universidad Minuto de Dios": "EDUCACIÓN-UNIVERSIDADES",
-    "Yawa": "ENTRETENIMIENTO",
-    "Asociación Bancaria y de Entidades Financieras de Colombia": "FINANCIERO",
-    "Constructora Jaramillo Mora": "CONSTRUCCIÓN E INFRAESTRUCTURA",
-    "Defensoría del Pueblo": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Federación Colombiana de Golf": "ENTRETENIMIENTO",
-    "Savia Salud EPS": "SALUD",
-    "Tecnoquímicas S.A": "FARMACÉUTICO",
-    "Unidad para la Atención y Reparación Integral a las Víctimas": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Unión Europea": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Agrosavia": "AGROINDUSTRIAL",
-    "Alcaldía de Santa Marta": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Asociación Colombiana de Agencias de Viajes y Turismo": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Ban100": "FINANCIERO",
-    "Federación Colombiana de Municipios": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Sanofi": "FARMACÉUTICO",
-    "Secretaría General de la Alcaldía de Bogotá": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "Tigo": "TELECOMUNICACIONES",
-    "FUNDACIÓN PARA EL FUTURO DE COLOMBIA": "EDUCACIÓN-UNIVERSIDADES",
-    "COTELCO": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "WWF COLOMBIA": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "REGISTRADURÍA NACIONAL DEL ESTADO CIVIL": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "UNIVERSIDAD AUTÓNOMA DE OCCIDENTE": "EDUCACIÓN-UNIVERSIDADES",
-    "UNIVERSIDAD DE LA COSTA": "EDUCACIÓN-UNIVERSIDADES",
-    "AGENCIA NACIONAL DE CONTRATACIÓN PÚBLICA": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "HOLCIM COLOMBIA": "CEMENTERAS",
-    "UNIDAD NACIONAL PARA LA GESTIÓN DE RIESGOS Y DESASTRES": "ASOCIACIONES, CORPORACIONES, FUNDACIONES",
-    "COMFENALCO VALLE": "CAJAS DE COMPENSACIÓN",
-    "FUNDACIÓN SANTA FE DE BOGOTÁ": "SALUD",
-    "NISSAN": "AUTOMOTRIZ",
-    "CHANGAN - DEEPAL": "AUTOMOTRIZ",
-    "SIEMENS HEALTHINEERS": "SALUD",
-    "FEDERACIÓN NACIONAL DE AVICULTORES DE COLOMBIA": "AGROINDUSTRIAL",
-    "UNIVERSIDAD SIMÓN BOLÍVAR": "EDUCACIÓN-UNIVERSIDADES",
-    "UNIVERSIDAD TECNOLÓGICA DE BOLÍVAR": "EDUCACIÓN-UNIVERSIDADES",
-    "DROPI": "COMERCIO ELECTRÓNICO Y DISTRIBUCIÓN",
-}
+    with open(_clientes_path, encoding="utf-8-sig", newline="") as _f:
+        for _row in csv.DictReader(_f):
+            _cli = (_row.get("cliente") or "").strip()
+            if not _cli:
+                continue
+            CLIENTES_FRECUENTES.append(_cli)
+            _sec = (_row.get("sector_merco") or "").strip()
+            if _sec:
+                CLIENTE_SECTORES[_cli] = _sec
 # Lookup por nombre normalizado: el mapa manda sin importar mayúsculas/tildes.
 _CLIENTE_SECTORES_NORM = {}
 for _k, _v in CLIENTE_SECTORES.items():
@@ -378,38 +324,93 @@ if company_name_input:
     found_any = False
     nombre_empresa = None
 
-    textos_informe = []
+    # Cada bloque del informe guarda su versión en texto plano (para pegar
+    # sin formato) y en HTML sin fondo (para pegar con negritas y tablas).
+    informe_bloques = []
+
+    def _md_a_html(texto_md):
+        t = html.escape(texto_md, quote=False)
+        t = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', t)
+        return re.sub(r'\*(.+?)\*', r'<em>\1</em>', t)
+
+    def _md_a_plano(texto_md):
+        return texto_md.replace("**", "").replace("*", "")
+
+    def agregar_al_informe(texto_md):
+        informe_bloques.append((_md_a_plano(texto_md), f"<p>{_md_a_html(texto_md)}</p>"))
 
     def mostrar_tarjeta(etiqueta, texto_md):
-        """Muestra el resultado en una tarjeta y lo acumula para el informe completo."""
-        textos_informe.append(texto_md)
-        html_txt = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', texto_md)
-        html_txt = re.sub(r'\*(.+?)\*', r'<em>\1</em>', html_txt)
-        st.markdown(f'<div class="result-card"><span class="chip">{etiqueta}</span><br>{html_txt}</div>', unsafe_allow_html=True)
+        """Muestra el resultado en una tarjeta (sin fondo) y lo acumula para el informe."""
+        agregar_al_informe(texto_md)
+        st.markdown(f'<div class="result-card"><span class="chip">{etiqueta}</span><br>{_md_a_html(texto_md)}</div>',
+                    unsafe_allow_html=True)
 
-    def boton_copiar(texto):
-        """Botón grande y visible que copia el texto al portapapeles."""
-        payload = json.dumps(texto)
+    # Estilos en línea: al copiar y pegar la tabla conserva bordes y negritas,
+    # pero sin color de fondo.
+    _TD = "border:1px solid #D9CFC0; padding:6px 12px; background:transparent; text-align:left;"
+    _TD_NUM = "border:1px solid #D9CFC0; padding:6px 12px; background:transparent; text-align:center;"
+
+    def tabla_html(columnas, filas, destacar=None):
+        """Tabla HTML transparente; `destacar` es el índice de una fila a resaltar."""
+        cab = "".join(
+            f'<th class="{"num" if i == 0 else ""}" style="{_TD_NUM if i == 0 else _TD} font-weight:700;">{html.escape(str(c))}</th>'
+            for i, c in enumerate(columnas))
+        cuerpo = []
+        for r, fila in enumerate(filas):
+            peso = " font-weight:700;" if r == destacar else ""
+            celdas = "".join(
+                f'<td class="{"num" if i == 0 else ""}" style="{_TD_NUM if i == 0 else _TD}{peso}">{html.escape(str(v))}</td>'
+                for i, v in enumerate(fila))
+            cuerpo.append(f'<tr class="{"destacada" if r == destacar else ""}">{celdas}</tr>')
+        return ('<table class="tabla-merco" style="border-collapse:collapse; background:transparent;">'
+                f'<thead><tr>{cab}</tr></thead><tbody>{"".join(cuerpo)}</tbody></table>')
+
+    def mostrar_tabla(titulo, columnas, filas, nota=None, destacar=None):
+        """Muestra una tabla copiable y transparente y la agrega al informe."""
+        t_html = tabla_html(columnas, filas, destacar)
+        nota_html = f'<p class="nota-tabla">{html.escape(nota)}</p>' if nota else ""
+        st.markdown(f'<p class="titulo-tabla">{html.escape(titulo)}</p>{nota_html}{t_html}',
+                    unsafe_allow_html=True)
+        plano = "\n".join(["\t".join(map(str, columnas))] + ["\t".join(map(str, f)) for f in filas])
+        informe_bloques.append((f"{titulo}:\n{plano}", f"<p><strong>{html.escape(titulo)}</strong></p>{t_html}"))
+
+    def boton_copiar(texto, texto_html):
+        """Botón que copia el informe con formato (HTML sin fondo) y en texto plano."""
         components.html(
             """
-            <button id="btnCopiarInforme" style="width:100%; background:#C4562C; color:#FFFFFF; border:none; border-radius:12px; padding:14px 22px; font-family:Inter, system-ui, sans-serif; font-size:17px; font-weight:700; cursor:pointer; box-shadow:0 3px 10px rgba(90,55,25,.25);">&#128203; Copiar el informe completo</button>
+            <button id="btnCopiarInforme" style="width:100%; background:#C4562C; color:#FFFFFF; border:none; border-radius:12px; padding:14px 22px; font-family:Inter, system-ui, sans-serif; font-size:17px; font-weight:700; cursor:pointer;">&#128203; Copiar el informe completo</button>
             <script>
             const TEXTO_INFORME = __PAYLOAD__;
+            const HTML_INFORME = __PAYLOAD_HTML__;
             const btn = document.getElementById('btnCopiarInforme');
+            function copiaRespaldo() {
+              const div = document.createElement('div');
+              div.contentEditable = 'true';
+              div.innerHTML = HTML_INFORME;
+              div.style.position = 'fixed'; div.style.left = '-9999px'; div.style.background = 'transparent';
+              document.body.appendChild(div);
+              const rango = document.createRange(); rango.selectNodeContents(div);
+              const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rango);
+              const ok = document.execCommand('copy');
+              sel.removeAllRanges(); document.body.removeChild(div);
+              return ok;
+            }
             btn.addEventListener('click', async () => {
-              try { await navigator.clipboard.writeText(TEXTO_INFORME); }
-              catch (e) {
-                const ta = document.createElement('textarea');
-                ta.value = TEXTO_INFORME;
-                ta.style.position = 'fixed'; ta.style.opacity = '0';
-                document.body.appendChild(ta); ta.select();
-                document.execCommand('copy'); document.body.removeChild(ta);
+              try {
+                await navigator.clipboard.write([new ClipboardItem({
+                  'text/html': new Blob([HTML_INFORME], {type: 'text/html'}),
+                  'text/plain': new Blob([TEXTO_INFORME], {type: 'text/plain'})
+                })]);
+              } catch (e) {
+                if (!copiaRespaldo()) {
+                  try { await navigator.clipboard.writeText(TEXTO_INFORME); } catch (e2) {}
+                }
               }
-              btn.textContent = '\u2705 \u00a1Copiado! Ya puedes pegarlo donde lo necesites';
-              setTimeout(() => { btn.textContent = '📋 Copiar el informe completo'; }, 3000);
+              btn.textContent = '✅ ¡Copiado! Ya puedes pegarlo donde lo necesites';
+              setTimeout(() => { btn.innerHTML = '&#128203; Copiar el informe completo'; }, 3000);
             });
             </script>
-            """.replace("__PAYLOAD__", payload),
+            """.replace("__PAYLOAD_HTML__", json.dumps(texto_html)).replace("__PAYLOAD__", json.dumps(texto)),
             height=62
         )
 
@@ -567,21 +568,22 @@ if company_name_input:
                      + historial(pos))
         mostrar_tarjeta(rank_name.upper(), texto)
 
-    sector_mostrado = False
+    # La marca figura en Merco Sectores 2026: no hace falta la tabla del sector.
+    en_sectores_2026 = False
+    datos_sec = {}
     if all(f"merco_sectores_{y}" in files for y in YEARS):
-        datos_sec = {}
         for year in YEARS:
             sectores = parse_sector_ranking(files[f"merco_sectores_{year}"])
             sector, pos, nombre = find_company_in_sectors_robust(sectores, normalized_input)
             if pos: datos_sec[year] = (sector, pos, nombre)
         if datos_sec:
             found_any = True
-            sector_mostrado = True
             pos = {y: (datos_sec[y][1] if y in datos_sec else None) for y in YEARS}
             anio_ref = next(y for y in YEARS if y in datos_sec)
             sector_ref, _, nombre = datos_sec[anio_ref]
             nombre = formato_empresa(nombre)
             if pos[2026]:
+                en_sectores_2026 = True
                 texto = (f"En el ranking **Merco Sectores 2026**, la empresa **{nombre}** ocupa la posición **{pos[2026]}** "
                          f"dentro del sector **{sector_ref}**.") + historial(pos)
                 notas = [f"En {anio} figuró en el sector **{datos_sec[anio][0]}**."
@@ -632,92 +634,80 @@ if company_name_input:
             if clave in t: return sector
         return None
 
-    def mostrar_tabla_sector(nombre_sector, df_sec, nota):
-        st.markdown(f"**Merco Sectores 2026 · {nombre_sector}**")
-        st.caption(nota)
-        tabla = df_sec[['posicion', 'empresa']].rename(columns={'posicion': 'Posición', 'empresa': 'Empresa'})
-        tabla['Empresa'] = tabla['Empresa'].apply(formato_empresa)
-        st.dataframe(tabla, use_container_width=True, hide_index=True)
-
+    # --- Merco Sectores 2026 del sector de la marca cuando la marca no sale ---
+    # Prioridad: 1) sector asignado al cliente en data/clientes_merco.csv;
+    # 2) sector en el que la marca figuró en años anteriores; 3) sector
+    # inferido por palabras del nombre (universidad, clínica, banco...).
     sector_sugerido = None
-    if not sector_mostrado and "merco_sectores_2026" in files:
-        sec_prob = None
-        if cliente_actual and normalize_text(cliente_actual) in _CLIENTE_SECTORES_NORM:
-            sec_prob = _CLIENTE_SECTORES_NORM[normalize_text(cliente_actual)]
-        if not sec_prob:
-            sec_prob = sector_probable(nombre_empresa or company_name_input)
-        if sec_prob:
-            sectores_2026 = parse_sector_ranking(files["merco_sectores_2026"])
-            if sec_prob in sectores_2026:
-                sector_sugerido = (sec_prob, sectores_2026[sec_prob])
+    if not en_sectores_2026 and "merco_sectores_2026" in files:
+        sectores_2026 = parse_sector_ranking(files["merco_sectores_2026"])
+        candidatos = []
+        for _clave in (cliente_actual, _base_input, company_name_input):
+            if _clave:
+                candidatos.append(_CLIENTE_SECTORES_NORM.get(normalize_text(_clave)))
+        candidatos += [datos_sec[y][0] for y in YEARS if y in datos_sec]
+        candidatos += [sector_probable(nombre_empresa), sector_probable(_base_input)]
+        sec_norm = {normalize_text(k): k for k in sectores_2026}
+        for cand in candidatos:
+            if cand and normalize_text(cand) in sec_norm:
+                _sec = sec_norm[normalize_text(cand)]
+                sector_sugerido = (_sec, sectores_2026[_sec])
+                break
+
+    nombre_marca = formato_empresa(nombre_empresa or _base_input)
+
+    def mostrar_tabla_sector(nota):
+        nombre_sector, df_sec = sector_sugerido
+        filas = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa))
+                 for f in df_sec.itertuples(index=False)]
+        mostrar_tabla(f"Merco Sectores 2026 · {nombre_sector}", ["Posición", "Empresa"], filas, nota=nota)
 
     if not found_any:
         st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco de 2024, 2025 o 2026.")
-        top_10 = None
+        agregar_al_informe(
+            f"**{nombre_marca}** no aparece en los rankings Merco Empresas, Talento, Líderes y Sectores "
+            "de las ediciones 2024, 2025 y 2026."
+            + (f" A continuación se presenta el ranking **Merco Sectores 2026** del sector "
+               f"**{sector_sugerido[0]}**, al que pertenece la marca." if sector_sugerido else "")
+        )
+        if sector_sugerido:
+            mostrar_tabla_sector("Empresas que figuran en 2026 en el sector de la marca.")
         if "merco_empresas_2026" in files:
             df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
             if df_empresas_2026 is not None and all(c in df_empresas_2026.columns for c in ['posicion', 'empresa', 'puntuacion']):
-                top_10 = df_empresas_2026.head(10)[['posicion', 'empresa', 'puntuacion']].copy()
-                top_10['empresa'] = top_10['empresa'].apply(formato_empresa)
-        if "merco_empresas_2026" in files:
-            if sector_sugerido and top_10 is not None:
-                col_top, col_sector = st.columns(2)
-                with col_top:
-                    st.markdown("**Top 10 · Merco Empresas 2026**")
-                    st.caption("Referencia del ranking general.")
-                    st.dataframe(top_10, use_container_width=True, hide_index=True)
-                with col_sector:
-                    mostrar_tabla_sector(
-                        sector_sugerido[0], sector_sugerido[1],
-                        "La empresa buscada no figura en los rankings; por su nombre, este es su sector probable y las empresas que sí aparecen en él en 2026."
-                    )
-            elif top_10 is not None:
-                st.info("A continuación, se muestra el Top 10 del ranking general 'Merco Empresas 2026' como referencia.")
-                st.dataframe(top_10, use_container_width=True, hide_index=True)
-        # El informe para copiar tiene la MISMA estructura que cuando la empresa
-        # sí aparece (intro + contenido + outro); el contenido son las tablas.
-        cuerpo_no = [
-            f"{_base_input} no aparece en los rankings Merco Empresas, Talento, Líderes y Sectores de las ediciones 2024, 2025 y 2026."
-        ]
-        if sector_sugerido:
-            filas_sec = "\n".join(
-                f"{f.posicion}\t{formato_empresa(f.empresa)}" for f in sector_sugerido[1].itertuples(index=False)
-            )
-            cuerpo_no.append(f"Tabla del sector {sector_sugerido[0]} · Merco Sectores 2026:\nPosición\tEmpresa\n{filas_sec}")
-        if top_10 is not None:
-            filas_top = "\n".join(
-                f"{f.posicion}\t{f.empresa}\t{f.puntuacion}" for f in top_10.itertuples(index=False)
-            )
-            cuerpo_no.append(f"Top 10 · Merco Empresas 2026:\nPosición\tEmpresa\tPuntuación\n{filas_top}")
-        informe_no_encontrado = (
-            INTRO_TEXT.strip()
-            + "\n\n" + "\n\n".join(cuerpo_no)
-            + "\n\n" + OUTRO_TEXT.replace("---", "").strip()
-        )
-        st.markdown("---")
-        boton_copiar(informe_no_encontrado)
-        st.subheader("📋 Informe completo para copiar")
-        st.caption("El bloque reúne la introducción, el aviso con las tablas y el texto de cierre, en texto plano y sin formato. También puedes copiarlo con el ícono en la esquina superior derecha del bloque.")
-        st.code(informe_no_encontrado, language=None)
+                top_10 = df_empresas_2026.head(10)
+                filas_top = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa), f.puntuacion)
+                             for f in top_10.itertuples(index=False)]
+                mostrar_tabla("Top 10 · Merco Empresas 2026", ["Posición", "Empresa", "Puntuación"], filas_top,
+                              nota="Referencia del ranking general.")
     elif sector_sugerido:
+        # Si hubo data en años anteriores, la tarjeta de Merco Sectores ya
+        # dijo que no figura en 2026; si no, se agrega esa tarjeta.
+        if not datos_sec:
+            mostrar_tarjeta(
+                "MERCO SECTORES",
+                f"En el ranking **Merco Sectores 2026**, la empresa **{nombre_marca}** no figura en el ranking. "
+                f"A continuación se presenta el ranking del sector **{sector_sugerido[0]}**, al que pertenece la marca."
+            )
         st.markdown("---")
-        st.subheader("🧭 Sector probable de la empresa")
-        mostrar_tabla_sector(
-            sector_sugerido[0], sector_sugerido[1],
-            "La empresa no figura en el ranking sectorial 2026; por su nombre, este es su sector probable y las empresas que sí aparecen en él."
-        )
+        st.subheader("🧭 Merco Sectores 2026 del sector de la marca")
+        mostrar_tabla_sector("Empresas que figuran en 2026 en el sector de la marca.")
 
-    if textos_informe:
-        informe_completo = (
-            INTRO_TEXT.strip()
-            + "\n\n" + "\n\n".join(t.replace("**", "").replace("*", "") for t in textos_informe)
-            + "\n\n" + OUTRO_TEXT.replace("---", "").strip()
+    if informe_bloques:
+        intro = INTRO_TEXT.strip()
+        outro = OUTRO_TEXT.replace("---", "").strip()
+        informe_completo = intro + "\n\n" + "\n\n".join(t for t, _ in informe_bloques) + "\n\n" + outro
+        _p = lambda t: "".join(f"<p>{html.escape(x.strip())}</p>" for x in t.split("\n\n") if x.strip())
+        informe_html = (
+            '<div style="background:transparent; font-family:Arial, sans-serif; font-size:11pt; color:#000000;">'
+            + _p(intro) + "".join(h for _, h in informe_bloques) + _p(outro) + "</div>"
         )
         st.markdown("---")
-        boton_copiar(informe_completo)
+        boton_copiar(informe_completo, informe_html)
         st.subheader("📋 Informe completo para copiar")
-        st.caption("El bloque reúne la introducción, los resultados y el texto de cierre, en texto plano y sin formato. También puedes copiarlo con el ícono en la esquina superior derecha del bloque.")
-        st.code(informe_completo, language=None)
+        st.caption("El botón copia el informe con negritas y tablas, sin fondo, listo para pegar en Word, correo o PowerPoint. "
+                   "El bloque de abajo es la versión en texto plano (cópiala con el ícono de su esquina superior derecha).")
+        st.code(informe_completo, language=None, wrap_lines=True)
 
     st.markdown(OUTRO_TEXT)
 else:
