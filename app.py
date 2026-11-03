@@ -877,15 +877,13 @@ if company_name_input:
             if df_sec_2026 is not None:
                 tablas.append(tabla_sector(sec_2026, df_sec_2026, "La marca aparece resaltada.",
                                            nombre_destacar=nombre_sec))
-                tablas[-1]["informe"] = False
         elif sector_sugerido:
             # Si hubo data en años anteriores, la tarjeta de Merco Sectores ya
             # dijo que no figura en 2026; si no, se agrega esa tarjeta.
             if not datos_sec:
                 mostrar_tarjeta(
                     "MERCO SECTORES",
-                    f"En el ranking **Merco Sectores 2026**, la empresa **{nombre_marca}** no figura en el ranking. "
-                    f"A continuación se presenta el ranking del sector **{sector_sugerido[0]}**, al que pertenece la marca."
+                    f"En el ranking **Merco Sectores 2026**, la empresa **{nombre_marca}** no figura en el ranking."
                 )
             tablas.append(tabla_sector(*sector_sugerido, "Empresas que figuran en 2026 en el sector de la marca."))
         top = tabla_top10()
@@ -905,7 +903,9 @@ if company_name_input:
         if tablas:
             st.markdown("---")
             st.subheader("🧭 Merco Sectores 2026 y ranking general")
-            mostrar_tablas(tablas)
+            # Las tablas se ven en pantalla y se copian como imagen; el
+            # informe de texto solo lleva los párrafos.
+            mostrar_tablas(tablas, al_informe=False)
 
     if informe_bloques:
         intro = INTRO_TEXT.strip()
@@ -919,7 +919,7 @@ if company_name_input:
         st.markdown("---")
         boton_copiar(informe_completo, informe_html)
         st.subheader("📋 Informe completo para copiar")
-        st.caption("El botón copia el informe con negritas y tablas, sin fondo, listo para pegar en Word, correo o PowerPoint. "
+        st.caption("El botón copia el informe con negritas, sin fondo, listo para pegar en Word, correo o PowerPoint (las tablas se copian aparte con sus botones de imagen). "
                    "El bloque de abajo es la versión en texto plano (cópiala con el ícono de su esquina superior derecha).")
         st.code(informe_completo, language=None, wrap_lines=True)
 
