@@ -34,12 +34,12 @@ html, body, [class*="css"], .stApp { font-family: 'Inter', system-ui, -apple-sys
 .result-card { background: transparent; border: 1px solid #E9E1D4; border-left: 5px solid #C4562C; border-radius: 14px; padding: 18px 22px; margin: 12px 0 16px 0; font-size: 16.5px; line-height: 1.6; color: #26221D; }
 .result-card .chip { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #B34A24; background: transparent; padding: 0; margin-bottom: 6px; }
 table.tabla-merco { border-collapse: collapse; width: 100%; background: transparent; margin: 6px 0 18px 0; font-size: 15.5px; color: #26221D; }
-table.tabla-merco th, table.tabla-merco td { background: transparent; border: 1px solid #D9CFC0; padding: 7px 12px; text-align: left; }
-table.tabla-merco th { font-weight: 700; }
-table.tabla-merco td.num, table.tabla-merco th.num { text-align: center; width: 90px; }
-table.tabla-merco tr.destacada td { font-weight: 700; }
+table.tabla-merco th:first-child { width: 96px; }
 .titulo-tabla { font-weight: 700; font-size: 16.5px; margin: 14px 0 2px 0; color: #221C15; }
-.nota-tabla { font-size: 14px; color: #6E6257; margin: 0 0 6px 0; }
+.nota-tabla { font-size: 14px; color: #6E6257; margin: 0 0 6px 0; min-height: 2.6em; }
+.grid-tablas { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; margin-top: 6px; }
+.grid-tablas > .col-tabla { flex: 1 1 360px; min-width: 0; }
+.grid-tablas > .col-tabla:only-child .nota-tabla { min-height: 0; }
 div[data-testid="stTextInput"] input { border-radius: 12px; border: 1.5px solid #DCD1BF; background: #FFFFFF; padding: 12px 16px; font-size: 17px; color: #26221D !important; caret-color: #B34A24; -webkit-text-fill-color: #26221D; }
 div[data-testid="stTextInput"] input::placeholder { color: #A2937F !important; opacity: 1; -webkit-text-fill-color: #A2937F; }
 div[data-testid="stTextInput"] label p { color: #3A342C !important; font-weight: 600; font-size: 16px; }
@@ -346,33 +346,165 @@ if company_name_input:
                     unsafe_allow_html=True)
 
     # Estilos en línea: al copiar y pegar la tabla conserva bordes y negritas,
-    # pero sin color de fondo.
-    _TD = "border:1px solid #D9CFC0; padding:6px 12px; background:transparent; text-align:left;"
-    _TD_NUM = "border:1px solid #D9CFC0; padding:6px 12px; background:transparent; text-align:center;"
+    # pero sin color de fondo. Mismo estilo que la imagen PNG de las tablas.
+    _BORDE = "border:1px solid #E3D9CA; padding:7px 12px; background:transparent;"
+    _CAB = ("border:1px solid #E3D9CA; border-bottom:2px solid #C4562C; padding:8px 12px; background:transparent;"
+            " color:#6E6257; font-size:12.5px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase;")
+
+    def _es_numero(v):
+        return bool(re.fullmatch(r"-?[0-9.,]+", str(v).strip()))
 
     def tabla_html(columnas, filas, destacar=None):
-        """Tabla HTML transparente; `destacar` es el índice de una fila a resaltar."""
-        cab = "".join(
-            f'<th class="{"num" if i == 0 else ""}" style="{_TD_NUM if i == 0 else _TD} font-weight:700;">{html.escape(str(c))}</th>'
-            for i, c in enumerate(columnas))
+        """Tabla HTML transparente; `destacar` es el índice de una fila a resaltar.
+        La posición va centrada y las columnas numéricas a la derecha."""
+        alin = ["center" if i == 0 else ("right" if filas and all(_es_numero(f[i]) for f in filas) else "left")
+                for i in range(len(columnas))]
+        cab = "".join(f'<th style="{_CAB} text-align:{alin[i]};">{html.escape(str(c))}</th>'
+                      for i, c in enumerate(columnas))
         cuerpo = []
         for r, fila in enumerate(filas):
-            peso = " font-weight:700;" if r == destacar else ""
             celdas = "".join(
-                f'<td class="{"num" if i == 0 else ""}" style="{_TD_NUM if i == 0 else _TD}{peso}">{html.escape(str(v))}</td>'
+                f'<td style="{_BORDE} text-align:{alin[i]};'
+                f'{" font-weight:600;" if i == 0 or r == destacar else ""}">{html.escape(str(v))}</td>'
                 for i, v in enumerate(fila))
-            cuerpo.append(f'<tr class="{"destacada" if r == destacar else ""}">{celdas}</tr>')
+            cuerpo.append(f"<tr>{celdas}</tr>")
         return ('<table class="tabla-merco" style="border-collapse:collapse; background:transparent;">'
                 f'<thead><tr>{cab}</tr></thead><tbody>{"".join(cuerpo)}</tbody></table>')
 
-    def mostrar_tabla(titulo, columnas, filas, nota=None, destacar=None):
-        """Muestra una tabla copiable y transparente y la agrega al informe."""
-        t_html = tabla_html(columnas, filas, destacar)
-        nota_html = f'<p class="nota-tabla">{html.escape(nota)}</p>' if nota else ""
-        st.markdown(f'<p class="titulo-tabla">{html.escape(titulo)}</p>{nota_html}{t_html}',
-                    unsafe_allow_html=True)
-        plano = "\n".join(["\t".join(map(str, columnas))] + ["\t".join(map(str, f)) for f in filas])
-        informe_bloques.append((f"{titulo}:\n{plano}", f"<p><strong>{html.escape(titulo)}</strong></p>{t_html}"))
+    def mostrar_tablas(tablas):
+        """Muestra una o varias tablas una al lado de otra (copiables y sin
+        fondo), las agrega al informe y ofrece copiarlas como imagen PNG
+        transparente. Cada tabla: dict(titulo, columnas, filas, nota)."""
+        if not tablas:
+            return
+        bloques, celdas_word = [], []
+        for t in tablas:
+            t_html = tabla_html(t["columnas"], t["filas"])
+            nota_html = f'<p class="nota-tabla">{html.escape(t["nota"])}</p>' if t.get("nota") else ""
+            bloques.append(f'<div class="col-tabla"><p class="titulo-tabla">{html.escape(t["titulo"])}</p>{nota_html}{t_html}</div>')
+            plano = "\n".join(["\t".join(map(str, t["columnas"]))] + ["\t".join(map(str, f)) for f in t["filas"]])
+            informe_bloques.append((f'{t["titulo"]}:\n{plano}', None))
+            celdas_word.append(
+                f'<td style="vertical-align:top; padding:0 14px 0 0; border:none; background:transparent;">'
+                f'<p><strong>{html.escape(t["titulo"])}</strong></p>{t_html}</td>')
+        st.markdown(f'<div class="grid-tablas">{"".join(bloques)}</div>', unsafe_allow_html=True)
+        # En el informe enriquecido las tablas también van lado a lado
+        # (una tabla de maquetación sin bordes ni fondo).
+        informe_bloques.append((None,
+            '<table style="border-collapse:collapse; border:none; background:transparent;"><tr>'
+            + "".join(celdas_word) + "</tr></table>"))
+        boton_imagen_tablas(tablas)
+
+    def boton_imagen_tablas(tablas):
+        """Dibuja las tablas lado a lado en un canvas (fondo transparente, estilo
+        de la app) y las copia al portapapeles como imagen PNG; también permite
+        descargarla."""
+        datos = [{"titulo": t["titulo"], "columnas": [str(c) for c in t["columnas"]],
+                  "filas": [[str(v) for v in f] for f in t["filas"]]} for t in tablas]
+        etiqueta = "Copiar tablas como imagen" if len(tablas) > 1 else "Copiar tabla como imagen"
+        components.html(
+            """
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+            <div style="display:flex; gap:10px; font-family:Inter, system-ui, sans-serif;">
+              <button id="btnImg" style="flex:1; background:transparent; color:#B34A24; border:1.5px solid #C4562C; border-radius:12px; padding:11px 18px; font-family:inherit; font-size:15.5px; font-weight:700; cursor:pointer;">&#128444;&#65039; __ETIQUETA__</button>
+              <button id="btnPng" style="background:transparent; color:#6E6257; border:1.5px solid #DCD1BF; border-radius:12px; padding:11px 16px; font-family:inherit; font-size:15px; font-weight:600; cursor:pointer;">&#11015;&#65039; Descargar PNG</button>
+            </div>
+            <script>
+            const TABLAS = __DATOS__;
+            const ESCALA = 2, FUENTE = 'Inter, "Segoe UI", Arial, sans-serif';
+            const C = { titulo:'#221C15', texto:'#26221D', cabecera:'#6E6257', acento:'#C4562C', borde:'#D9CFC0', linea:'#ECE3D6' };
+            const PAD = 14, FILA = 36, CAB = 38, TIT = 34, SEP = 36, MARGEN = 6;
+            const esNum = v => /^-?[0-9.,]+$/.test(v.trim());
+
+            function medir(ctx, t) {
+              const anchos = t.columnas.map((c, i) => {
+                ctx.font = '700 13px ' + FUENTE;
+                let w = ctx.measureText(c.toUpperCase()).width + 1.2 * c.length;
+                ctx.font = '400 15px ' + FUENTE;
+                for (const f of t.filas) w = Math.max(w, ctx.measureText(f[i] || '').width);
+                return Math.ceil(w + 2 * PAD);
+              });
+              ctx.font = '700 16px ' + FUENTE;
+              const total = anchos.reduce((a, b) => a + b, 0);
+              const tit = Math.ceil(ctx.measureText(t.titulo).width);
+              if (tit > total) anchos[anchos.length - 1] += tit - total;
+              return { anchos, ancho: Math.max(total, tit), alto: TIT + CAB + FILA * t.filas.length };
+            }
+
+            function redondeado(ctx, x, y, w, h, r) {
+              ctx.beginPath();
+              ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+              ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+            }
+
+            function dibujar() {
+              const cv = document.createElement('canvas');
+              let ctx = cv.getContext('2d');
+              const m = TABLAS.map(t => medir(ctx, t));
+              const W = m.reduce((a, b) => a + b.ancho, 0) + SEP * (TABLAS.length - 1) + 2 * MARGEN;
+              const H = Math.max(...m.map(x => x.alto)) + 2 * MARGEN;
+              cv.width = W * ESCALA; cv.height = H * ESCALA;
+              ctx = cv.getContext('2d'); ctx.scale(ESCALA, ESCALA);   // fondo transparente
+              let x0 = MARGEN;
+              TABLAS.forEach((t, k) => {
+                const { anchos, ancho } = m[k];
+                const y0 = MARGEN, yT = y0 + TIT;
+                ctx.fillStyle = C.titulo; ctx.font = '700 16px ' + FUENTE; ctx.textBaseline = 'middle';
+                ctx.textAlign = 'left'; ctx.fillText(t.titulo, x0, y0 + TIT / 2 - 3);
+                const hT = CAB + FILA * t.filas.length;
+                redondeado(ctx, x0 + 0.5, yT + 0.5, ancho - 1, hT - 1, 10);
+                ctx.strokeStyle = C.borde; ctx.lineWidth = 1; ctx.stroke();
+                ctx.fillStyle = C.acento; ctx.fillRect(x0 + 1, yT + CAB - 1, ancho - 2, 2);
+                ctx.strokeStyle = C.linea;
+                for (let r = 1; r < t.filas.length; r++) {
+                  const y = yT + CAB + FILA * r + 0.5;
+                  ctx.beginPath(); ctx.moveTo(x0 + 1, y); ctx.lineTo(x0 + ancho - 1, y); ctx.stroke();
+                }
+                let cx = x0;
+                anchos.forEach((w, i) => {
+                  if (i > 0) { ctx.beginPath(); ctx.moveTo(cx + 0.5, yT + 1); ctx.lineTo(cx + 0.5, yT + hT - 1); ctx.stroke(); }
+                  const num = i === 0 || t.filas.every(f => esNum(f[i] || ''));
+                  const pos = i === 0 ? ['center', cx + w / 2] : (num ? ['right', cx + w - PAD] : ['left', cx + PAD]);
+                  ctx.textAlign = pos[0];
+                  ctx.fillStyle = C.cabecera; ctx.font = '700 13px ' + FUENTE;
+                  if ('letterSpacing' in ctx) ctx.letterSpacing = '0.6px';
+                  ctx.fillText(t.columnas[i].toUpperCase(), pos[1], yT + CAB / 2);
+                  if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+                  ctx.fillStyle = C.texto; ctx.font = (i === 0 ? '600 ' : '400 ') + '15px ' + FUENTE;
+                  t.filas.forEach((f, r) => ctx.fillText(f[i] || '', pos[1], yT + CAB + FILA * r + FILA / 2 + 1));
+                  cx += w;
+                });
+                x0 += ancho + SEP;
+              });
+              return cv;
+            }
+
+            async function listo() {
+              try { await Promise.race([Promise.all([document.fonts.load('400 15px Inter'), document.fonts.load('700 16px Inter'), document.fonts.load('600 15px Inter')]), new Promise(r => setTimeout(r, 1500))]); } catch (e) {}
+            }
+            const aviso = (b, txt, orig) => { b.textContent = txt; setTimeout(() => { b.innerHTML = orig; }, 3000); };
+            function descargar(cv) {
+              const a = document.createElement('a'); a.download = 'tablas_merco.png'; a.href = cv.toDataURL('image/png'); a.click();
+            }
+            const bImg = document.getElementById('btnImg'), bPng = document.getElementById('btnPng');
+            const oImg = bImg.innerHTML, oPng = bPng.innerHTML;
+            bImg.addEventListener('click', async () => {
+              await listo(); const cv = dibujar();
+              try {
+                const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
+                await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+                aviso(bImg, '✅ Imagen copiada: pégala en tu informe o presentación', oImg);
+              } catch (e) {
+                descargar(cv);
+                aviso(bImg, 'Tu navegador no permite copiar imágenes: se descargó el PNG', oImg);
+              }
+            });
+            bPng.addEventListener('click', async () => { await listo(); descargar(dibujar()); aviso(bPng, '✅ Descargado', oPng); });
+            </script>
+            """.replace("__DATOS__", json.dumps(datos, ensure_ascii=False).replace("</", "<\\/"))
+               .replace("__ETIQUETA__", etiqueta),
+            height=58,
+        )
 
     def boton_copiar(texto, texto_html):
         """Botón que copia el informe con formato (HTML sin fondo) y en texto plano."""
@@ -656,11 +788,12 @@ if company_name_input:
 
     nombre_marca = formato_empresa(nombre_empresa or _base_input)
 
-    def mostrar_tabla_sector(nota):
+    def tabla_sector(nota):
         nombre_sector, df_sec = sector_sugerido
         filas = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa))
                  for f in df_sec.itertuples(index=False)]
-        mostrar_tabla(f"Merco Sectores 2026 · {nombre_sector}", ["Posición", "Empresa"], filas, nota=nota)
+        return dict(titulo=f"Merco Sectores 2026 · {nombre_sector}", columnas=["Posición", "Empresa"],
+                    filas=filas, nota=nota)
 
     if not found_any:
         st.warning(f"La empresa '{company_name_input}' no fue encontrada en ninguno de los rankings Merco de 2024, 2025 o 2026.")
@@ -670,16 +803,18 @@ if company_name_input:
             + (f" A continuación se presenta el ranking **Merco Sectores 2026** del sector "
                f"**{sector_sugerido[0]}**, al que pertenece la marca." if sector_sugerido else "")
         )
+        tablas = []
         if sector_sugerido:
-            mostrar_tabla_sector("Empresas que figuran en 2026 en el sector de la marca.")
+            tablas.append(tabla_sector("Empresas que figuran en 2026 en el sector de la marca."))
         if "merco_empresas_2026" in files:
             df_empresas_2026 = parse_general_ranking(files["merco_empresas_2026"])
             if df_empresas_2026 is not None and all(c in df_empresas_2026.columns for c in ['posicion', 'empresa', 'puntuacion']):
                 top_10 = df_empresas_2026.head(10)
                 filas_top = [(int(f.posicion) if pd.notna(f.posicion) else "", formato_empresa(f.empresa), f.puntuacion)
                              for f in top_10.itertuples(index=False)]
-                mostrar_tabla("Top 10 · Merco Empresas 2026", ["Posición", "Empresa", "Puntuación"], filas_top,
-                              nota="Referencia del ranking general.")
+                tablas.append(dict(titulo="Top 10 · Merco Empresas 2026", columnas=["Posición", "Empresa", "Puntuación"],
+                                   filas=filas_top, nota="Referencia del ranking general."))
+        mostrar_tablas(tablas)
     elif sector_sugerido:
         # Si hubo data en años anteriores, la tarjeta de Merco Sectores ya
         # dijo que no figura en 2026; si no, se agrega esa tarjeta.
@@ -691,16 +826,16 @@ if company_name_input:
             )
         st.markdown("---")
         st.subheader("🧭 Merco Sectores 2026 del sector de la marca")
-        mostrar_tabla_sector("Empresas que figuran en 2026 en el sector de la marca.")
+        mostrar_tablas([tabla_sector("Empresas que figuran en 2026 en el sector de la marca.")])
 
     if informe_bloques:
         intro = INTRO_TEXT.strip()
         outro = OUTRO_TEXT.replace("---", "").strip()
-        informe_completo = intro + "\n\n" + "\n\n".join(t for t, _ in informe_bloques) + "\n\n" + outro
+        informe_completo = intro + "\n\n" + "\n\n".join(t for t, _ in informe_bloques if t) + "\n\n" + outro
         _p = lambda t: "".join(f"<p>{html.escape(x.strip())}</p>" for x in t.split("\n\n") if x.strip())
         informe_html = (
             '<div style="background:transparent; font-family:Arial, sans-serif; font-size:11pt; color:#000000;">'
-            + _p(intro) + "".join(h for _, h in informe_bloques) + _p(outro) + "</div>"
+            + _p(intro) + "".join(h for _, h in informe_bloques if h) + _p(outro) + "</div>"
         )
         st.markdown("---")
         boton_copiar(informe_completo, informe_html)
