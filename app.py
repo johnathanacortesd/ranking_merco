@@ -289,6 +289,7 @@ if company_name_input:
         "la cardio": "LACARDIO",
         "unal": "UNIVERSIDAD NACIONAL DE COLOMBIA",
         "holcim colombia": "HOLCIM",
+        "comfenalco valle": "COMFENALCO",  # en Merco figura como "COMFENALCO" (confirmado por el usuario)
     }
     if normalized_input in ALIAS_MERCO:
         normalized_input = normalize_text(ALIAS_MERCO[normalized_input])
@@ -327,6 +328,9 @@ if company_name_input:
     # Cada bloque del informe guarda su versión en texto plano (para pegar
     # sin formato) y en HTML sin fondo (para pegar con negritas y tablas).
     informe_bloques = []
+    # Trayectoria de la marca: (ranking, {año: puesto}, nota) por cada ranking
+    # en el que figuró al menos un año.
+    trayectoria = []
 
     def _md_a_html(texto_md):
         t = html.escape(texto_md, quote=False)
@@ -354,12 +358,14 @@ if company_name_input:
     def _es_numero(v):
         return bool(re.fullmatch(r"-?[0-9.,]+", str(v).strip()))
 
-    def tabla_html(columnas, filas, destacar=None):
+    def tabla_html(columnas, filas, destacar=None, alinear=None):
         """Tabla HTML transparente; `destacar` es el índice de una fila a resaltar.
-        La posición va centrada y las columnas numéricas a la derecha."""
-        alin = ["center" if i == 0 else ("right" if filas and all(_es_numero(f[i]) for f in filas) else "left")
-                for i in range(len(columnas))]
-        cab = "".join(f'<th style="{_CAB} text-align:{alin[i]};">{html.escape(str(c))}</th>'
+        Por defecto la posición va centrada y las columnas numéricas a la
+        derecha; `alinear` (lista left/center/right) fija la alineación."""
+        alin = alinear or ["center" if i == 0 else ("right" if filas and all(_es_numero(f[i]) for f in filas) else "left")
+                           for i in range(len(columnas))]
+        ancho0 = " width:auto;" if alin[0] != "center" else ""
+        cab = "".join(f'<th style="{_CAB} text-align:{alin[i]};{ancho0 if i == 0 else ""}">{html.escape(str(c))}</th>'
                       for i, c in enumerate(columnas))
         cuerpo = []
         for r, fila in enumerate(filas):
@@ -380,7 +386,7 @@ if company_name_input:
             return
         bloques, celdas_word = [], []
         for t in tablas:
-            t_html = tabla_html(t["columnas"], t["filas"], t.get("destacar"))
+            t_html = tabla_html(t["columnas"], t["filas"], t.get("destacar"), t.get("alinear"))
             nota_html = f'<p class="nota-tabla">{html.escape(t["nota"])}</p>' if t.get("nota") else ""
             bloques.append(f'<div class="col-tabla"><p class="titulo-tabla">{html.escape(t["titulo"])}</p>{nota_html}{t_html}</div>')
             plano = "\n".join(["\t".join(map(str, t["columnas"]))] + ["\t".join(map(str, f)) for f in t["filas"]])
@@ -405,7 +411,7 @@ if company_name_input:
         descargarla."""
         datos = [{"titulo": t["titulo"], "columnas": [str(c) for c in t["columnas"]],
                   "filas": [[str(v) for v in f] for f in t["filas"]],
-                  "destacar": t.get("destacar")} for t in tablas]
+                  "destacar": t.get("destacar"), "alinear": t.get("alinear")} for t in tablas]
         etiqueta = "Copiar tablas como imagen" if len(tablas) > 1 else "Copiar tabla como imagen"
         components.html(
             """
@@ -470,8 +476,8 @@ if company_name_input:
                 let cx = x0;
                 anchos.forEach((w, i) => {
                   if (i > 0) { ctx.beginPath(); ctx.moveTo(cx + 0.5, yT + 1); ctx.lineTo(cx + 0.5, yT + hT - 1); ctx.stroke(); }
-                  const num = i === 0 || t.filas.every(f => esNum(f[i] || ''));
-                  const pos = i === 0 ? ['center', cx + w / 2] : (num ? ['right', cx + w - PAD] : ['left', cx + PAD]);
+                  const al = t.alinear ? t.alinear[i] : (i === 0 ? 'center' : (t.filas.every(f => esNum(f[i] || '')) ? 'right' : 'left'));
+                  const pos = al === 'center' ? ['center', cx + w / 2] : (al === 'right' ? ['right', cx + w - PAD] : ['left', cx + PAD]);
                   ctx.textAlign = pos[0];
                   ctx.fillStyle = C.cabecera; ctx.font = '700 13px ' + FUENTE;
                   if ('letterSpacing' in ctx) ctx.letterSpacing = '0.6px';
@@ -480,7 +486,7 @@ if company_name_input:
                   t.filas.forEach((f, r) => {
                     const marca = r === t.destacar;
                     ctx.fillStyle = marca ? C.acento : C.texto;
-                    ctx.font = (marca ? '700 ' : (i === 0 ? '600 ' : '400 ')) + '15px ' + FUENTE;
+                    ctx.font = (marca ? '700 ' : (i === 0 && !t.alinear ? '600 ' : '400 ')) + '15px ' + FUENTE;
                     ctx.fillText(f[i] || '', pos[1], yT + CAB + FILA * r + FILA / 2 + 1);
                   });
                   cx += w;
@@ -636,6 +642,18 @@ if company_name_input:
         nombre = next(datos[y][1] for y in YEARS if y in datos)
         if nombre_empresa is None: nombre_empresa = nombre
         nombre = formato_empresa(nombre)
+        nota_tray = None
+        if rank_name == "Merco Líderes":
+            # Los puestos de Líderes son de personas: se nombra a quien los obtuvo.
+            _vocero = VOCEROS_LIDERES.get(normalized_input)
+            _por_lider = {}
+            for y in sorted(datos):
+                _por_lider.setdefault(nombre_titulo(datos[y][2]), []).append(str(y))
+            nota_tray = "Merco Líderes: " + "; ".join(
+                f"{l} ({', '.join(a)})"
+                + (" – no es el vocero actual" if _vocero and l != nombre_titulo(_vocero) else "")
+                for l, a in _por_lider.items())
+        trayectoria.append((rank_name, pos, nota_tray))
 
         if rank_name == "Merco Líderes":
             anio_ref = next(y for y in YEARS if y in datos)
@@ -725,6 +743,7 @@ if company_name_input:
             anio_ref = next(y for y in YEARS if y in datos_sec)
             sector_ref, _, nombre = datos_sec[anio_ref]
             nombre = formato_empresa(nombre)
+            trayectoria.append((f"Merco Sectores · {sector_ref.capitalize()}", pos, None))
             if pos[2026]:
                 en_sectores_2026 = True
                 texto = (f"En el ranking **Merco Sectores 2026**, la empresa **{nombre}** ocupa la posición **{pos[2026]}** "
@@ -745,7 +764,7 @@ if company_name_input:
         ("clinica", "SALUD"), ("hospital", "SALUD"),
         ("banco", "FINANCIERO"), ("financiera", "FINANCIERO"),
         ("seguros", "ASEGURADORAS"), ("aseguradora", "ASEGURADORAS"),
-        ("caja de compensacion", "CAJAS DE COMPENSACIÓN"), ("compensacion familiar", "CAJAS DE COMPENSACIÓN"),
+        ("caja de compensacion", "CAJAS DE COMPENSACIÓN"), ("comfenalco", "CAJAS DE COMPENSACIÓN"), ("comfama", "CAJAS DE COMPENSACIÓN"), ("cafam", "CAJAS DE COMPENSACIÓN"), ("colsubsidio", "CAJAS DE COMPENSACIÓN"), ("compensar", "CAJAS DE COMPENSACIÓN"), ("comfandi", "CAJAS DE COMPENSACIÓN"), ("compensacion familiar", "CAJAS DE COMPENSACIÓN"),
         ("pensiones y cesantias", "FONDOS DE PENSIONES Y CESANTÍAS"), ("fondo de pensiones", "FONDOS DE PENSIONES Y CESANTÍAS"),
         ("constructora", "CONSTRUCCIÓN E INFRAESTRUCTURA"), ("construccion", "CONSTRUCCIÓN E INFRAESTRUCTURA"),
         ("petrolera", "PETROLERAS Y DISTRIBUCIÓN DE HIDROCARBUROS"), ("petroleo", "PETROLERAS Y DISTRIBUCIÓN DE HIDROCARBUROS"),
@@ -872,6 +891,17 @@ if company_name_input:
         top = tabla_top10()
         if top:
             tablas.append(top)
+        if trayectoria:
+            # Resumen: una fila por ranking en el que figuró, una columna por año.
+            st.markdown("---")
+            st.subheader("📈 Trayectoria en Merco")
+            notas = ["—: no figuró en el ranking ese año."] + [n for _, _, n in trayectoria if n]
+            mostrar_tablas([dict(
+                titulo=f"Trayectoria de {nombre_marca} en Merco · 2024-2026",
+                columnas=["Ranking", "2024", "2025", "2026"],
+                filas=[(r, *[(p[y] if p[y] else "—") for y in (2024, 2025, 2026)]) for r, p, _ in trayectoria],
+                nota=" ".join(notas), alinear=["left", "center", "center", "center"], informe=False,
+            )], al_informe=False)
         if tablas:
             st.markdown("---")
             st.subheader("🧭 Merco Sectores 2026 y ranking general")
